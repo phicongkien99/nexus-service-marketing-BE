@@ -1,6 +1,6 @@
-using System;
+using System;using System.IO;
+using System.Text;
 using System.Data;
-using System.IO;
 
 namespace Nexus.Entity.Entities
 {
@@ -13,7 +13,8 @@ namespace Nexus.Entity.Entities
 			CreatedAt,
 			CreatedBy,
 			Id,
-			ImageId,
+			IsDeleted,
+			Logo,
 			Name,
 			UpdatedAt,
 			UpdatedBy
@@ -36,12 +37,13 @@ namespace Nexus.Entity.Entities
 		#region Properties
 
 		public DateTime?  CreatedAt { get; set; }
-		public int  CreatedBy { get; set; }
+		public int?  CreatedBy { get; set; }
 		public int  Id { get; set; } //Key 
-		public string  ImageId { get; set; }
+		public int?  IsDeleted { get; set; }
+		public string  Logo { get; set; }
 		public string  Name { get; set; }
 		public DateTime?  UpdatedAt { get; set; }
-		public int  UpdatedBy { get; set; }
+		public int?  UpdatedBy { get; set; }
 
 		#endregion
 
@@ -50,10 +52,8 @@ namespace Nexus.Entity.Entities
 		public override bool IsValid()
 		{
 
-			if (ImageId != null && ImageId.Length > 255 )
-				throw new InvalidDataException("Field: ImageId in entity: Manufacturer is over-size: 255, value=" + ImageId);
-			if (Name == null)
-				throw new NoNullAllowedException("Field: Name in entity: Manufacturer is Null");
+			if (Logo != null && Logo.Length > 255 )
+				throw new InvalidDataException("Field: Logo in entity: Manufacturer is over-size: 255, value=" + Logo);
 
 			if (Name != null && Name.Length > 255 )
 				throw new InvalidDataException("Field: Name in entity: Manufacturer is over-size: 255, value=" + Name);

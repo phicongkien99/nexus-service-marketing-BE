@@ -22,12 +22,11 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.DatalayerWorker
                                         using System.Globalization;
                                         using System.Linq;
                                         using Anotar.NLog;
-                                        using QuantEdge.Entity.Keys;
-                                        using QuantEdge.Common.Enum;
-                                        using QuantEdge.Entity.Entities;
-                                        using QuantEdge.Lib.Broadcast;
+                                        using Nexus.Entity.Keys;
+                                        using Nexus.Common.Enum;
+                                        using Nexus.Entity.Entities;
                                         ");
-                headerFile.AppendLine("namespace QuantEdge.Lib.Memory");
+                headerFile.AppendLine("namespace Nexus.Memory");
                 headerFile.AppendLine("{");
                 var endFile = new StringBuilder();
                 endFile.AppendLine("}");

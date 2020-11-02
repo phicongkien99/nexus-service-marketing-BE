@@ -1,6 +1,6 @@
-using System;
+using System;using System.IO;
+using System.Text;
 using System.Data;
-using System.IO;
 
 namespace Nexus.Entity.Entities
 {
@@ -10,12 +10,9 @@ namespace Nexus.Entity.Entities
 
 		public enum ImageFields
 		{
-			CreatedAt,
-			CreatedBy,
 			Id,
-			ImageUrl,
-			UpdatedAt,
-			UpdatedBy
+			IdCustomer,
+			Url
 		}
 
 		public enum ImageKey
@@ -34,12 +31,9 @@ namespace Nexus.Entity.Entities
 
 		#region Properties
 
-		public DateTime?  CreatedAt { get; set; }
-		public int  CreatedBy { get; set; }
 		public int  Id { get; set; } //Key 
-		public string  ImageUrl { get; set; }
-		public DateTime?  UpdatedAt { get; set; }
-		public int  UpdatedBy { get; set; }
+		public int?  IdCustomer { get; set; }
+		public string  Url { get; set; }
 
 		#endregion
 
@@ -47,11 +41,9 @@ namespace Nexus.Entity.Entities
 
 		public override bool IsValid()
 		{
-			if (ImageUrl == null)
-				throw new NoNullAllowedException("Field: ImageUrl in entity: Image is Null");
 
-			if (ImageUrl != null && ImageUrl.Length > 255 )
-				throw new InvalidDataException("Field: ImageUrl in entity: Image is over-size: 255, value=" + ImageUrl);
+			if (Url != null && Url.Length > 255 )
+				throw new InvalidDataException("Field: Url in entity: Image is over-size: 255, value=" + Url);
 			return true;
 		}
 

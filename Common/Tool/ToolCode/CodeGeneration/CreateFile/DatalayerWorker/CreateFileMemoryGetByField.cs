@@ -22,12 +22,11 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.DatalayerWorker
                                         using System.Globalization;
                                         using System.Linq;
                                         using Anotar.NLog;
-                                        using QuantEdge.Entity.Keys;
-                                        using QuantEdge.Common.Enum;
-                                        using QuantEdge.Entity.Entities;
-                                        using QuantEdge.Lib.Broadcast;
+                                        using Nexus.Entity.Keys;
+                                        using Nexus.Common.Enum;
+                                        using Nexus.Entity.Entities;
                                         ");
-                headerFile.AppendLine("namespace QuantEdge.Lib.Memory");
+                headerFile.AppendLine("namespace Nexus.Memory");
                 headerFile.AppendLine("{");
                 var endFile = new StringBuilder();
                 endFile.AppendLine("}");
@@ -171,12 +170,12 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.DatalayerWorker
                     if (IsNullValue(column, tableName))
                     {
                         functionBuild.AppendLine("listValue = Dic" + tableName + ".Values.ToList().FindAll(obj => obj." + column.Name + ".HasValue &&");
-                        functionBuild.AppendLine("fieldValue.Equals(obj." + column.Name + ".Value.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));");
+                        functionBuild.AppendLine("fieldValue.Equals(obj." + column.Name + ".Value.ToString(), StringComparison.InvariantCultureIgnoreCase));");
                     }
                     else
                     {
                         functionBuild.AppendLine("listValue = Dic" + tableName + ".Values.ToList().FindAll(obj =>");
-                        functionBuild.AppendLine("fieldValue.Equals(obj." + column.Name + ".ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));");
+                        functionBuild.AppendLine("fieldValue.Equals(obj." + column.Name + ".ToString(), StringComparison.InvariantCultureIgnoreCase));");
                     }
 
                     functionBuild.AppendLine("}");

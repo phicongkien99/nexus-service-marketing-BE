@@ -1,6 +1,6 @@
-using System;
+using System;using System.IO;
+using System.Text;
 using System.Data;
-using System.IO;
 
 namespace Nexus.Entity.Entities
 {
@@ -10,16 +10,10 @@ namespace Nexus.Entity.Entities
 
 		public enum ImportReceiptFields
 		{
-			CreatedAt,
-			CreatedBy,
-			Date,
 			Id,
-			IdEmployee,
 			IdProvider,
-			ListProductId,
-			TotalPrice,
-			UpdatedAt,
-			UpdatedBy
+			ImportDate,
+			TotalPrice
 		}
 
 		public enum ImportReceiptKey
@@ -38,16 +32,10 @@ namespace Nexus.Entity.Entities
 
 		#region Properties
 
-		public DateTime?  CreatedAt { get; set; }
-		public int  CreatedBy { get; set; }
-		public DateTime  Date { get; set; }
 		public int  Id { get; set; } //Key 
-		public int  IdEmployee { get; set; }
 		public int  IdProvider { get; set; }
-		public string  ListProductId { get; set; }
-		public decimal  TotalPrice { get; set; }
-		public DateTime?  UpdatedAt { get; set; }
-		public int  UpdatedBy { get; set; }
+		public DateTime?  ImportDate { get; set; }
+		public decimal?  TotalPrice { get; set; }
 
 		#endregion
 
@@ -55,11 +43,6 @@ namespace Nexus.Entity.Entities
 
 		public override bool IsValid()
 		{
-
-			if (ListProductId != null && ListProductId.Length > 255 )
-				throw new InvalidDataException("Field: ListProductId in entity: ImportReceipt is over-size: 255, value=" + ListProductId);
-			if (TotalPrice == null)
-				throw new NoNullAllowedException("Field: TotalPrice in entity: ImportReceipt is Null");
 			return true;
 		}
 

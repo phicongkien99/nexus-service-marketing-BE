@@ -151,13 +151,13 @@ namespace Nexus.Utils
             try
             {
                 //Lấy tất cả userLogin đang được sử dụng
-                List<UserLogin> listUserLogin = MemoryInfo.GetAllUserLogin().FindAll(u => u.Username.Equals(userNameCheck, StringComparison.InvariantCultureIgnoreCase));
-                if (isCreate)
-                {
-                    //Nếu là tạo mới userLogin
-                    if (listUserLogin.Count > 0) return true;
-                    return false;
-                }
+//                List<UserLogin> listUserLogin = MemoryInfo.GetAllUserLogin().FindAll(u => u.Username.Equals(userNameCheck, StringComparison.InvariantCultureIgnoreCase));
+//                if (isCreate)
+//                {
+//                    //Nếu là tạo mới userLogin
+//                    if (listUserLogin.Count > 0) return true;
+//                    return false;
+//                }
             }
             catch (Exception ex)
             {

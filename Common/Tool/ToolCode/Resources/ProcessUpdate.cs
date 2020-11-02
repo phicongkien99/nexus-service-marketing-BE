@@ -3,18 +3,17 @@ using System;
 using System.Linq;
 using Anotar.Log4Net;
 using Language.Languages;
-using QuantEdge.Common.Enum;
-using QuantEdge.Entity;
-using QuantEdge.Entity.Entities;
-using QuantEdge.Lib.Broadcast;
-using QuantEdge.Lib.Memory;
-using QuantEdge.Message.Common;
-using QuantEdge.Message.Memory;
-using QuantEdge.Message.Response.Risk;
-using QuantEdge.Message.Topic;
-using QuantEdge.Worker.RiskManager.Utils;
+using Nexus.Common.Enum;
+using Nexus.Entity;
+using Nexus.Entity.Entities;
+using Nexus.Memory;
+using Nexus.Message.Common;
+using Nexus.Message.Memory;
+using Nexus.Message.Response.Risk;
+using Nexus.Message.Topic;
+using Nexus.Worker.RiskManager.Utils;
 
-namespace QuantEdge.Worker.RiskManager.Processor.Update%EntityName%Request
+namespace Nexus.Worker.RiskManager.Processor.Update%EntityName%Request
 {
     public class Process_Update%EntityName%Request : IDisposable
     {

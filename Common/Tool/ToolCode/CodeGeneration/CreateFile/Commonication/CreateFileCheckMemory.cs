@@ -20,12 +20,12 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.Commonication
                                     using System.Collections.Generic;
                                     using System.Linq;
                                     using Anotar.NLog;
-                                    using ElectricShop.Entity;
-                                    using ElectricShop.Common.Enum;
-                                    using ElectricShop.Entity.Entities;
-                                    using ElectricShop.Lib.Memory;
-                                    using ElectricShop.Worker.CommunicationMemory.Utils;");
-            headerFile.AppendLine("namespace ElectricShop.Worker.CommunicationMemory.ProcessCheck.FunctionCheckMemory");
+                                    using Nexus.Entity;
+                                    using Nexus.Common.Enum;
+                                    using Nexus.Entity.Entities;
+                                    using Nexus.Memory;
+                                    using Nexus.Worker.CommunicationMemory.Utils;");
+            headerFile.AppendLine("namespace Nexus.Worker.CommunicationMemory.ProcessCheck.FunctionCheckMemory");
             headerFile.AppendLine("{");
             var endFile = new StringBuilder();
             endFile.AppendLine("}");

@@ -62,7 +62,7 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("using System.Data;");
                 stringBuild.AppendLine("");
 
-                stringBuild.AppendLine("namespace ElectricShop.Entity.Entities");
+                stringBuild.AppendLine("namespace Nexus.Entity.Entities");
                 stringBuild.AppendLine("{");
                 stringBuild.AppendLine("\tpublic class " + className + ": BaseEntity");
                 stringBuild.AppendFormat("\t{{");
@@ -110,7 +110,7 @@ namespace CommonicationMemory.CodeGeneration
                 //Tạo hàm lấy khóa nếu có nhiều keys
                 if (listColums.Count > 1)
                 {
-                    stringBuild.Insert(0, "using ElectricShop.Entity.Keys;\r\n");
+                    stringBuild.Insert(0, "using Nexus.Entity.Keys;\r\n");
 
                     stringBuild.AppendLine("\t\tpublic " + className + "Keys Get" + className + "Keys()");
                     stringBuild.AppendLine("\t\t{");

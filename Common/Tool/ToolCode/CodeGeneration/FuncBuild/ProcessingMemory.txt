@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using Anotar.Log4Net;
-using QuantEdge.Common.Enum;
-using QuantEdge.Entity;
-using QuantEdge.Entity.Entities;
-using QuantEdge.Lib.Memory;
-using QuantEdge.Message.Broadcast.Event;
-using QuantEdge.Message.Broadcast.Session;
-using QuantEdge.Message.Common;
-using QuantEdge.Message.Request;
-using QuantEdge.Message.Request.Session;
-using QuantEdge.Worker.CommunicationMemory.LoadMemory;
-using QuantEdge.Worker.CommunicationMemory.ProcessCheck.FunctionCheckMemory;
+using Nexus.Common.Enum;
+using Nexus.Entity;
+using Nexus.Entity.Entities;
+using Nexus.Memory;
+using Nexus.Message.Broadcast.Event;
+using Nexus.Message.Broadcast.Session;
+using Nexus.Message.Common;
+using Nexus.Message.Request;
+using Nexus.Message.Request.Session;
+using Nexus.Worker.CommunicationMemory.LoadMemory;
+using Nexus.Worker.CommunicationMemory.ProcessCheck.FunctionCheckMemory;
 
-namespace QuantEdge.Worker.CommunicationMemory.ProcessCheck
+namespace Nexus.Worker.CommunicationMemory.ProcessCheck
 {
     public class ProcessingMemory
     {

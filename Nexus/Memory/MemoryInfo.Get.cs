@@ -1,16 +1,109 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Anotar.NLog;
-using Nexus.Entity.Entities;
 using Nexus.Entity.Keys;
+using Nexus.Common.Enum;
+using Nexus.Entity.Entities;
 
 namespace Nexus.Memory
 {
     public partial class MemoryInfo : Memory
     {
+        public static Area GetArea(int id)
+        {
+            if (DicArea.ContainsKey(id))
+                return DicArea[id].Clone() as Area;
+            LogTo.Error("Not get Area by id = " + id);
+            return null;
+        }
+
+        public static Connection GetConnection(int id)
+        {
+            if (DicConnection.ContainsKey(id))
+                return DicConnection[id].Clone() as Connection;
+            LogTo.Error("Not get Connection by id = " + id);
+            return null;
+        }
+
+        public static ConnectionStatus GetConnectionStatus(int id)
+        {
+            if (DicConnectionStatus.ContainsKey(id))
+                return DicConnectionStatus[id].Clone() as ConnectionStatus;
+            LogTo.Error("Not get ConnectionStatus by id = " + id);
+            return null;
+        }
+
+        public static ConnectionType GetConnectionType(int id)
+        {
+            if (DicConnectionType.ContainsKey(id))
+                return DicConnectionType[id].Clone() as ConnectionType;
+            LogTo.Error("Not get ConnectionType by id = " + id);
+            return null;
+        }
+
+        public static Contract GetContract(int id)
+        {
+            if (DicContract.ContainsKey(id))
+                return DicContract[id].Clone() as Contract;
+            LogTo.Error("Not get Contract by id = " + id);
+            return null;
+        }
+
         public static Customer GetCustomer(int id)
         {
             if (DicCustomer.ContainsKey(id))
                 return DicCustomer[id].Clone() as Customer;
-            Logger.Write("Not get Customer by id = " + id);
+            LogTo.Error("Not get Customer by id = " + id);
+            return null;
+        }
+
+        public static CustomerFeedback GetCustomerFeedback(int id)
+        {
+            if (DicCustomerFeedback.ContainsKey(id))
+                return DicCustomerFeedback[id].Clone() as CustomerFeedback;
+            LogTo.Error("Not get CustomerFeedback by id = " + id);
+            return null;
+        }
+
+        public static DetailImportReceipt GetDetailImportReceipt(DetailImportReceiptKeys detailImportReceiptKeys)
+        {
+            if (DicDetailImportReceipt.ContainsKey(detailImportReceiptKeys))
+                return DicDetailImportReceipt[detailImportReceiptKeys].Clone() as DetailImportReceipt;
+            LogTo.Error("Not get DetailImportReceipt by detailImportReceiptKeys = " + detailImportReceiptKeys);
+            return null;
+        }
+
+        public static Device GetDevice(int id)
+        {
+            if (DicDevice.ContainsKey(id))
+                return DicDevice[id].Clone() as Device;
+            LogTo.Error("Not get Device by id = " + id);
+            return null;
+        }
+
+        public static DeviceType GetDeviceType(int id)
+        {
+            if (DicDeviceType.ContainsKey(id))
+                return DicDeviceType[id].Clone() as DeviceType;
+            LogTo.Error("Not get DeviceType by id = " + id);
+            return null;
+        }
+
+        public static Employee GetEmployee(int id)
+        {
+            if (DicEmployee.ContainsKey(id))
+                return DicEmployee[id].Clone() as Employee;
+            LogTo.Error("Not get Employee by id = " + id);
+            return null;
+        }
+
+        public static Fee GetFee(int id)
+        {
+            if (DicFee.ContainsKey(id))
+                return DicFee[id].Clone() as Fee;
+            LogTo.Error("Not get Fee by id = " + id);
             return null;
         }
 
@@ -18,22 +111,15 @@ namespace Nexus.Memory
         {
             if (DicImage.ContainsKey(id))
                 return DicImage[id].Clone() as Image;
-            Logger.Write("Not get Image by id = " + id);
+            LogTo.Error("Not get Image by id = " + id);
             return null;
         }
 
-        public static Post GetPost(int id)
-        {
-            if (DicPost.ContainsKey(id))
-                return DicPost[id].Clone() as Post;
-            LogTo.Error("Not get Post by id = " + id);
-            return null;
-        }
         public static ImportReceipt GetImportReceipt(int id)
         {
             if (DicImportReceipt.ContainsKey(id))
                 return DicImportReceipt[id].Clone() as ImportReceipt;
-            Logger.Write("Not get ImportReceipt by id = " + id);
+            LogTo.Error("Not get ImportReceipt by id = " + id);
             return null;
         }
 
@@ -41,47 +127,23 @@ namespace Nexus.Memory
         {
             if (DicManufacturer.ContainsKey(id))
                 return DicManufacturer[id].Clone() as Manufacturer;
-            Logger.Write("Not get Manufacturer by id = " + id);
+            LogTo.Error("Not get Manufacturer by id = " + id);
             return null;
         }
 
-        public static OrderDetail GetOrderDetail(int id)
+        public static Payment GetPayment(int id)
         {
-            if (DicOrderDetail.ContainsKey(id))
-                return DicOrderDetail[id].Clone() as OrderDetail;
-            Logger.Write("Not get OrderDetail by id = " + id);
+            if (DicPayment.ContainsKey(id))
+                return DicPayment[id].Clone() as Payment;
+            LogTo.Error("Not get Payment by id = " + id);
             return null;
         }
 
-        public static Permission GetPermission(int id)
+        public static PaymentFee GetPaymentFee(PaymentFeeKeys paymentFeeKeys)
         {
-            if (DicPermission.ContainsKey(id))
-                return DicPermission[id].Clone() as Permission;
-            Logger.Write("Not get Permission by id = " + id);
-            return null;
-        }
-
-        public static Product GetProduct(int id)
-        {
-            if (DicProduct.ContainsKey(id))
-                return DicProduct[id].Clone() as Product;
-            Logger.Write("Not get Product by id = " + id);
-            return null;
-        }
-
-        public static ProductType GetProductType(int id)
-        {
-            if (DicProductType.ContainsKey(id))
-                return DicProductType[id].Clone() as ProductType;
-            Logger.Write("Not get ProductType by id = " + id);
-            return null;
-        }
-
-        public static Property GetProperty(int id)
-        {
-            if (DicProperty.ContainsKey(id))
-                return DicProperty[id].Clone() as Property;
-            Logger.Write("Not get Property by id = " + id);
+            if (DicPaymentFee.ContainsKey(paymentFeeKeys))
+                return DicPaymentFee[paymentFeeKeys].Clone() as PaymentFee;
+            LogTo.Error("Not get PaymentFee by paymentFeeKeys = " + paymentFeeKeys);
             return null;
         }
 
@@ -89,51 +151,48 @@ namespace Nexus.Memory
         {
             if (DicProvider.ContainsKey(id))
                 return DicProvider[id].Clone() as Provider;
-            Logger.Write("Not get Provider by id = " + id);
+            LogTo.Error("Not get Provider by id = " + id);
             return null;
         }
 
-        public static Role GetRole(int id)
+        public static ServiceForm GetServiceForm(int id)
         {
-            if (DicRole.ContainsKey(id))
-                return DicRole[id].Clone() as Role;
-            Logger.Write("Not get Role by id = " + id);
+            if (DicServiceForm.ContainsKey(id))
+                return DicServiceForm[id].Clone() as ServiceForm;
+            LogTo.Error("Not get ServiceForm by id = " + id);
             return null;
         }
 
-        public static RolePermission GetRolePermission(RolePermissionKeys rolePermissionKeys)
+        public static ServiceFormStatus GetServiceFormStatus(int id)
         {
-            if (DicRolePermission.ContainsKey(rolePermissionKeys))
-                return DicRolePermission[rolePermissionKeys].Clone() as RolePermission;
-            Logger.Write("Not get RolePermission by rolePermissionKeys = " + rolePermissionKeys);
+            if (DicServiceFormStatus.ContainsKey(id))
+                return DicServiceFormStatus[id].Clone() as ServiceFormStatus;
+            LogTo.Error("Not get ServiceFormStatus by id = " + id);
             return null;
         }
 
-        public static UserInfo GetUserInfo(int idUserLogin)
+        public static ServicePack GetServicePack(int id)
         {
-            if (DicUserInfo.ContainsKey(idUserLogin))
-                return DicUserInfo[idUserLogin].Clone() as UserInfo;
-            Logger.Write("Not get UserInfo by idUserLogin = " + idUserLogin);
+            if (DicServicePack.ContainsKey(id))
+                return DicServicePack[id].Clone() as ServicePack;
+            LogTo.Error("Not get ServicePack by id = " + id);
             return null;
         }
 
-        public static UserLogin GetUserLogin(int id)
+        public static ServicePackFee GetServicePackFee(ServicePackFeeKeys servicePackFeeKeys)
         {
-            if (DicUserLogin.ContainsKey(id))
-                return DicUserLogin[id].Clone() as UserLogin;
-            Logger.Write("Not get UserLogin by id = " + id);
+            if (DicServicePackFee.ContainsKey(servicePackFeeKeys))
+                return DicServicePackFee[servicePackFeeKeys].Clone() as ServicePackFee;
+            LogTo.Error("Not get ServicePackFee by servicePackFeeKeys = " + servicePackFeeKeys);
             return null;
         }
 
-        public static UserRole GetUserRole(UserRoleKeys userRoleKeys)
+        public static Store GetStore(int id)
         {
-            if (DicUserRole.ContainsKey(userRoleKeys))
-                return DicUserRole[userRoleKeys].Clone() as UserRole;
-            Logger.Write("Not get UserRole by userRoleKeys = " + userRoleKeys);
+            if (DicStore.ContainsKey(id))
+                return DicStore[id].Clone() as Store;
+            LogTo.Error("Not get Store by id = " + id);
             return null;
         }
-
     }
 }
-
-

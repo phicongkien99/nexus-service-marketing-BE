@@ -38,36 +38,43 @@ namespace Nexus.Entity
         {
             return EntityName;
         }
-		
-#region MyObject
 
-#endregion
+        #region MyObject
 
-
-#region MyView
-#endregion
+        #endregion
 
 
-#region MyEntity
+        #region MyView
 
-public Customer Customer { get; set; }
-public Image Image { get; set; }
-public ImportReceipt ImportReceipt { get; set; }
-public Manufacturer Manufacturer { get; set; }
-public OrderDetail OrderDetail { get; set; }
-public Permission Permission { get; set; }
-public Product Product { get; set; }
-public ProductType ProductType { get; set; }
-public Property Property { get; set; }
-public Provider Provider { get; set; }
-public Role  Role{ get; set; }
-public RolePermission  RolePermission{ get; set; }
-public UserInfo  UserInfo{ get; set; }
-public UserLogin  UserLogin{ get; set; }
-public UserRole  UserRole{ get; set; }
-   
-#endregion
+        #endregion
 
+
+        #region MyEntity
+
+        public Area Area { get; set; }
+        public Connection Connection { get; set; }
+        public ConnectionStatus ConnectionStatus { get; set; }
+        public ConnectionType ConnectionType { get; set; }
+        public Contract Contract { get; set; }
+        public Customer Customer { get; set; }
+        public CustomerFeedback CustomerFeedback { get; set; }
+        public DetailImportReceipt DetailImportReceipt { get; set; }
+        public Device Device { get; set; }
+        public DeviceType DeviceType { get; set; }
+        public Employee Employee { get; set; }
+        public Fee Fee { get; set; }
+        public Image Image { get; set; }
+        public ImportReceipt ImportReceipt { get; set; }
+        public Manufacturer Manufacturer { get; set; }
+        public Payment Payment { get; set; }
+        public PaymentFee PaymentFee { get; set; }
+        public Provider Provider { get; set; }
+        public ServiceForm ServiceForm { get; set; }
+        public ServiceFormStatus ServiceFormStatus { get; set; }
+        public ServicePack ServicePack { get; set; }
+        public ServicePackFee ServicePackFee { get; set; }
+        public Store Store { get; set; }
+
+        #endregion
     }
 }
-

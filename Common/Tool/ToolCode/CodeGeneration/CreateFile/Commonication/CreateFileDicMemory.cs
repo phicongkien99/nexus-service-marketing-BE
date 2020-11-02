@@ -16,7 +16,7 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.Commonication
                 sw.WriteLine();
                 var headerFile = new StringBuilder();
                 headerFile.AppendLine(@"using System.Collections.Generic;
-                                        using QuantEdge.Entity.Entities;
+                                        using Nexus.Entity.Entities;
                                         ");
                 headerFile.AppendLine("namespace CommunicationMemory.Memory");
                 headerFile.AppendLine("{");

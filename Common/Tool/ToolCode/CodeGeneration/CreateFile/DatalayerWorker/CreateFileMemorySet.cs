@@ -20,15 +20,14 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.DatalayerWorker
                 headerFile.AppendLine(@"using System;
                                         using System.Collections.Generic;
                                         using System.Globalization;
-                                        using QuantEdge.Entity.Keys;
+                                        using Nexus.Entity.Keys;
                                         using System.Linq;
-                                        using QuantEdge.Common.Enum;
-                                        using QuantEdge.Entity;
+                                        using Nexus.Common.Enum;
+                                        using Nexus.Entity;
                                         using Anotar.NLog;
-                                        using QuantEdge.Entity.Entities;
-                                        using QuantEdge.Lib.Broadcast;
+                                        using Nexus.Entity.Entities;
                                         ");
-                headerFile.AppendLine("namespace QuantEdge.Lib.Memory");
+                headerFile.AppendLine("namespace Nexus.Memory");
                 headerFile.AppendLine("{");
                 var endFile = new StringBuilder();
                 endFile.AppendLine("}");
@@ -93,14 +92,12 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.DatalayerWorker
 
                 #region Tạo hàm SetMemory --> UpdateAndInsertEntity
                 var headerclassBuilderSet = new StringBuilder();
-                headerclassBuilderSet.AppendLine("private static void UpdateAndInsertEntity(BaseEntity entity)");
+                headerclassBuilderSet.AppendLine("public static void UpdateAndInsertEntity(BaseEntity entity)");
                 headerclassBuilderSet.AppendLine("{");
                 var endclassBuilderSet = new StringBuilder();
                 endclassBuilderSet.AppendLine("}");
 
                 stringBuild.Append(headerclassBuilderSet.ToString());
-                stringBuild.AppendLine("if (!IsSubscribeEntity(entity.GetName()))");
-                stringBuild.AppendLine("return;");
 
                 //Tạo các hàm SetMemory ở đây
                 stringBuild.AppendLine("#region Bảng sinh key bằng tay");
@@ -167,8 +164,6 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.DatalayerWorker
                 endclassBuilderRemove.AppendLine("}");
 
                 stringBuild.Append(headerclassBuilderRemove.ToString());
-                stringBuild.AppendLine("if (!IsSubscribeEntity(entity.GetName()))");
-                stringBuild.AppendLine("return;");
 
                 stringBuild.AppendLine("#region Bảng sinh key bằng tay");
                 //Tạo các hàm SetMemory ở đây

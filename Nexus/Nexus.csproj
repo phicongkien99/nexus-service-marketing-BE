@@ -148,8 +148,26 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ConfirmOrderController.cs" />
-    <Compile Include="Controllers\ChangePasswordController.cs" />
+    <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\ConnectionController.cs" />
+    <Compile Include="Controllers\ConnectionStatusController.cs" />
+    <Compile Include="Controllers\ConnectionTypeController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\CustomerFeedbackController.cs" />
+    <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\DeviceTypeController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\FeeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\ImportReceiptController.cs" />
+    <Compile Include="Controllers\ManufacturerController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="Controllers\ServiceFormController.cs" />
+    <Compile Include="Controllers\ServiceFormStatusController.cs" />
+    <Compile Include="Controllers\ServicePackController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -165,17 +183,11 @@
     <Compile Include="Models\Request\ChangePasswordReq.cs" />
     <Compile Include="Models\Request\ConfirmOrder.cs" />
     <Compile Include="Models\Response\ImportReceiptResponse.cs" />
-    <Compile Include="Models\Response\ManufacturerResponse.cs" />
     <Compile Include="Models\ErrorCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReaderDatabase\ProcessReadDatabaseUtils.cs" />
-    <Compile Include="Utils\ProductUtils.cs" />
     <Compile Include="Utils\CheckUtils.cs" />
-    <Compile Include="Utils\ImagesUtils.cs" />
-    <Compile Include="Utils\EmailUtils.cs" />
-    <Compile Include="Utils\Operator.cs" />
     <Compile Include="Utils\PasswordGenerator.cs" />
-    <Compile Include="Utils\Token.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\TemplateConfirmOrder.html">

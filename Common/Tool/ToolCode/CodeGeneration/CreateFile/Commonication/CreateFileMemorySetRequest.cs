@@ -19,12 +19,12 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.Commonication
                                         using System.Collections.Generic;
                                         using System.Linq;
                                         using CommunicationMemory.ReaderDatabase;
-                                        using QuantEdge.Common.Enum;
-                                        using QuantEdge.Entity;
-                                        using QuantEdge.Entity.Entities;
-                                        using QuantEdge.Lib.Memory;
+                                        using Nexus.Common.Enum;
+                                        using Nexus.Entity;
+                                        using Nexus.Entity.Entities;
+                                        using Nexus.Memory;
                                         ");
-                headerFile.AppendLine("namespace QuantEdge.Worker.CommunicationMemory.LoadMemory");
+                headerFile.AppendLine("namespace Nexus.Worker.CommunicationMemory.LoadMemory");
                 headerFile.AppendLine("{");
                 var endFile = new StringBuilder();
                 endFile.AppendLine("}");
@@ -84,7 +84,7 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.Commonication
 
                 #region Tạo hàm SetMemory --> UpdateAndInsertEntity
                 var headerclassBuilderSet = new StringBuilder();
-                headerclassBuilderSet.AppendLine("private static void UpdateAndInsertEntity(BaseEntity entity)");
+                headerclassBuilderSet.AppendLine("public static void UpdateAndInsertEntity(BaseEntity entity)");
                 headerclassBuilderSet.AppendLine("{");
                 var endclassBuilderSet = new StringBuilder();
                 endclassBuilderSet.AppendLine("}");

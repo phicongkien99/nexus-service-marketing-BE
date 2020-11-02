@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using Nexus.DatabaseDAL.Common;
 using Nexus.Entity;
 using Nexus.Entity.Entities;
+using Nexus.DatabaseDAL.Common;
+using System.Data;
+using Anotar.NLog;
 
 namespace Nexus.DatabaseDAL.EntitySql
 {
@@ -42,12 +44,13 @@ namespace Nexus.DatabaseDAL.EntitySql
                 if (businessObject != null)
 				{
 
-								sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
+								sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
 				sqlCommand.Parameters.Add(new SqlParameter("@CreatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedBy));
 				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
-				sqlCommand.Parameters.Add(new SqlParameter("@ImageId", SqlDbType.NVarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.ImageId));
-				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.NVarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
-				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@IsDeleted", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsDeleted));
+				sqlCommand.Parameters.Add(new SqlParameter("@Logo", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Logo));
+				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
 				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedBy));
 
 
@@ -82,12 +85,13 @@ namespace Nexus.DatabaseDAL.EntitySql
                 if (businessObject != null)
                 {
 
-								sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
+								sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
 				sqlCommand.Parameters.Add(new SqlParameter("@CreatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedBy));
 				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
-				sqlCommand.Parameters.Add(new SqlParameter("@ImageId", SqlDbType.NVarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.ImageId));
-				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.NVarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
-				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@IsDeleted", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsDeleted));
+				sqlCommand.Parameters.Add(new SqlParameter("@Logo", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Logo));
+				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
 				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedBy));
 
 				
@@ -158,18 +162,30 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(Manufacturer.ManufacturerFields.CreatedBy.ToString()) != -1)
-				businessObject.CreatedBy = dataReader.GetInt32(GetIndex(Manufacturer.ManufacturerFields.CreatedBy.ToString()));
+				if (!dataReader.IsDBNull(GetIndex(Manufacturer.ManufacturerFields.CreatedBy.ToString())))
+				{
+					businessObject.CreatedBy = dataReader.GetInt32(GetIndex(Manufacturer.ManufacturerFields.CreatedBy.ToString()));
+				}
 
 				businessObject.Id = dataReader.GetInt32(GetIndex(Manufacturer.ManufacturerFields.Id.ToString()));
 
-			if (GetIndex(Manufacturer.ManufacturerFields.ImageId.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Manufacturer.ManufacturerFields.ImageId.ToString())))
+			if (GetIndex(Manufacturer.ManufacturerFields.IsDeleted.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(Manufacturer.ManufacturerFields.IsDeleted.ToString())))
 				{
-					businessObject.ImageId = dataReader.GetString(GetIndex(Manufacturer.ManufacturerFields.ImageId.ToString()));
+					businessObject.IsDeleted = dataReader.GetInt32(GetIndex(Manufacturer.ManufacturerFields.IsDeleted.ToString()));
+				}
+
+			if (GetIndex(Manufacturer.ManufacturerFields.Logo.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(Manufacturer.ManufacturerFields.Logo.ToString())))
+				{
+					businessObject.Logo = dataReader.GetString(GetIndex(Manufacturer.ManufacturerFields.Logo.ToString()));
 				}
 
 			if (GetIndex(Manufacturer.ManufacturerFields.Name.ToString()) != -1)
-				businessObject.Name = dataReader.GetString(GetIndex(Manufacturer.ManufacturerFields.Name.ToString()));
+				if (!dataReader.IsDBNull(GetIndex(Manufacturer.ManufacturerFields.Name.ToString())))
+				{
+					businessObject.Name = dataReader.GetString(GetIndex(Manufacturer.ManufacturerFields.Name.ToString()));
+				}
 
 			if (GetIndex(Manufacturer.ManufacturerFields.UpdatedAt.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Manufacturer.ManufacturerFields.UpdatedAt.ToString())))
@@ -178,7 +194,10 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(Manufacturer.ManufacturerFields.UpdatedBy.ToString()) != -1)
-				businessObject.UpdatedBy = dataReader.GetInt32(GetIndex(Manufacturer.ManufacturerFields.UpdatedBy.ToString()));
+				if (!dataReader.IsDBNull(GetIndex(Manufacturer.ManufacturerFields.UpdatedBy.ToString())))
+				{
+					businessObject.UpdatedBy = dataReader.GetInt32(GetIndex(Manufacturer.ManufacturerFields.UpdatedBy.ToString()));
+				}
 
 
         }

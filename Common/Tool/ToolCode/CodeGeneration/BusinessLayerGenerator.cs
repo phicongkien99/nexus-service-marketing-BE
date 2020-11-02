@@ -134,7 +134,7 @@ namespace CommonicationMemory.CodeGeneration
             var file = forderEntity + "GetSqlFile.cs";
             var stringBuilder = new StringBuilder();
             var stringTmp = "if (entityName.Equals({0}.EntityName())) { return new {0}Sql(); }";
-
+            var stringEntity = "public 0 0 { get; set; }";
             foreach (DatabaseTable table in database.Tables)
             {
                 if (!table.IsSelected) continue;
@@ -149,6 +149,13 @@ namespace CommonicationMemory.CodeGeneration
                 #endregion
             }
 
+            stringBuilder.AppendLine();
+            foreach (DatabaseTable table in database.Tables)
+            {
+                if (!table.IsSelected) continue;
+                string result = stringEntity.Replace("0", table.TableName);
+                stringBuilder.AppendLine(result);
+            }
             using (StreamWriter sw = new StreamWriter(file))
             {
                 sw.Write(stringBuilder);
@@ -195,8 +202,8 @@ namespace CommonicationMemory.CodeGeneration
                 var stringBuild = new StringBuilder();
                 //using (StreamWriter sw = new StreamWriter(fileRequest))
                 {
-                    stringBuild.AppendLine("using ElectricShop.Common.Enum;");
-                    stringBuild.AppendLine("namespace ElectricShop.Message.Request.DataProvider");
+                    stringBuild.AppendLine("using Nexus.Common.Enum;");
+                    stringBuild.AppendLine("namespace Nexus.Message.Request.DataProvider");
                     stringBuild.AppendLine("{");
                     stringBuild.AppendLine("    public class GetList" + table.TableName + "Request : Request");
                     stringBuild.AppendLine("    {");
@@ -221,9 +228,9 @@ namespace CommonicationMemory.CodeGeneration
                 //using (StreamWriter sw = new StreamWriter(fileUpdateRequest))
                 {
                     stringBuild.AppendLine("using System.Collections.Generic;");
-                    stringBuild.AppendLine("using ElectricShop.Common.Enum;");
-                    stringBuild.AppendLine("using ElectricShop.Entity.Entities;");
-                    stringBuild.AppendLine("namespace ElectricShop.Message.Request.Risk");
+                    stringBuild.AppendLine("using Nexus.Common.Enum;");
+                    stringBuild.AppendLine("using Nexus.Entity.Entities;");
+                    stringBuild.AppendLine("namespace Nexus.Message.Request.Risk");
                     stringBuild.AppendLine("{");
                     stringBuild.AppendLine("    public class Update" + table.TableName + "Request : Request");
                     stringBuild.AppendLine("    {");
@@ -257,9 +264,9 @@ namespace CommonicationMemory.CodeGeneration
                 //using (StreamWriter sw = new StreamWriter(fileResponse))
                 {
                     stringBuild.AppendLine("using System.Collections.Generic;");
-                    stringBuild.AppendLine("using ElectricShop.Common.Enum;");
-                    stringBuild.AppendLine("using ElectricShop.Entity.Entities;");
-                    stringBuild.AppendLine("namespace ElectricShop.Message.Response.DataProvider");
+                    stringBuild.AppendLine("using Nexus.Common.Enum;");
+                    stringBuild.AppendLine("using Nexus.Entity.Entities;");
+                    stringBuild.AppendLine("namespace Nexus.Message.Response.DataProvider");
                     stringBuild.AppendLine("{");
                     stringBuild.AppendLine("    public class GetList" + table.TableName + "Response : Response");
                     stringBuild.AppendLine("    {");
@@ -282,8 +289,8 @@ namespace CommonicationMemory.CodeGeneration
                 //using (StreamWriter sw = new StreamWriter(fileUpdateResponse))
                 {
                     stringBuild.AppendLine("using Language.Languages;");
-                    stringBuild.AppendLine("using ElectricShop.Common.Enum;");
-                    stringBuild.AppendLine("namespace ElectricShop.Message.Response.Risk");
+                    stringBuild.AppendLine("using Nexus.Common.Enum;");
+                    stringBuild.AppendLine("namespace Nexus.Message.Response.Risk");
                     stringBuild.AppendLine("{");
                     stringBuild.AppendLine("    public class Update" + table.TableName + "Response : Response");
                     stringBuild.AppendLine("    {");
@@ -396,9 +403,9 @@ namespace CommonicationMemory.CodeGeneration
                 fileText = fileText.Replace("using Oracle.ManagedDataAccess.Client;", "using MySql.Data.MySqlClient;");
                 fileText = fileText.Replace("OracleCommand", "MySqlCommand");
 
-                fileText = fileText.Replace("namespace ElectricShop.DatabaseDAL.EntitySql",
-                    "namespace ElectricShop.DatabaseDAL.EntityMySql");
-                fileText = fileText.Replace("using ElectricShop.DatabaseDAL.Common;", "using ElectricShop.DatabaseDAL.CommonMySql;");
+                fileText = fileText.Replace("namespace Nexus.DatabaseDAL.EntitySql",
+                    "namespace Nexus.DatabaseDAL.EntityMySql");
+                fileText = fileText.Replace("using Nexus.DatabaseDAL.Common;", "using Nexus.DatabaseDAL.CommonMySql;");
                 fileText = fileText.Replace("EntityBaseSql", "EntityBaseMySql");
             }
             else if (!OracleHelper.IsConectOracle)

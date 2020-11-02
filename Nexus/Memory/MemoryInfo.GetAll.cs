@@ -1,14 +1,73 @@
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using Nexus.Entity.Keys;
 using System.Linq;
+using Nexus.Common.Enum;
 using Nexus.Entity.Entities;
 
 namespace Nexus.Memory
 {
     public partial class MemoryInfo : Memory
     {
+        public static List<Area> GetAllArea()
+        {
+            return DicArea.Select(obj => obj.Value.Clone() as Area).ToList();
+        }
+
+        public static List<Connection> GetAllConnection()
+        {
+            return DicConnection.Select(obj => obj.Value.Clone() as Connection).ToList();
+        }
+
+        public static List<ConnectionStatus> GetAllConnectionStatus()
+        {
+            return DicConnectionStatus.Select(obj => obj.Value.Clone() as ConnectionStatus).ToList();
+        }
+
+        public static List<ConnectionType> GetAllConnectionType()
+        {
+            return DicConnectionType.Select(obj => obj.Value.Clone() as ConnectionType).ToList();
+        }
+
+        public static List<Contract> GetAllContract()
+        {
+            return DicContract.Select(obj => obj.Value.Clone() as Contract).ToList();
+        }
+
         public static List<Customer> GetAllCustomer()
         {
             return DicCustomer.Select(obj => obj.Value.Clone() as Customer).ToList();
+        }
+
+        public static List<CustomerFeedback> GetAllCustomerFeedback()
+        {
+            return DicCustomerFeedback.Select(obj => obj.Value.Clone() as CustomerFeedback).ToList();
+        }
+
+        public static List<DetailImportReceipt> GetAllDetailImportReceipt()
+        {
+            return DicDetailImportReceipt.Select(obj => obj.Value.Clone() as DetailImportReceipt).ToList();
+        }
+
+        public static List<Device> GetAllDevice()
+        {
+            return DicDevice.Select(obj => obj.Value.Clone() as Device).ToList();
+        }
+
+        public static List<DeviceType> GetAllDeviceType()
+        {
+            return DicDeviceType.Select(obj => obj.Value.Clone() as DeviceType).ToList();
+        }
+
+        public static List<Employee> GetAllEmployee()
+        {
+            return DicEmployee.Select(obj => obj.Value.Clone() as Employee).ToList();
+        }
+
+        public static List<Fee> GetAllFee()
+        {
+            return DicFee.Select(obj => obj.Value.Clone() as Fee).ToList();
         }
 
         public static List<Image> GetAllImage()
@@ -20,39 +79,20 @@ namespace Nexus.Memory
         {
             return DicImportReceipt.Select(obj => obj.Value.Clone() as ImportReceipt).ToList();
         }
-        public static List<Post> GetAllPost()
-        {
-            return DicPost.Select(obj => obj.Value.Clone() as Post).ToList();
-        }
 
         public static List<Manufacturer> GetAllManufacturer()
         {
             return DicManufacturer.Select(obj => obj.Value.Clone() as Manufacturer).ToList();
         }
 
-        public static List<OrderDetail> GetAllOrderDetail()
+        public static List<Payment> GetAllPayment()
         {
-            return DicOrderDetail.Select(obj => obj.Value.Clone() as OrderDetail).ToList();
+            return DicPayment.Select(obj => obj.Value.Clone() as Payment).ToList();
         }
 
-        public static List<Permission> GetAllPermission()
+        public static List<PaymentFee> GetAllPaymentFee()
         {
-            return DicPermission.Select(obj => obj.Value.Clone() as Permission).ToList();
-        }
-
-        public static List<Product> GetAllProduct()
-        {
-            return DicProduct.Select(obj => obj.Value.Clone() as Product).ToList();
-        }
-
-        public static List<ProductType> GetAllProductType()
-        {
-            return DicProductType.Select(obj => obj.Value.Clone() as ProductType).ToList();
-        }
-
-        public static List<Property> GetAllProperty()
-        {
-            return DicProperty.Select(obj => obj.Value.Clone() as Property).ToList();
+            return DicPaymentFee.Select(obj => obj.Value.Clone() as PaymentFee).ToList();
         }
 
         public static List<Provider> GetAllProvider()
@@ -60,32 +100,29 @@ namespace Nexus.Memory
             return DicProvider.Select(obj => obj.Value.Clone() as Provider).ToList();
         }
 
-        public static List<Role> GetAllRole()
+        public static List<ServiceForm> GetAllServiceForm()
         {
-            return DicRole.Select(obj => obj.Value.Clone() as Role).ToList();
+            return DicServiceForm.Select(obj => obj.Value.Clone() as ServiceForm).ToList();
         }
 
-        public static List<RolePermission> GetAllRolePermission()
+        public static List<ServiceFormStatus> GetAllServiceFormStatus()
         {
-            return DicRolePermission.Select(obj => obj.Value.Clone() as RolePermission).ToList();
+            return DicServiceFormStatus.Select(obj => obj.Value.Clone() as ServiceFormStatus).ToList();
         }
 
-        public static List<UserInfo> GetAllUserInfo()
+        public static List<ServicePack> GetAllServicePack()
         {
-            return DicUserInfo.Select(obj => obj.Value.Clone() as UserInfo).ToList();
+            return DicServicePack.Select(obj => obj.Value.Clone() as ServicePack).ToList();
         }
 
-        public static List<UserLogin> GetAllUserLogin()
+        public static List<ServicePackFee> GetAllServicePackFee()
         {
-            return DicUserLogin.Select(obj => obj.Value.Clone() as UserLogin).ToList();
+            return DicServicePackFee.Select(obj => obj.Value.Clone() as ServicePackFee).ToList();
         }
 
-        public static List<UserRole> GetAllUserRole()
+        public static List<Store> GetAllStore()
         {
-            return DicUserRole.Select(obj => obj.Value.Clone() as UserRole).ToList();
+            return DicStore.Select(obj => obj.Value.Clone() as Store).ToList();
         }
-
     }
 }
-
-

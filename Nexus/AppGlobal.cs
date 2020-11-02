@@ -44,53 +44,53 @@ namespace Nexus
             }
             return true;
         }
-        public static bool InitUserPermission(string reason)
-        {
-            try
-            {
-                // init dicRoleMapping trước
-                var lstRole = MemoryInfo.GetAllRole();
-                foreach (var role in lstRole)
-                {
-                    Memory.Memory.DicRoleMapping[role.Id] = new List<Permission>();
-                    // lay ra list rolepermission
-                    var lstRolePermission = MemoryInfo.GetListRolePermissionByField(role.Id.ToString(),
-                        RolePermission.RolePermissionFields.IdRole);
-                    if(lstRolePermission.Count == 0)continue;
-                    foreach (var rolePermission in lstRolePermission)
-                    {
-                        var permission = MemoryInfo.GetPermission(rolePermission.IdPermission);
-                        Memory.Memory.DicRoleMapping[role.Id].Add(permission);
-                    }
-                }
-                // init bang memory
-                // lay tat ca user cua he thong
-                var lstUserInfo = MemoryInfo.GetAllUserInfo();
-                foreach (var userInfo in lstUserInfo)
-                {
-                    Memory.Memory.DicUserPermission[userInfo.IdUserLogin] = new List<Permission>(); // khoi tao
-                    // check xem user thuoc nhom quyen nao
-                    var lstUserRole =
-                        MemoryInfo.GetListUserRoleByField(userInfo.IdUserLogin.ToString(), UserRole.UserRoleFields.IdUserLogin);
-                    if (lstUserRole.Count == 0)
-                        continue;//chua dc gan quyen
-                    var userRole = lstUserRole.FirstOrDefault(x => x.IdUserLogin == userInfo.IdUserLogin);
-                    if (userRole == null)
-                        continue; // chua duoc gan quyen
-                    var lstPermission = Memory.Memory.DicRoleMapping[userRole.IdRole];
-                    if (lstPermission.Count == 0)
-                        continue; // khong co permission nao ca
-                    Memory.Memory.DicUserPermission[userInfo.IdUserLogin].AddRange(lstPermission);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Write(string.Format("Init Permission voi resson:{0} that bai", reason),true);
-                Logger.Write(ex.ToString(),true);
-                return false;
-            }
-            return true;
-        }
+//        public static bool InitUserPermission(string reason)
+//        {
+//            try
+//            {
+//                // init dicRoleMapping trước
+//                var lstRole = MemoryInfo.GetAllRole();
+//                foreach (var role in lstRole)
+//                {
+//                    Memory.Memory.DicRoleMapping[role.Id] = new List<Permission>();
+//                    // lay ra list rolepermission
+//                    var lstRolePermission = MemoryInfo.GetListRolePermissionByField(role.Id.ToString(),
+//                        RolePermission.RolePermissionFields.IdRole);
+//                    if(lstRolePermission.Count == 0)continue;
+//                    foreach (var rolePermission in lstRolePermission)
+//                    {
+//                        var permission = MemoryInfo.GetPermission(rolePermission.IdPermission);
+//                        Memory.Memory.DicRoleMapping[role.Id].Add(permission);
+//                    }
+//                }
+//                // init bang memory
+//                // lay tat ca user cua he thong
+//                var lstUserInfo = MemoryInfo.GetAllUserInfo();
+//                foreach (var userInfo in lstUserInfo)
+//                {
+//                    Memory.Memory.DicUserPermission[userInfo.IdUserLogin] = new List<Permission>(); // khoi tao
+//                    // check xem user thuoc nhom quyen nao
+//                    var lstUserRole =
+//                        MemoryInfo.GetListUserRoleByField(userInfo.IdUserLogin.ToString(), UserRole.UserRoleFields.IdUserLogin);
+//                    if (lstUserRole.Count == 0)
+//                        continue;//chua dc gan quyen
+//                    var userRole = lstUserRole.FirstOrDefault(x => x.IdUserLogin == userInfo.IdUserLogin);
+//                    if (userRole == null)
+//                        continue; // chua duoc gan quyen
+//                    var lstPermission = Memory.Memory.DicRoleMapping[userRole.IdRole];
+//                    if (lstPermission.Count == 0)
+//                        continue; // khong co permission nao ca
+//                    Memory.Memory.DicUserPermission[userInfo.IdUserLogin].AddRange(lstPermission);
+//                }
+//            }
+//            catch (Exception ex)
+//            {
+//                Logger.Write(string.Format("Init Permission voi resson:{0} that bai", reason),true);
+//                Logger.Write(ex.ToString(),true);
+//                return false;
+//            }
+//            return true;
+//        }
 
         
 

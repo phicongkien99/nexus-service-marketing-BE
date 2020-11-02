@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using QuantEdge.Entity.Entities;
-using QuantEdge.Message.Common;
-using QuantEdge.Message.Response.DataProvider;
-using QuantEdge.Message.Topic;
+using Nexus.Entity.Entities;
+using Nexus.Message.Common;
+using Nexus.Message.Response.DataProvider;
+using Nexus.Message.Topic;
 using Anotar.Log4Net;
 using System.Linq;
-using QuantEdge.Common.Enum;
-using QuantEdge.Entity;
-using QuantEdge.Worker.DataProviderManager.ReaderDatabase;
+using Nexus.Common.Enum;
+using Nexus.Entity;
+using Nexus.Worker.DataProviderManager.ReaderDatabase;
 
-namespace QuantEdge.Worker.DataProviderManager.Processor.GetList%EntityName%Request
+namespace Nexus.Worker.DataProviderManager.Processor.GetList%EntityName%Request
 {
     public class Process_GetList%EntityName%Request : IDisposable
     {

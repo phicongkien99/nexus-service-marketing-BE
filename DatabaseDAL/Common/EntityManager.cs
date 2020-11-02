@@ -43,24 +43,29 @@ namespace Nexus.DatabaseDAL.Common
         {
 
             #region GetMyEntity
+            if (entityName.Equals(Area.EntityName())) { return new AreaSql(); }
+            if (entityName.Equals(Connection.EntityName())) { return new ConnectionSql(); }
+            if (entityName.Equals(ConnectionStatus.EntityName())) { return new ConnectionStatusSql(); }
+            if (entityName.Equals(ConnectionType.EntityName())) { return new ConnectionTypeSql(); }
+            if (entityName.Equals(Contract.EntityName())) { return new ContractSql(); }
             if (entityName.Equals(Customer.EntityName())) { return new CustomerSql(); }
+            if (entityName.Equals(CustomerFeedback.EntityName())) { return new CustomerFeedbackSql(); }
+            if (entityName.Equals(DetailImportReceipt.EntityName())) { return new DetailImportReceiptSql(); }
+            if (entityName.Equals(Device.EntityName())) { return new DeviceSql(); }
+            if (entityName.Equals(DeviceType.EntityName())) { return new DeviceTypeSql(); }
+            if (entityName.Equals(Employee.EntityName())) { return new EmployeeSql(); }
+            if (entityName.Equals(Fee.EntityName())) { return new FeeSql(); }
             if (entityName.Equals(Image.EntityName())) { return new ImageSql(); }
             if (entityName.Equals(ImportReceipt.EntityName())) { return new ImportReceiptSql(); }
             if (entityName.Equals(Manufacturer.EntityName())) { return new ManufacturerSql(); }
-            if (entityName.Equals(OrderDetail.EntityName())) { return new OrderDetailSql(); }
-            if (entityName.Equals(Permission.EntityName())) { return new PermissionSql(); }
-            if (entityName.Equals(Post.EntityName())) { return new PostSql(); }
-            if (entityName.Equals(Product.EntityName())) { return new ProductSql(); }
-            if (entityName.Equals(ProductType.EntityName())) { return new ProductTypeSql(); }
-            if (entityName.Equals(Property.EntityName())) { return new PropertySql(); }
+            if (entityName.Equals(Payment.EntityName())) { return new PaymentSql(); }
+            if (entityName.Equals(PaymentFee.EntityName())) { return new PaymentFeeSql(); }
             if (entityName.Equals(Provider.EntityName())) { return new ProviderSql(); }
-            if (entityName.Equals(Role.EntityName())) { return new RoleSql(); }
-            if (entityName.Equals(RolePermission.EntityName())) { return new RolePermissionSql(); }
-            if (entityName.Equals(UserInfo.EntityName())) { return new UserInfoSql(); }
-            if (entityName.Equals(UserLogin.EntityName())) { return new UserLoginSql(); }
-            if (entityName.Equals(UserRole.EntityName())) { return new UserRoleSql(); }
-
-
+            if (entityName.Equals(ServiceForm.EntityName())) { return new ServiceFormSql(); }
+            if (entityName.Equals(ServiceFormStatus.EntityName())) { return new ServiceFormStatusSql(); }
+            if (entityName.Equals(ServicePack.EntityName())) { return new ServicePackSql(); }
+            if (entityName.Equals(ServicePackFee.EntityName())) { return new ServicePackFeeSql(); }
+            if (entityName.Equals(Store.EntityName())) { return new StoreSql(); }
 
             #endregion
 

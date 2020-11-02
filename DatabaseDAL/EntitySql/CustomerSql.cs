@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using Nexus.DatabaseDAL.Common;
 using Nexus.Entity;
 using Nexus.Entity.Entities;
+using Nexus.DatabaseDAL.Common;
+using System.Data;
+using Anotar.NLog;
 
 namespace Nexus.DatabaseDAL.EntitySql
 {
@@ -42,14 +44,14 @@ namespace Nexus.DatabaseDAL.EntitySql
                 if (businessObject != null)
 				{
 
-								sqlCommand.Parameters.Add(new SqlParameter("@Address", SqlDbType.NVarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Address));
-				sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
+								sqlCommand.Parameters.Add(new SqlParameter("@Address", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Address));
+				sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
 				sqlCommand.Parameters.Add(new SqlParameter("@CreatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedBy));
 				sqlCommand.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Email));
 				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
-				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.NVarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
+				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
 				sqlCommand.Parameters.Add(new SqlParameter("@Phone", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Phone));
-				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
 				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedBy));
 
 
@@ -84,14 +86,14 @@ namespace Nexus.DatabaseDAL.EntitySql
                 if (businessObject != null)
                 {
 
-								sqlCommand.Parameters.Add(new SqlParameter("@Address", SqlDbType.NVarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Address));
-				sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
+								sqlCommand.Parameters.Add(new SqlParameter("@Address", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Address));
+				sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
 				sqlCommand.Parameters.Add(new SqlParameter("@CreatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedBy));
 				sqlCommand.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Email));
 				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
-				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.NVarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
+				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
 				sqlCommand.Parameters.Add(new SqlParameter("@Phone", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Phone));
-				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
 				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedBy));
 
 				
@@ -168,7 +170,10 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(Customer.CustomerFields.CreatedBy.ToString()) != -1)
-				businessObject.CreatedBy = dataReader.GetInt32(GetIndex(Customer.CustomerFields.CreatedBy.ToString()));
+				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.CreatedBy.ToString())))
+				{
+					businessObject.CreatedBy = dataReader.GetInt32(GetIndex(Customer.CustomerFields.CreatedBy.ToString()));
+				}
 
 			if (GetIndex(Customer.CustomerFields.Email.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.Email.ToString())))
@@ -179,7 +184,10 @@ namespace Nexus.DatabaseDAL.EntitySql
 				businessObject.Id = dataReader.GetInt32(GetIndex(Customer.CustomerFields.Id.ToString()));
 
 			if (GetIndex(Customer.CustomerFields.Name.ToString()) != -1)
-				businessObject.Name = dataReader.GetString(GetIndex(Customer.CustomerFields.Name.ToString()));
+				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.Name.ToString())))
+				{
+					businessObject.Name = dataReader.GetString(GetIndex(Customer.CustomerFields.Name.ToString()));
+				}
 
 			if (GetIndex(Customer.CustomerFields.Phone.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.Phone.ToString())))
@@ -194,7 +202,10 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(Customer.CustomerFields.UpdatedBy.ToString()) != -1)
-				businessObject.UpdatedBy = dataReader.GetInt32(GetIndex(Customer.CustomerFields.UpdatedBy.ToString()));
+				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.UpdatedBy.ToString())))
+				{
+					businessObject.UpdatedBy = dataReader.GetInt32(GetIndex(Customer.CustomerFields.UpdatedBy.ToString()));
+				}
 
 
         }

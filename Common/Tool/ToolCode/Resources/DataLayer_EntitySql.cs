@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Oracle.ManagedDataAccess.Client;
-using ElectricShop.Entity;
-using ElectricShop.Entity.Entities;
-using ElectricShop.DatabaseDAL.Common;
+using Nexus.Entity;
+using Nexus.Entity.Entities;
+using Nexus.DatabaseDAL.Common;
 using System.Data;
 using Anotar.NLog;
 
-namespace ElectricShop.DatabaseDAL.EntitySql
+namespace Nexus.DatabaseDAL.EntitySql
 {
 	public class $CLASS_NAME$Sql : EntityBaseSql 
 	{

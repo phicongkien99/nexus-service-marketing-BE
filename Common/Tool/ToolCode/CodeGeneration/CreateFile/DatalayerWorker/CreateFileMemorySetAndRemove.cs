@@ -17,10 +17,10 @@ namespace CommonicationMemory.CodeGeneration.CreateFile.DatalayerWorker
                 listTable.Sort((l, r) => String.Compare(l.TableName, r.TableName, StringComparison.Ordinal));
                 var stringBuild = new StringBuilder(); 
                 var headerFile = new StringBuilder();
-                headerFile.AppendLine(@"using ElectricShop.Entity.Entities;
-                                        using ElectricShop.Entity.Keys;
+                headerFile.AppendLine(@"using Nexus.Entity.Entities;
+                                        using Nexus.Entity.Keys;
                                         ");
-                headerFile.AppendLine("namespace ElectricShop.Memory");
+                headerFile.AppendLine("namespace Nexus.Memory");
                 headerFile.AppendLine("{");
                 var endFile = new StringBuilder();
                 endFile.AppendLine("}");

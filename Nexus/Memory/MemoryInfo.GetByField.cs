@@ -2,13 +2,220 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Anotar.NLog;
+using Nexus.Entity.Keys;
+using Nexus.Common.Enum;
 using Nexus.Entity.Entities;
 
 namespace Nexus.Memory
 {
     public partial class MemoryInfo : Memory
     {
+        #region Area
+
+        public static List<Area> GetListAreaByField(string fieldValue, Area.AreaFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<Area>();
+            if (fieldName == Area.AreaFields.CreatedBy)
+            {
+                listValue = DicArea.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.CreatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Area.AreaFields.Id)
+            {
+                listValue = DicArea.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Area.AreaFields.IsDeleted)
+            {
+                listValue = DicArea.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IsDeleted.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Area.AreaFields.Name)
+            {
+                listValue = DicArea.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Area.AreaFields.ShortName)
+            {
+                listValue = DicArea.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.ShortName.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Area.AreaFields.UpdatedBy)
+            {
+                listValue = DicArea.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.UpdatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as Area).ToList();
+        }
+
+        #endregion
+
+        #region Connection
+
+        public static List<Connection> GetListConnectionByField(string fieldValue,
+            Connection.ConnectionFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<Connection>();
+            if (fieldName == Connection.ConnectionFields.Id)
+            {
+                listValue = DicConnection.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Connection.ConnectionFields.IdConnectionStatus)
+            {
+                listValue = DicConnection.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdConnectionStatus.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Connection.ConnectionFields.IdContract)
+            {
+                listValue = DicConnection.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdContract.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Connection.ConnectionFields.IdDevice)
+            {
+                listValue = DicConnection.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdDevice.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Connection.ConnectionFields.IdServicePack)
+            {
+                listValue = DicConnection.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdServicePack.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as Connection).ToList();
+        }
+
+        #endregion
+
+        #region ConnectionStatus
+
+        public static List<ConnectionStatus> GetListConnectionStatusByField(string fieldValue,
+            ConnectionStatus.ConnectionStatusFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<ConnectionStatus>();
+            if (fieldName == ConnectionStatus.ConnectionStatusFields.CreatedBy)
+            {
+                listValue = DicConnectionStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.CreatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ConnectionStatus.ConnectionStatusFields.Description)
+            {
+                listValue = DicConnectionStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Description.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ConnectionStatus.ConnectionStatusFields.Id)
+            {
+                listValue = DicConnectionStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ConnectionStatus.ConnectionStatusFields.IsDeleted)
+            {
+                listValue = DicConnectionStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IsDeleted.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ConnectionStatus.ConnectionStatusFields.Name)
+            {
+                listValue = DicConnectionStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ConnectionStatus.ConnectionStatusFields.UpdatedBy)
+            {
+                listValue = DicConnectionStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.UpdatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as ConnectionStatus).ToList();
+        }
+
+        #endregion
+
+        #region ConnectionType
+
+        public static List<ConnectionType> GetListConnectionTypeByField(string fieldValue,
+            ConnectionType.ConnectionTypeFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<ConnectionType>();
+            if (fieldName == ConnectionType.ConnectionTypeFields.CreatedBy)
+            {
+                listValue = DicConnectionType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.CreatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ConnectionType.ConnectionTypeFields.Description)
+            {
+                listValue = DicConnectionType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Description.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ConnectionType.ConnectionTypeFields.Id)
+            {
+                listValue = DicConnectionType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ConnectionType.ConnectionTypeFields.IsDeleted)
+            {
+                listValue = DicConnectionType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IsDeleted.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ConnectionType.ConnectionTypeFields.Name)
+            {
+                listValue = DicConnectionType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ConnectionType.ConnectionTypeFields.UpdatedBy)
+            {
+                listValue = DicConnectionType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.UpdatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as ConnectionType).ToList();
+        }
+
+        #endregion
+
+        #region Contract
+
+        public static List<Contract> GetListContractByField(string fieldValue, Contract.ContractFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<Contract>();
+            if (fieldName == Contract.ContractFields.Address)
+            {
+                listValue = DicContract.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Address.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Contract.ContractFields.ContractId)
+            {
+                listValue = DicContract.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.ContractId.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Contract.ContractFields.Id)
+            {
+                listValue = DicContract.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Contract.ContractFields.IdArea)
+            {
+                listValue = DicContract.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdArea.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Contract.ContractFields.IdCustomer)
+            {
+                listValue = DicContract.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdCustomer.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as Contract).ToList();
+        }
+
+        #endregion
+
         #region Customer
+
         public static List<Customer> GetListCustomerByField(string fieldValue, Customer.CustomerFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
@@ -16,398 +223,432 @@ namespace Nexus.Memory
             if (fieldName == Customer.CustomerFields.Address)
             {
                 listValue = DicCustomer.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Address.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Address.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Customer.CustomerFields.CreatedBy)
             {
                 listValue = DicCustomer.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.CreatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Customer.CustomerFields.Email)
+            {
+                listValue = DicCustomer.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Email.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Customer.CustomerFields.Id)
             {
                 listValue = DicCustomer.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Customer.CustomerFields.Name)
             {
                 listValue = DicCustomer.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Name.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Customer.CustomerFields.Phone)
             {
                 listValue = DicCustomer.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Phone.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Phone.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Customer.CustomerFields.UpdatedBy)
             {
                 listValue = DicCustomer.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.UpdatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
+
             return listValue.Select(value => value.Clone() as Customer).ToList();
         }
+
+        #endregion
+
+        #region CustomerFeedback
+
+        public static List<CustomerFeedback> GetListCustomerFeedbackByField(string fieldValue,
+            CustomerFeedback.CustomerFeedbackFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<CustomerFeedback>();
+            if (fieldName == CustomerFeedback.CustomerFeedbackFields.Content)
+            {
+                listValue = DicCustomerFeedback.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Content.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == CustomerFeedback.CustomerFeedbackFields.Id)
+            {
+                listValue = DicCustomerFeedback.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == CustomerFeedback.CustomerFeedbackFields.IdCustomer)
+            {
+                listValue = DicCustomerFeedback.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdCustomer.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == CustomerFeedback.CustomerFeedbackFields.Rating)
+            {
+                listValue = DicCustomerFeedback.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Rating.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as CustomerFeedback).ToList();
+        }
+
+        #endregion
+
+        #region DetailImportReceipt
+
+        public static List<DetailImportReceipt> GetListDetailImportReceiptByField(string fieldValue,
+            DetailImportReceipt.DetailImportReceiptFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<DetailImportReceipt>();
+            if (fieldName == DetailImportReceipt.DetailImportReceiptFields.Price)
+            {
+                listValue = DicDetailImportReceipt.Values.ToList().FindAll(obj => obj.Price.HasValue &&
+                                                                                  fieldValue.Equals(
+                                                                                      obj.Price.Value.ToString(),
+                                                                                      StringComparison
+                                                                                          .InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == DetailImportReceipt.DetailImportReceiptFields.Quantity)
+            {
+                listValue = DicDetailImportReceipt.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Quantity.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as DetailImportReceipt).ToList();
+        }
+
+        #endregion
+
+        #region Device
+
+        public static List<Device> GetListDeviceByField(string fieldValue, Device.DeviceFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<Device>();
+            if (fieldName == Device.DeviceFields.Id)
+            {
+                listValue = DicDevice.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Device.DeviceFields.IdDeviceType)
+            {
+                listValue = DicDevice.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdDeviceType.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Device.DeviceFields.IdManufacturer)
+            {
+                listValue = DicDevice.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdManufacturer.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Device.DeviceFields.Name)
+            {
+                listValue = DicDevice.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Device.DeviceFields.Stock)
+            {
+                listValue = DicDevice.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Stock.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Device.DeviceFields.Using)
+            {
+                listValue = DicDevice.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Using.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as Device).ToList();
+        }
+
+        #endregion
+
+        #region DeviceType
+
+        public static List<DeviceType> GetListDeviceTypeByField(string fieldValue,
+            DeviceType.DeviceTypeFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<DeviceType>();
+            if (fieldName == DeviceType.DeviceTypeFields.CreatedBy)
+            {
+                listValue = DicDeviceType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.CreatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == DeviceType.DeviceTypeFields.Description)
+            {
+                listValue = DicDeviceType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Description.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == DeviceType.DeviceTypeFields.Id)
+            {
+                listValue = DicDeviceType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == DeviceType.DeviceTypeFields.IsDeleted)
+            {
+                listValue = DicDeviceType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IsDeleted.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == DeviceType.DeviceTypeFields.Name)
+            {
+                listValue = DicDeviceType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == DeviceType.DeviceTypeFields.UpdatedBy)
+            {
+                listValue = DicDeviceType.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.UpdatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as DeviceType).ToList();
+        }
+
+        #endregion
+
+        #region Employee
+
+        public static List<Employee> GetListEmployeeByField(string fieldValue, Employee.EmployeeFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<Employee>();
+            if (fieldName == Employee.EmployeeFields.Address)
+            {
+                listValue = DicEmployee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Address.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Employee.EmployeeFields.Email)
+            {
+                listValue = DicEmployee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Email.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Employee.EmployeeFields.Id)
+            {
+                listValue = DicEmployee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Employee.EmployeeFields.IdStore)
+            {
+                listValue = DicEmployee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdStore.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Employee.EmployeeFields.IsActivated)
+            {
+                listValue = DicEmployee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IsActivated.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Employee.EmployeeFields.Name)
+            {
+                listValue = DicEmployee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Employee.EmployeeFields.Password)
+            {
+                listValue = DicEmployee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Password.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Employee.EmployeeFields.Phone)
+            {
+                listValue = DicEmployee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Phone.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Employee.EmployeeFields.Role)
+            {
+                listValue = DicEmployee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Role.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as Employee).ToList();
+        }
+
+        #endregion
+
+        #region Fee
+
+        public static List<Fee> GetListFeeByField(string fieldValue, Fee.FeeFields fieldName)
+        {
+            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
+            var listValue = new List<Fee>();
+            if (fieldName == Fee.FeeFields.CreatedBy)
+            {
+                listValue = DicFee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.CreatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Fee.FeeFields.Description)
+            {
+                listValue = DicFee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Description.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Fee.FeeFields.Id)
+            {
+                listValue = DicFee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Fee.FeeFields.IsDeleted)
+            {
+                listValue = DicFee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IsDeleted.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Fee.FeeFields.Name)
+            {
+                listValue = DicFee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Fee.FeeFields.UpdatedBy)
+            {
+                listValue = DicFee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.UpdatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as Fee).ToList();
+        }
+
         #endregion
 
         #region Image
+
         public static List<Image> GetListImageByField(string fieldValue, Image.ImageFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
             var listValue = new List<Image>();
-            if (fieldName == Image.ImageFields.CreatedBy)
+            if (fieldName == Image.ImageFields.Id)
             {
                 listValue = DicImage.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == Image.ImageFields.Id)
+            else if (fieldName == Image.ImageFields.IdCustomer)
             {
                 listValue = DicImage.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.IdCustomer.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == Image.ImageFields.UpdatedBy)
+            else if (fieldName == Image.ImageFields.Url)
             {
                 listValue = DicImage.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Url.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
+
             return listValue.Select(value => value.Clone() as Image).ToList();
         }
+
         #endregion
 
         #region ImportReceipt
-        public static List<ImportReceipt> GetListImportReceiptByField(string fieldValue, ImportReceipt.ImportReceiptFields fieldName)
+
+        public static List<ImportReceipt> GetListImportReceiptByField(string fieldValue,
+            ImportReceipt.ImportReceiptFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
             var listValue = new List<ImportReceipt>();
-            if (fieldName == ImportReceipt.ImportReceiptFields.CreatedBy)
+            if (fieldName == ImportReceipt.ImportReceiptFields.Id)
             {
                 listValue = DicImportReceipt.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == ImportReceipt.ImportReceiptFields.Id)
-            {
-                listValue = DicImportReceipt.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == ImportReceipt.ImportReceiptFields.IdEmployee)
-            {
-                listValue = DicImportReceipt.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.IdEmployee.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == ImportReceipt.ImportReceiptFields.IdProvider)
             {
                 listValue = DicImportReceipt.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.IdProvider.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == ImportReceipt.ImportReceiptFields.ListProductId)
-            {
-                listValue = DicImportReceipt.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.ListProductId.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.IdProvider.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == ImportReceipt.ImportReceiptFields.TotalPrice)
             {
                 listValue = DicImportReceipt.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.TotalPrice.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.TotalPrice.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == ImportReceipt.ImportReceiptFields.UpdatedBy)
-            {
-                listValue = DicImportReceipt.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
+
             return listValue.Select(value => value.Clone() as ImportReceipt).ToList();
         }
+
         #endregion
 
         #region Manufacturer
-        public static List<Manufacturer> GetListManufacturerByField(string fieldValue, Manufacturer.ManufacturerFields fieldName)
+
+        public static List<Manufacturer> GetListManufacturerByField(string fieldValue,
+            Manufacturer.ManufacturerFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
             var listValue = new List<Manufacturer>();
             if (fieldName == Manufacturer.ManufacturerFields.CreatedBy)
             {
                 listValue = DicManufacturer.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.CreatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Manufacturer.ManufacturerFields.Id)
             {
                 listValue = DicManufacturer.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Manufacturer.ManufacturerFields.IsDeleted)
+            {
+                listValue = DicManufacturer.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IsDeleted.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Manufacturer.ManufacturerFields.Logo)
+            {
+                listValue = DicManufacturer.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Logo.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Manufacturer.ManufacturerFields.Name)
             {
                 listValue = DicManufacturer.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Name.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Manufacturer.ManufacturerFields.UpdatedBy)
             {
                 listValue = DicManufacturer.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.UpdatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
+
             return listValue.Select(value => value.Clone() as Manufacturer).ToList();
         }
+
         #endregion
 
-        #region OrderDetail
-        public static List<OrderDetail> GetListOrderDetailByField(string fieldValue, OrderDetail.OrderDetailFields fieldName)
+        #region Payment
+
+        public static List<Payment> GetListPaymentByField(string fieldValue, Payment.PaymentFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<OrderDetail>();
-            if (fieldName == OrderDetail.OrderDetailFields.Address)
+            var listValue = new List<Payment>();
+            if (fieldName == Payment.PaymentFields.Id)
             {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Address.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicPayment.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == OrderDetail.OrderDetailFields.CreatedBy)
+            else if (fieldName == Payment.PaymentFields.IdContract)
             {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicPayment.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdContract.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == OrderDetail.OrderDetailFields.Id)
+            else if (fieldName == Payment.PaymentFields.TotalPrice)
             {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicPayment.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.TotalPrice.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == OrderDetail.OrderDetailFields.IdCustomer)
-            {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.IdCustomer.ToString(), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == OrderDetail.OrderDetailFields.IdEmployee)
-            {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.IdEmployee.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == OrderDetail.OrderDetailFields.ListProductId)
-            {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.ListProductId.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == OrderDetail.OrderDetailFields.Name)
-            {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Name.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == OrderDetail.OrderDetailFields.OrderStatus)
-            {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.OrderStatus.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == OrderDetail.OrderDetailFields.Phone)
-            {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Phone.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == OrderDetail.OrderDetailFields.TotalPrice)
-            {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.TotalPrice.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == OrderDetail.OrderDetailFields.UpdatedBy)
-            {
-                listValue = DicOrderDetail.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            return listValue.Select(value => value.Clone() as OrderDetail).ToList();
+
+            return listValue.Select(value => value.Clone() as Payment).ToList();
         }
+
         #endregion
 
-        #region Permission
-        public static List<Permission> GetListPermissionByField(string fieldValue, Permission.PermissionFields fieldName)
-        {
-            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<Permission>();
-            if (fieldName == Permission.PermissionFields.CreatedBy)
-            {
-                listValue = DicPermission.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Permission.PermissionFields.Description)
-            {
-                listValue = DicPermission.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Description.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Permission.PermissionFields.Id)
-            {
-                listValue = DicPermission.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Permission.PermissionFields.Name)
-            {
-                listValue = DicPermission.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Name.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Permission.PermissionFields.UpdatedBy)
-            {
-                listValue = DicPermission.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            return listValue.Select(value => value.Clone() as Permission).ToList();
-        }
-        #endregion
-        #region Post
-        public static List<Post> GetListPostByField(string fieldValue, Post.PostFields fieldName)
-        {
-            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<Post>();
-            if (fieldName == Post.PostFields.Content)
-            {
-                listValue = DicPost.Values.ToList().FindAll(obj =>
-                    fieldValue.Equals(obj.Content.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Post.PostFields.CreatedBy)
-            {
-                listValue = DicPost.Values.ToList().FindAll(obj =>
-                    fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Post.PostFields.Id)
-            {
-                listValue = DicPost.Values.ToList().FindAll(obj =>
-                    fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Post.PostFields.Tittle)
-            {
-                listValue = DicPost.Values.ToList().FindAll(obj =>
-                    fieldValue.Equals(obj.Tittle.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Post.PostFields.UpdatedBy)
-            {
-                listValue = DicPost.Values.ToList().FindAll(obj =>
-                    fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            return listValue.Select(value => value.Clone() as Post).ToList();
-        }
-        #endregion
+        #region PaymentFee
 
-        #region Product
-        public static List<Product> GetListProductByField(string fieldValue, Product.ProductFields fieldName)
+        public static List<PaymentFee> GetListPaymentFeeByField(string fieldValue,
+            PaymentFee.PaymentFeeFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<Product>();
-            if (fieldName == Product.ProductFields.CreatedBy)
+            var listValue = new List<PaymentFee>();
+            if (fieldName == PaymentFee.PaymentFeeFields.Value)
             {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicPaymentFee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Value.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == Product.ProductFields.Description)
-            {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Description.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Product.ProductFields.Id)
-            {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Product.ProductFields.IdDisplay)
-            {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.IdDisplay.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Product.ProductFields.IdManufacturer)
-            {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.IdManufacturer.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Product.ProductFields.IdProductType)
-            {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.IdProductType.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Product.ProductFields.Name)
-            {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Name.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Product.ProductFields.Quantity)
-            {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Quantity.ToString(), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Product.ProductFields.SupportDuration)
-            {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.SupportDuration.ToString(), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Product.ProductFields.UnitPrice)
-            {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UnitPrice.ToString(), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Product.ProductFields.UpdatedBy)
-            {
-                listValue = DicProduct.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            return listValue.Select(value => value.Clone() as Product).ToList();
-        }
-        #endregion
 
-        #region ProductType
-        public static List<ProductType> GetListProductTypeByField(string fieldValue, ProductType.ProductTypeFields fieldName)
-        {
-            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<ProductType>();
-            if (fieldName == ProductType.ProductTypeFields.CreatedBy)
-            {
-                listValue = DicProductType.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == ProductType.ProductTypeFields.Id)
-            {
-                listValue = DicProductType.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == ProductType.ProductTypeFields.Name)
-            {
-                listValue = DicProductType.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Name.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == ProductType.ProductTypeFields.UpdatedBy)
-            {
-                listValue = DicProductType.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            return listValue.Select(value => value.Clone() as ProductType).ToList();
+            return listValue.Select(value => value.Clone() as PaymentFee).ToList();
         }
-        #endregion
 
-        #region Property
-        public static List<Property> GetListPropertyByField(string fieldValue, Property.PropertyFields fieldName)
-        {
-            if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<Property>();
-            if (fieldName == Property.PropertyFields.CreatedBy)
-            {
-                listValue = DicProperty.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Property.PropertyFields.Data)
-            {
-                listValue = DicProperty.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Data.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Property.PropertyFields.Id)
-            {
-                listValue = DicProperty.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Property.PropertyFields.IdProduct)
-            {
-                listValue = DicProperty.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.IdProduct.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Property.PropertyFields.Name)
-            {
-                listValue = DicProperty.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Name.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == Property.PropertyFields.UpdatedBy)
-            {
-                listValue = DicProperty.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            return listValue.Select(value => value.Clone() as Property).ToList();
-        }
         #endregion
 
         #region Provider
+
         public static List<Provider> GetListProviderByField(string fieldValue, Provider.ProviderFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
@@ -415,187 +656,226 @@ namespace Nexus.Memory
             if (fieldName == Provider.ProviderFields.Address)
             {
                 listValue = DicProvider.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Address.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Address.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Provider.ProviderFields.CreatedBy)
             {
                 listValue = DicProvider.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.CreatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Provider.ProviderFields.Email)
             {
                 listValue = DicProvider.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Email.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Email.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Provider.ProviderFields.Id)
             {
                 listValue = DicProvider.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Provider.ProviderFields.IsDeleted)
+            {
+                listValue = DicProvider.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IsDeleted.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Provider.ProviderFields.Name)
             {
                 listValue = DicProvider.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Name.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Provider.ProviderFields.Phone)
             {
                 listValue = DicProvider.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Phone.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.Phone.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
             else if (fieldName == Provider.ProviderFields.UpdatedBy)
             {
                 listValue = DicProvider.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                    fieldValue.Equals(obj.UpdatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
+
             return listValue.Select(value => value.Clone() as Provider).ToList();
         }
+
         #endregion
 
-        #region Role
-        public static List<Role> GetListRoleByField(string fieldValue, Role.RoleFields fieldName)
+        #region ServiceForm
+
+        public static List<ServiceForm> GetListServiceFormByField(string fieldValue,
+            ServiceForm.ServiceFormFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<Role>();
-            if (fieldName == Role.RoleFields.CreatedBy)
+            var listValue = new List<ServiceForm>();
+            if (fieldName == ServiceForm.ServiceFormFields.Id)
             {
-                listValue = DicRole.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServiceForm.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == Role.RoleFields.Description)
+            else if (fieldName == ServiceForm.ServiceFormFields.IdCustomer)
             {
-                listValue = DicRole.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Description.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServiceForm.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdCustomer.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == Role.RoleFields.Id)
+            else if (fieldName == ServiceForm.ServiceFormFields.IdEmployee)
             {
-                listValue = DicRole.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServiceForm.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdEmployee.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == Role.RoleFields.Name)
+            else if (fieldName == ServiceForm.ServiceFormFields.IdServiceFormStatus)
             {
-                listValue = DicRole.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Name.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServiceForm.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdServiceFormStatus.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == Role.RoleFields.UpdatedBy)
+            else if (fieldName == ServiceForm.ServiceFormFields.IdServicePack)
             {
-                listValue = DicRole.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServiceForm.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdServicePack.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            return listValue.Select(value => value.Clone() as Role).ToList();
+
+            return listValue.Select(value => value.Clone() as ServiceForm).ToList();
         }
+
         #endregion
 
-        #region RolePermission
-        public static List<RolePermission> GetListRolePermissionByField(string fieldValue, RolePermission.RolePermissionFields fieldName)
+        #region ServiceFormStatus
+
+        public static List<ServiceFormStatus> GetListServiceFormStatusByField(string fieldValue,
+            ServiceFormStatus.ServiceFormStatusFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<RolePermission>();
-            if (fieldName == RolePermission.RolePermissionFields.IdRole)
+            var listValue = new List<ServiceFormStatus>();
+            if (fieldName == ServiceFormStatus.ServiceFormStatusFields.CreatedBy)
             {
-                listValue = DicRolePermission.Values.ToList().FindAll(obj =>
-                    fieldValue.Equals(obj.IdRole.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServiceFormStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.CreatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == RolePermission.RolePermissionFields.IdPermission)
+            else if (fieldName == ServiceFormStatus.ServiceFormStatusFields.Description)
             {
-                listValue = DicRolePermission.Values.ToList().FindAll(obj =>
-                    fieldValue.Equals(obj.IdPermission.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServiceFormStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Description.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            return listValue.Select(value => value.Clone() as RolePermission).ToList();
+            else if (fieldName == ServiceFormStatus.ServiceFormStatusFields.Id)
+            {
+                listValue = DicServiceFormStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ServiceFormStatus.ServiceFormStatusFields.IsDeleted)
+            {
+                listValue = DicServiceFormStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IsDeleted.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ServiceFormStatus.ServiceFormStatusFields.Name)
+            {
+                listValue = DicServiceFormStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == ServiceFormStatus.ServiceFormStatusFields.UpdatedBy)
+            {
+                listValue = DicServiceFormStatus.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.UpdatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return listValue.Select(value => value.Clone() as ServiceFormStatus).ToList();
         }
+
         #endregion
 
-        #region UserInfo
-        public static List<UserInfo> GetListUserInfoByField(string fieldValue, UserInfo.UserInfoFields fieldName)
+        #region ServicePack
+
+        public static List<ServicePack> GetListServicePackByField(string fieldValue,
+            ServicePack.ServicePackFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<UserInfo>();
-            if (fieldName == UserInfo.UserInfoFields.Address)
+            var listValue = new List<ServicePack>();
+            if (fieldName == ServicePack.ServicePackFields.Description)
             {
-                listValue = DicUserInfo.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Address.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServicePack.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Description.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == UserInfo.UserInfoFields.CreatedBy)
+            else if (fieldName == ServicePack.ServicePackFields.Id)
             {
-                listValue = DicUserInfo.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.CreatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServicePack.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == UserInfo.UserInfoFields.Email)
+            else if (fieldName == ServicePack.ServicePackFields.IdConnectionType)
             {
-                listValue = DicUserInfo.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Email.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServicePack.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdConnectionType.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == UserInfo.UserInfoFields.IdUserLogin)
+            else if (fieldName == ServicePack.ServicePackFields.Name)
             {
-                listValue = DicUserInfo.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.IdUserLogin.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServicePack.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == UserInfo.UserInfoFields.Name)
-            {
-                listValue = DicUserInfo.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Name.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == UserInfo.UserInfoFields.Phone)
-            {
-                listValue = DicUserInfo.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Phone.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == UserInfo.UserInfoFields.UpdatedBy)
-            {
-                listValue = DicUserInfo.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.UpdatedBy.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            return listValue.Select(value => value.Clone() as UserInfo).ToList();
+
+            return listValue.Select(value => value.Clone() as ServicePack).ToList();
         }
+
         #endregion
 
-        #region UserLogin
-        public static List<UserLogin> GetListUserLoginByField(string fieldValue, UserLogin.UserLoginFields fieldName)
+        #region ServicePackFee
+
+        public static List<ServicePackFee> GetListServicePackFeeByField(string fieldValue,
+            ServicePackFee.ServicePackFeeFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<UserLogin>();
-            if (fieldName == UserLogin.UserLoginFields.Id)
+            var listValue = new List<ServicePackFee>();
+            if (fieldName == ServicePackFee.ServicePackFeeFields.Value)
             {
-                listValue = DicUserLogin.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Id.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicServicePackFee.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Value.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            else if (fieldName == UserLogin.UserLoginFields.Password)
-            {
-                listValue = DicUserLogin.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Password.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == UserLogin.UserLoginFields.Username)
-            {
-                listValue = DicUserLogin.Values.ToList().FindAll(obj =>
-                fieldValue.Equals(obj.Username.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            else if (fieldName == UserLogin.UserLoginFields.UserStatus)
-            {
-                listValue = DicUserLogin.Values.ToList().FindAll(obj =>
-                    fieldValue.Equals(obj.UserStatus.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }
-            return listValue.Select(value => value.Clone() as UserLogin).ToList();
+
+            return listValue.Select(value => value.Clone() as ServicePackFee).ToList();
         }
+
         #endregion
 
-        #region UserRole
-        public static List<UserRole> GetListUserRoleByField(string fieldValue, UserRole.UserRoleFields fieldName)
+        #region Store
+
+        public static List<Store> GetListStoreByField(string fieldValue, Store.StoreFields fieldName)
         {
             if (string.IsNullOrEmpty(fieldValue)) fieldValue = "";
-            var listValue = new List<UserRole>();
-            if (fieldName == UserRole.UserRoleFields.IdRole)
+            var listValue = new List<Store>();
+            if (fieldName == Store.StoreFields.Address)
             {
-                listValue = DicUserRole.Values.ToList().FindAll(obj =>
-                    fieldValue.Equals(obj.IdRole.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
-            }else if (fieldName == UserRole.UserRoleFields.IdUserLogin)
-            {
-                listValue = DicUserRole.Values.ToList().FindAll(obj =>
-                    fieldValue.Equals(obj.IdUserLogin.ToString(CultureInfo.InvariantCulture), StringComparison.InvariantCultureIgnoreCase));
+                listValue = DicStore.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Address.ToString(), StringComparison.InvariantCultureIgnoreCase));
             }
-            return listValue.Select(value => value.Clone() as UserRole).ToList();
-        }
-        #endregion
+            else if (fieldName == Store.StoreFields.CreatedBy)
+            {
+                listValue = DicStore.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.CreatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Store.StoreFields.Id)
+            {
+                listValue = DicStore.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Id.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Store.StoreFields.IdArea)
+            {
+                listValue = DicStore.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IdArea.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Store.StoreFields.IsClosed)
+            {
+                listValue = DicStore.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.IsClosed.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Store.StoreFields.Name)
+            {
+                listValue = DicStore.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.Name.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
+            else if (fieldName == Store.StoreFields.UpdatedBy)
+            {
+                listValue = DicStore.Values.ToList().FindAll(obj =>
+                    fieldValue.Equals(obj.UpdatedBy.ToString(), StringComparison.InvariantCultureIgnoreCase));
+            }
 
+            return listValue.Select(value => value.Clone() as Store).ToList();
+        }
+
+        #endregion
     }
 }
-
-

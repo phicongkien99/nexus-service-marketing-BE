@@ -5,38 +5,273 @@ namespace Nexus.Memory
 {
     public partial class MemorySet : Memory
     {
-        internal static void SetMemory(Customer objectValue)
+        internal static void SetMemory(Area objectValue)
         {
             string entityName = objectValue.GetName();
-            // chua co thi khoi tao
+// chua co thi khoi tao
             if (!DicMaxKeyEntity.ContainsKey(entityName))
                 DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
+// co roi thi so sanh roi set max key vao dic
             if (DicMaxKeyEntity[entityName] < objectValue.Id)
             {
                 DicMaxKeyEntity[entityName] = objectValue.Id;
             }
+
+            DicArea[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(Area objectValue)
+        {
+            if (DicArea.ContainsKey(objectValue.Id))
+                DicArea.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(Connection objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
+            DicConnection[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(Connection objectValue)
+        {
+            if (DicConnection.ContainsKey(objectValue.Id))
+                DicConnection.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(ConnectionStatus objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
+            DicConnectionStatus[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(ConnectionStatus objectValue)
+        {
+            if (DicConnectionStatus.ContainsKey(objectValue.Id))
+                DicConnectionStatus.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(ConnectionType objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
+            DicConnectionType[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(ConnectionType objectValue)
+        {
+            if (DicConnectionType.ContainsKey(objectValue.Id))
+                DicConnectionType.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(Contract objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
+            DicContract[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(Contract objectValue)
+        {
+            if (DicContract.ContainsKey(objectValue.Id))
+                DicContract.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(Customer objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
             DicCustomer[objectValue.Id] = objectValue;
         }
+
         internal static void RemoveMemory(Customer objectValue)
         {
             if (DicCustomer.ContainsKey(objectValue.Id))
                 DicCustomer.Remove(objectValue.Id);
         }
 
-        internal static void SetMemory(Image objectValue)
+        internal static void SetMemory(CustomerFeedback objectValue)
         {
             string entityName = objectValue.GetName();
-            // chua co thi khoi tao
+// chua co thi khoi tao
             if (!DicMaxKeyEntity.ContainsKey(entityName))
                 DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
+// co roi thi so sanh roi set max key vao dic
             if (DicMaxKeyEntity[entityName] < objectValue.Id)
             {
                 DicMaxKeyEntity[entityName] = objectValue.Id;
             }
+
+            DicCustomerFeedback[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(CustomerFeedback objectValue)
+        {
+            if (DicCustomerFeedback.ContainsKey(objectValue.Id))
+                DicCustomerFeedback.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(DetailImportReceipt objectValue)
+        {
+            var key = new DetailImportReceiptKeys
+            {
+                IdDevice = objectValue.IdDevice,
+                IdImportReceipt = objectValue.IdImportReceipt
+            };
+            DicDetailImportReceipt[key] = objectValue;
+        }
+
+        internal static void RemoveMemory(DetailImportReceipt objectValue)
+        {
+            var key = new DetailImportReceiptKeys
+            {
+                IdDevice = objectValue.IdDevice,
+                IdImportReceipt = objectValue.IdImportReceipt
+            };
+            if (DicDetailImportReceipt.ContainsKey(key))
+                DicDetailImportReceipt.Remove(key);
+        }
+
+        internal static void SetMemory(Device objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
+            DicDevice[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(Device objectValue)
+        {
+            if (DicDevice.ContainsKey(objectValue.Id))
+                DicDevice.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(DeviceType objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
+            DicDeviceType[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(DeviceType objectValue)
+        {
+            if (DicDeviceType.ContainsKey(objectValue.Id))
+                DicDeviceType.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(Employee objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
+            DicEmployee[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(Employee objectValue)
+        {
+            if (DicEmployee.ContainsKey(objectValue.Id))
+                DicEmployee.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(Fee objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
+            DicFee[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(Fee objectValue)
+        {
+            if (DicFee.ContainsKey(objectValue.Id))
+                DicFee.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(Image objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
             DicImage[objectValue.Id] = objectValue;
         }
+
         internal static void RemoveMemory(Image objectValue)
         {
             if (DicImage.ContainsKey(objectValue.Id))
@@ -46,16 +281,18 @@ namespace Nexus.Memory
         internal static void SetMemory(ImportReceipt objectValue)
         {
             string entityName = objectValue.GetName();
-            // chua co thi khoi tao
+// chua co thi khoi tao
             if (!DicMaxKeyEntity.ContainsKey(entityName))
                 DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
+// co roi thi so sanh roi set max key vao dic
             if (DicMaxKeyEntity[entityName] < objectValue.Id)
             {
                 DicMaxKeyEntity[entityName] = objectValue.Id;
             }
+
             DicImportReceipt[objectValue.Id] = objectValue;
         }
+
         internal static void RemoveMemory(ImportReceipt objectValue)
         {
             if (DicImportReceipt.ContainsKey(objectValue.Id))
@@ -65,253 +302,190 @@ namespace Nexus.Memory
         internal static void SetMemory(Manufacturer objectValue)
         {
             string entityName = objectValue.GetName();
-            // chua co thi khoi tao
+// chua co thi khoi tao
             if (!DicMaxKeyEntity.ContainsKey(entityName))
                 DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
+// co roi thi so sanh roi set max key vao dic
             if (DicMaxKeyEntity[entityName] < objectValue.Id)
             {
                 DicMaxKeyEntity[entityName] = objectValue.Id;
             }
+
             DicManufacturer[objectValue.Id] = objectValue;
         }
+
         internal static void RemoveMemory(Manufacturer objectValue)
         {
             if (DicManufacturer.ContainsKey(objectValue.Id))
                 DicManufacturer.Remove(objectValue.Id);
         }
 
-        internal static void SetMemory(OrderDetail objectValue)
+        internal static void SetMemory(Payment objectValue)
         {
             string entityName = objectValue.GetName();
-            // chua co thi khoi tao
+// chua co thi khoi tao
             if (!DicMaxKeyEntity.ContainsKey(entityName))
                 DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
+// co roi thi so sanh roi set max key vao dic
             if (DicMaxKeyEntity[entityName] < objectValue.Id)
             {
                 DicMaxKeyEntity[entityName] = objectValue.Id;
             }
-            DicOrderDetail[objectValue.Id] = objectValue;
-        }
-        internal static void RemoveMemory(OrderDetail objectValue)
-        {
-            if (DicOrderDetail.ContainsKey(objectValue.Id))
-                DicOrderDetail.Remove(objectValue.Id);
+
+            DicPayment[objectValue.Id] = objectValue;
         }
 
-        internal static void SetMemory(Permission objectValue)
+        internal static void RemoveMemory(Payment objectValue)
         {
-            string entityName = objectValue.GetName();
-            // chua co thi khoi tao
-            if (!DicMaxKeyEntity.ContainsKey(entityName))
-                DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
-            if (DicMaxKeyEntity[entityName] < objectValue.Id)
-            {
-                DicMaxKeyEntity[entityName] = objectValue.Id;
-            }
-            DicPermission[objectValue.Id] = objectValue;
-        }
-        internal static void RemoveMemory(Permission objectValue)
-        {
-            if (DicPermission.ContainsKey(objectValue.Id))
-                DicPermission.Remove(objectValue.Id);
+            if (DicPayment.ContainsKey(objectValue.Id))
+                DicPayment.Remove(objectValue.Id);
         }
 
-        internal static void SetMemory(Post objectValue)
+        internal static void SetMemory(PaymentFee objectValue)
         {
-            string entityName = objectValue.GetName();
-            // chua co thi khoi tao
-            if (!DicMaxKeyEntity.ContainsKey(entityName))
-                DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
-            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            var key = new PaymentFeeKeys
             {
-                DicMaxKeyEntity[entityName] = objectValue.Id;
-            }
-            DicPost[objectValue.Id] = objectValue;
-        }
-        internal static void RemoveMemory(Post objectValue)
-        {
-            if (DicPost.ContainsKey(objectValue.Id))
-                DicPost.Remove(objectValue.Id);
+                IdFee = objectValue.IdFee,
+                IdPayment = objectValue.IdPayment
+            };
+            DicPaymentFee[key] = objectValue;
         }
 
-        internal static void SetMemory(Product objectValue)
+        internal static void RemoveMemory(PaymentFee objectValue)
         {
-            string entityName = objectValue.GetName();
-            // chua co thi khoi tao
-            if (!DicMaxKeyEntity.ContainsKey(entityName))
-                DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
-            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            var key = new PaymentFeeKeys
             {
-                DicMaxKeyEntity[entityName] = objectValue.Id;
-            }
-            DicProduct[objectValue.Id] = objectValue;
-        }
-        internal static void RemoveMemory(Product objectValue)
-        {
-            if (DicProduct.ContainsKey(objectValue.Id))
-                DicProduct.Remove(objectValue.Id);
-        }
-
-        internal static void SetMemory(ProductType objectValue)
-        {
-            string entityName = objectValue.GetName();
-            // chua co thi khoi tao
-            if (!DicMaxKeyEntity.ContainsKey(entityName))
-                DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
-            if (DicMaxKeyEntity[entityName] < objectValue.Id)
-            {
-                DicMaxKeyEntity[entityName] = objectValue.Id;
-            }
-            DicProductType[objectValue.Id] = objectValue;
-        }
-        internal static void RemoveMemory(ProductType objectValue)
-        {
-            if (DicProductType.ContainsKey(objectValue.Id))
-                DicProductType.Remove(objectValue.Id);
-        }
-
-        internal static void SetMemory(Property objectValue)
-        {
-            string entityName = objectValue.GetName();
-            // chua co thi khoi tao
-            if (!DicMaxKeyEntity.ContainsKey(entityName))
-                DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
-            if (DicMaxKeyEntity[entityName] < objectValue.Id)
-            {
-                DicMaxKeyEntity[entityName] = objectValue.Id;
-            }
-            DicProperty[objectValue.Id] = objectValue;
-        }
-        internal static void RemoveMemory(Property objectValue)
-        {
-            if (DicProperty.ContainsKey(objectValue.Id))
-                DicProperty.Remove(objectValue.Id);
+                IdFee = objectValue.IdFee,
+                IdPayment = objectValue.IdPayment
+            };
+            if (DicPaymentFee.ContainsKey(key))
+                DicPaymentFee.Remove(key);
         }
 
         internal static void SetMemory(Provider objectValue)
         {
             string entityName = objectValue.GetName();
-            // chua co thi khoi tao
+// chua co thi khoi tao
             if (!DicMaxKeyEntity.ContainsKey(entityName))
                 DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
+// co roi thi so sanh roi set max key vao dic
             if (DicMaxKeyEntity[entityName] < objectValue.Id)
             {
                 DicMaxKeyEntity[entityName] = objectValue.Id;
             }
+
             DicProvider[objectValue.Id] = objectValue;
         }
+
         internal static void RemoveMemory(Provider objectValue)
         {
             if (DicProvider.ContainsKey(objectValue.Id))
                 DicProvider.Remove(objectValue.Id);
         }
 
-        internal static void SetMemory(Role objectValue)
+        internal static void SetMemory(ServiceForm objectValue)
         {
             string entityName = objectValue.GetName();
-            // chua co thi khoi tao
+// chua co thi khoi tao
             if (!DicMaxKeyEntity.ContainsKey(entityName))
                 DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
+// co roi thi so sanh roi set max key vao dic
             if (DicMaxKeyEntity[entityName] < objectValue.Id)
             {
                 DicMaxKeyEntity[entityName] = objectValue.Id;
             }
-            DicRole[objectValue.Id] = objectValue;
-        }
-        internal static void RemoveMemory(Role objectValue)
-        {
-            if (DicRole.ContainsKey(objectValue.Id))
-                DicRole.Remove(objectValue.Id);
+
+            DicServiceForm[objectValue.Id] = objectValue;
         }
 
-        internal static void SetMemory(RolePermission objectValue)
+        internal static void RemoveMemory(ServiceForm objectValue)
         {
-            var key = new RolePermissionKeys
-            {
-                IdPermission = objectValue.IdPermission,
-                IdRole = objectValue.IdRole
-            };
-            DicRolePermission[key] = objectValue;
-        }
-        internal static void RemoveMemory(RolePermission objectValue)
-        {
-            var key = new RolePermissionKeys
-            {
-                IdPermission = objectValue.IdPermission,
-                IdRole = objectValue.IdRole
-            };
-            if (DicRolePermission.ContainsKey(key))
-                DicRolePermission.Remove(key);
+            if (DicServiceForm.ContainsKey(objectValue.Id))
+                DicServiceForm.Remove(objectValue.Id);
         }
 
-        internal static void SetMemory(UserInfo objectValue)
+        internal static void SetMemory(ServiceFormStatus objectValue)
         {
             string entityName = objectValue.GetName();
-            // chua co thi khoi tao
+// chua co thi khoi tao
             if (!DicMaxKeyEntity.ContainsKey(entityName))
                 DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
-            if (DicMaxKeyEntity[entityName] < objectValue.IdUserLogin)
-            {
-                DicMaxKeyEntity[entityName] = objectValue.IdUserLogin;
-            }
-            DicUserInfo[objectValue.IdUserLogin] = objectValue;
-        }
-        internal static void RemoveMemory(UserInfo objectValue)
-        {
-            if (DicUserInfo.ContainsKey(objectValue.IdUserLogin))
-                DicUserInfo.Remove(objectValue.IdUserLogin);
-        }
-
-        internal static void SetMemory(UserLogin objectValue)
-        {
-            string entityName = objectValue.GetName();
-            // chua co thi khoi tao
-            if (!DicMaxKeyEntity.ContainsKey(entityName))
-                DicMaxKeyEntity[entityName] = 0;
-            // co roi thi so sanh roi set max key vao dic
+// co roi thi so sanh roi set max key vao dic
             if (DicMaxKeyEntity[entityName] < objectValue.Id)
             {
                 DicMaxKeyEntity[entityName] = objectValue.Id;
             }
-            DicUserLogin[objectValue.Id] = objectValue;
-        }
-        internal static void RemoveMemory(UserLogin objectValue)
-        {
-            if (DicUserLogin.ContainsKey(objectValue.Id))
-                DicUserLogin.Remove(objectValue.Id);
+
+            DicServiceFormStatus[objectValue.Id] = objectValue;
         }
 
-        internal static void SetMemory(UserRole objectValue)
+        internal static void RemoveMemory(ServiceFormStatus objectValue)
         {
-            var key = new UserRoleKeys
-            {
-                IdRole = objectValue.IdRole,
-                IdUserLogin = objectValue.IdUserLogin
-            };
-            DicUserRole[key] = objectValue;
-        }
-        internal static void RemoveMemory(UserRole objectValue)
-        {
-            var key = new UserRoleKeys
-            {
-                IdRole = objectValue.IdRole,
-                IdUserLogin = objectValue.IdUserLogin
-            };
-            if (DicUserRole.ContainsKey(key))
-                DicUserRole.Remove(key);
+            if (DicServiceFormStatus.ContainsKey(objectValue.Id))
+                DicServiceFormStatus.Remove(objectValue.Id);
         }
 
+        internal static void SetMemory(ServicePack objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
+            DicServicePack[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(ServicePack objectValue)
+        {
+            if (DicServicePack.ContainsKey(objectValue.Id))
+                DicServicePack.Remove(objectValue.Id);
+        }
+
+        internal static void SetMemory(ServicePackFee objectValue)
+        {
+            var key = new ServicePackFeeKeys
+            {
+                IdFee = objectValue.IdFee,
+                IdServicePack = objectValue.IdServicePack
+            };
+            DicServicePackFee[key] = objectValue;
+        }
+
+        internal static void RemoveMemory(ServicePackFee objectValue)
+        {
+            var key = new ServicePackFeeKeys
+            {
+                IdFee = objectValue.IdFee,
+                IdServicePack = objectValue.IdServicePack
+            };
+            if (DicServicePackFee.ContainsKey(key))
+                DicServicePackFee.Remove(key);
+        }
+
+        internal static void SetMemory(Store objectValue)
+        {
+            string entityName = objectValue.GetName();
+// chua co thi khoi tao
+            if (!DicMaxKeyEntity.ContainsKey(entityName))
+                DicMaxKeyEntity[entityName] = 0;
+// co roi thi so sanh roi set max key vao dic
+            if (DicMaxKeyEntity[entityName] < objectValue.Id)
+            {
+                DicMaxKeyEntity[entityName] = objectValue.Id;
+            }
+
+            DicStore[objectValue.Id] = objectValue;
+        }
+
+        internal static void RemoveMemory(Store objectValue)
+        {
+            if (DicStore.ContainsKey(objectValue.Id))
+                DicStore.Remove(objectValue.Id);
+        }
     }
 }
-
-

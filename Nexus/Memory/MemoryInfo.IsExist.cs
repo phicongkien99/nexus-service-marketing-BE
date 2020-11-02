@@ -1,9 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using Anotar.NLog;
 using Nexus.Entity.Keys;
+using Nexus.Common.Enum;
+using Nexus.Entity.Entities;
 
 namespace Nexus.Memory
 {
     public partial class MemoryInfo : Memory
     {
+        public static bool IsExistArea(int id)
+        {
+            if (DicArea.ContainsKey(id))
+                return true;
+            return false;
+        }
+
+        public static bool IsExistConnection(int id)
+        {
+            if (DicConnection.ContainsKey(id))
+                return true;
+            return false;
+        }
+
+        public static bool IsExistConnectionStatus(int id)
+        {
+            if (DicConnectionStatus.ContainsKey(id))
+                return true;
+            return false;
+        }
+
+        public static bool IsExistConnectionType(int id)
+        {
+            if (DicConnectionType.ContainsKey(id))
+                return true;
+            return false;
+        }
+
+        public static bool IsExistContract(int id)
+        {
+            if (DicContract.ContainsKey(id))
+                return true;
+            return false;
+        }
+
         public static bool IsExistCustomer(int id)
         {
             if (DicCustomer.ContainsKey(id))
@@ -11,16 +53,51 @@ namespace Nexus.Memory
             return false;
         }
 
-        public static bool IsExistImage(int id)
+        public static bool IsExistCustomerFeedback(int id)
         {
-            if (DicImage.ContainsKey(id))
+            if (DicCustomerFeedback.ContainsKey(id))
                 return true;
             return false;
         }
 
-        public static bool IsExistPost(int id)
+        public static bool IsExistDetailImportReceipt(DetailImportReceiptKeys detailImportReceiptKeys)
         {
-            if (DicPost.ContainsKey(id))
+            if (DicDetailImportReceipt.ContainsKey(detailImportReceiptKeys))
+                return true;
+            return false;
+        }
+
+        public static bool IsExistDevice(int id)
+        {
+            if (DicDevice.ContainsKey(id))
+                return true;
+            return false;
+        }
+
+        public static bool IsExistDeviceType(int id)
+        {
+            if (DicDeviceType.ContainsKey(id))
+                return true;
+            return false;
+        }
+
+        public static bool IsExistEmployee(int id)
+        {
+            if (DicEmployee.ContainsKey(id))
+                return true;
+            return false;
+        }
+
+        public static bool IsExistFee(int id)
+        {
+            if (DicFee.ContainsKey(id))
+                return true;
+            return false;
+        }
+
+        public static bool IsExistImage(int id)
+        {
+            if (DicImage.ContainsKey(id))
                 return true;
             return false;
         }
@@ -39,37 +116,16 @@ namespace Nexus.Memory
             return false;
         }
 
-        public static bool IsExistOrderDetail(int id)
+        public static bool IsExistPayment(int id)
         {
-            if (DicOrderDetail.ContainsKey(id))
+            if (DicPayment.ContainsKey(id))
                 return true;
             return false;
         }
 
-        public static bool IsExistPermission(int id)
+        public static bool IsExistPaymentFee(PaymentFeeKeys paymentFeeKeys)
         {
-            if (DicPermission.ContainsKey(id))
-                return true;
-            return false;
-        }
-
-        public static bool IsExistProduct(int id)
-        {
-            if (DicProduct.ContainsKey(id))
-                return true;
-            return false;
-        }
-
-        public static bool IsExistProductType(int id)
-        {
-            if (DicProductType.ContainsKey(id))
-                return true;
-            return false;
-        }
-
-        public static bool IsExistProperty(int id)
-        {
-            if (DicProperty.ContainsKey(id))
+            if (DicPaymentFee.ContainsKey(paymentFeeKeys))
                 return true;
             return false;
         }
@@ -81,42 +137,39 @@ namespace Nexus.Memory
             return false;
         }
 
-        public static bool IsExistRole(int id)
+        public static bool IsExistServiceForm(int id)
         {
-            if (DicRole.ContainsKey(id))
+            if (DicServiceForm.ContainsKey(id))
                 return true;
             return false;
         }
 
-        public static bool IsExistRolePermission(RolePermissionKeys rolePermissionKeys)
+        public static bool IsExistServiceFormStatus(int id)
         {
-            if (DicRolePermission.ContainsKey(rolePermissionKeys))
+            if (DicServiceFormStatus.ContainsKey(id))
                 return true;
             return false;
         }
 
-        public static bool IsExistUserInfo(int idUserLogin)
+        public static bool IsExistServicePack(int id)
         {
-            if (DicUserInfo.ContainsKey(idUserLogin))
+            if (DicServicePack.ContainsKey(id))
                 return true;
             return false;
         }
 
-        public static bool IsExistUserLogin(int id)
+        public static bool IsExistServicePackFee(ServicePackFeeKeys servicePackFeeKeys)
         {
-            if (DicUserLogin.ContainsKey(id))
+            if (DicServicePackFee.ContainsKey(servicePackFeeKeys))
                 return true;
             return false;
         }
 
-        public static bool IsExistUserRole(UserRoleKeys userRoleKeys)
+        public static bool IsExistStore(int id)
         {
-            if (DicUserRole.ContainsKey(userRoleKeys))
+            if (DicStore.ContainsKey(id))
                 return true;
             return false;
         }
-
     }
 }
-
-
