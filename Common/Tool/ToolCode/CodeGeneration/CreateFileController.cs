@@ -124,7 +124,7 @@ namespace CommonicationMemory.CodeGeneration
 //                stringBuild.AppendLine("\t\t\t\t#endregion");
                 stringBuild.AppendLine($"\t\t\t\tvar data = MemoryInfo.Get{className}(id);");
                 stringBuild.AppendLine("\t\t\t\tvar res = new RequestErrorCode(true, null, null);");
-                stringBuild.AppendLine("\t\t\t\tres.ListDataResult.Add(data);");
+                stringBuild.AppendLine("\t\t\t\tres.DataResult = data;");
                 stringBuild.AppendLine("\t\t\t\treturn Ok(res);");
                 stringBuild.AppendLine("\t\t\t}");
                 stringBuild.AppendLine("\t\t\tcatch (Exception ex)");
@@ -189,6 +189,7 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t// update memory");
                 stringBuild.AppendLine("\t\t\t\tMemorySet.UpdateAndInsertEntity(req);");
                 stringBuild.AppendLine("\t\t\t\tvar result = new RequestErrorCode(true);");
+                stringBuild.AppendLine("\t\t\t\tresult.DataResult = req;");
                 stringBuild.AppendLine("\t\t\t\treturn Ok(result);");
                 stringBuild.AppendLine("\t\t\t}");
                 stringBuild.AppendLine("\t\t\tcatch (Exception ex)");
@@ -236,7 +237,7 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t\treturn Ok(new RequestErrorCode(false, ErrorCodeEnum.DataNotExist.ToString(), \"Khong ton tai\"));");
                 stringBuild.AppendLine("\t\t\t\t}");
                 stringBuild.AppendLine("\t\t\t\t#endregion");
-                //stringBuild.AppendLine("\t\t\t\treq.Id = obj.Id; // gan lai id de update");
+                stringBuild.AppendLine("\t\t\t\treq.Id = obj.Id; // gan lai id de update");
                 stringBuild.AppendLine("\t\t\t\t#region Process");
                 //stringBuild.AppendLine("\t\t\t\treq.UpdatedAt = DateTime.Now;");
                 //stringBuild.AppendLine("\t\t\t\treq.UpdatedBy = userInfo.IdUserLogin;");
@@ -252,6 +253,7 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t// update memory");
                 stringBuild.AppendLine("\t\t\t\tMemorySet.UpdateAndInsertEntity(req);");
                 stringBuild.AppendLine("\t\t\t\tvar result = new RequestErrorCode(true);");
+                stringBuild.AppendLine("\t\t\t\tresult.DataResult = req;");
                 stringBuild.AppendLine("\t\t\t\treturn Ok(result);");
                 stringBuild.AppendLine("\t\t\t}");
                 stringBuild.AppendLine("\t\t\tcatch (Exception ex)");
@@ -312,6 +314,7 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t// update memory");
                 stringBuild.AppendLine("\t\t\t\tMemorySet.RemoveEntity(obj);");
                 stringBuild.AppendLine("\t\t\t\tvar result = new RequestErrorCode(true);");
+                stringBuild.AppendLine("\t\t\t\tresult.DataResult = obj;");
                 stringBuild.AppendLine("\t\t\t\treturn Ok(result);");
                 stringBuild.AppendLine("\t\t\t}");
                 stringBuild.AppendLine("\t\t\tcatch (Exception ex)");

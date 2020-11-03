@@ -4,5 +4,5 @@
   "SendConfirmEmail": true,
   "FolderSaveImages": "C:\\KhoiVuData\\Resources",
   "BaseUrl": "http://localhost:2000/",
-  "IsSendLogToBot": true
+  "IsSendLogToBot": false
 }

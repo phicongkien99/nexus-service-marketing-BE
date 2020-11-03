@@ -39,7 +39,7 @@ namespace Nexus.Controllers
 			{
 				var data = MemoryInfo.GetConnection(id);
 				var res = new RequestErrorCode(true, null, null);
-				res.ListDataResult.Add(data);
+				res.DataResult = data;
 				return Ok(res);
 			}
 			catch (Exception ex)
@@ -84,6 +84,7 @@ namespace Nexus.Controllers
 				// update memory
 				MemorySet.UpdateAndInsertEntity(req);
 				var result = new RequestErrorCode(true);
+				result.DataResult = req;
 				return Ok(result);
 			}
 			catch (Exception ex)
@@ -115,6 +116,7 @@ namespace Nexus.Controllers
 					return Ok(new RequestErrorCode(false, ErrorCodeEnum.DataNotExist.ToString(), "Khong ton tai"));
 				}
 				#endregion
+				req.Id = obj.Id; // gan lai id de update
 				#region Process
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
@@ -128,6 +130,7 @@ namespace Nexus.Controllers
 				// update memory
 				MemorySet.UpdateAndInsertEntity(req);
 				var result = new RequestErrorCode(true);
+				result.DataResult = req;
 				return Ok(result);
 			}
 			catch (Exception ex)
@@ -167,6 +170,7 @@ namespace Nexus.Controllers
 				// update memory
 				MemorySet.RemoveEntity(obj);
 				var result = new RequestErrorCode(true);
+				result.DataResult = obj;
 				return Ok(result);
 			}
 			catch (Exception ex)

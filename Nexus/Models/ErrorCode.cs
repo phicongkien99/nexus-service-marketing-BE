@@ -15,6 +15,7 @@ namespace Nexus.Models
         public bool IsSuccess { get; set; }
         public string ErrorCode { get; set; }
         public string ErrorMsg { get; set; }
+        public object DataResult  { get; set; }
         public List<object> ListDataResult;
 
         public void Dispose()
