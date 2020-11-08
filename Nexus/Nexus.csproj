@@ -188,6 +188,7 @@
     <Compile Include="ReaderDatabase\ProcessReadDatabaseUtils.cs" />
     <Compile Include="Utils\CheckUtils.cs" />
     <Compile Include="Utils\PasswordGenerator.cs" />
+    <Compile Include="Utils\Token.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\TemplateConfirmOrder.html">

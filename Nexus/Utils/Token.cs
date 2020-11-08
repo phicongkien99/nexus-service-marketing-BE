@@ -14,7 +14,7 @@ namespace Nexus.Utils
         private static readonly string _secret = "QirJsqTK22Q87CYnqoFHoz5GN2-zAEtVNI8sB2_9FsFmCjIAsLbVIIQhWMNqnu1RKcg_tNZ8ZF1W";//key
         private static readonly int _expire = 60 * 60 * 60 * 600; // seconds
 
-        public static string GenerateToken(UserInfo userInfo, int expire)
+        public static string GenerateToken(Employee employee, int expire)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Nexus.Utils
 
                 var payload = new Dictionary<string, object>
                 {
-                    { "UserInfo", userInfo },
+                    { "Employee", employee },
                     { "exp", secondsSinceEpoch }
                 };
 
@@ -51,9 +51,9 @@ namespace Nexus.Utils
             return null;
         }
 
-        public static bool ValidateToken(string token, out UserInfo userInfo)
+        public static bool ValidateToken(string token, out Employee employee)
         {
-            userInfo = null;
+            employee = null;
             try
             {
                 var keySec = _secret;
@@ -71,8 +71,8 @@ namespace Nexus.Utils
 
                 var stringToken = decoder.Decode(token, keySec, verify: true);
                 var payLoad = JsonConvert.DeserializeObject<Dictionary<string, object>>(stringToken);
-                var userInfoPayload = payLoad["UserInfo"];
-                userInfo = JsonConvert.DeserializeObject<UserInfo>(userInfoPayload.ToString());
+                var userInfoPayload = payLoad["Employee"];
+                employee = JsonConvert.DeserializeObject<Employee>(userInfoPayload.ToString());
                 return true;
             }
             catch (TokenExpiredException)
