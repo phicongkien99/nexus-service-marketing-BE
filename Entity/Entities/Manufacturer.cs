@@ -54,6 +54,8 @@ namespace Nexus.Entity.Entities
 
 			if (Logo != null && Logo.Length > 255 )
 				throw new InvalidDataException("Field: Logo in entity: Manufacturer is over-size: 255, value=" + Logo);
+			if (Name == null)
+				throw new NoNullAllowedException("Field: Name in entity: Manufacturer is Null");
 
 			if (Name != null && Name.Length > 255 )
 				throw new InvalidDataException("Field: Name in entity: Manufacturer is over-size: 255, value=" + Name);

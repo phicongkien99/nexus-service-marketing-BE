@@ -10,8 +10,13 @@ namespace Nexus.Entity.Entities
 
 		public enum ImageFields
 		{
+			CreatedAt,
+			CreatedBy,
 			Id,
 			IdCustomer,
+			IsDeleted,
+			UpdatedAt,
+			UpdatedBy,
 			Url
 		}
 
@@ -31,8 +36,13 @@ namespace Nexus.Entity.Entities
 
 		#region Properties
 
+		public DateTime?  CreatedAt { get; set; }
+		public int?  CreatedBy { get; set; }
 		public int  Id { get; set; } //Key 
 		public int?  IdCustomer { get; set; }
+		public int?  IsDeleted { get; set; }
+		public DateTime?  UpdatedAt { get; set; }
+		public int?  UpdatedBy { get; set; }
 		public string  Url { get; set; }
 
 		#endregion

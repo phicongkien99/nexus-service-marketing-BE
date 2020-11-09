@@ -10,12 +10,17 @@ namespace Nexus.Entity.Entities
 
 		public enum ConnectionFields
 		{
+			CreatedAt,
+			CreatedBy,
 			Id,
 			IdConnectionStatus,
 			IdContract,
 			IdDevice,
 			IdServicePack,
-			StartDate
+			IsDeleted,
+			StartDate,
+			UpdatedAt,
+			UpdatedBy
 		}
 
 		public enum ConnectionKey
@@ -34,12 +39,17 @@ namespace Nexus.Entity.Entities
 
 		#region Properties
 
+		public DateTime?  CreatedAt { get; set; }
+		public int?  CreatedBy { get; set; }
 		public int  Id { get; set; } //Key 
 		public int?  IdConnectionStatus { get; set; }
-		public int?  IdContract { get; set; }
-		public int?  IdDevice { get; set; }
-		public int?  IdServicePack { get; set; }
-		public DateTime?  StartDate { get; set; }
+		public int  IdContract { get; set; }
+		public int  IdDevice { get; set; }
+		public int  IdServicePack { get; set; }
+		public int?  IsDeleted { get; set; }
+		public DateTime  StartDate { get; set; }
+		public DateTime?  UpdatedAt { get; set; }
+		public int?  UpdatedBy { get; set; }
 
 		#endregion
 

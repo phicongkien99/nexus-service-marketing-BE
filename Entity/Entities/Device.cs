@@ -10,11 +10,16 @@ namespace Nexus.Entity.Entities
 
 		public enum DeviceFields
 		{
+			CreatedAt,
+			CreatedBy,
 			Id,
 			IdDeviceType,
 			IdManufacturer,
+			IsDeleted,
 			Name,
 			Stock,
+			UpdatedAt,
+			UpdatedBy,
 			Using
 		}
 
@@ -34,11 +39,16 @@ namespace Nexus.Entity.Entities
 
 		#region Properties
 
+		public DateTime?  CreatedAt { get; set; }
+		public int?  CreatedBy { get; set; }
 		public int  Id { get; set; } //Key 
-		public int?  IdDeviceType { get; set; }
-		public int?  IdManufacturer { get; set; }
+		public int  IdDeviceType { get; set; }
+		public int  IdManufacturer { get; set; }
+		public int?  IsDeleted { get; set; }
 		public string  Name { get; set; }
 		public int?  Stock { get; set; }
+		public DateTime?  UpdatedAt { get; set; }
+		public int?  UpdatedBy { get; set; }
 		public int?  Using { get; set; }
 
 		#endregion
@@ -47,6 +57,8 @@ namespace Nexus.Entity.Entities
 
 		public override bool IsValid()
 		{
+			if (Name == null)
+				throw new NoNullAllowedException("Field: Name in entity: Device is Null");
 
 			if (Name != null && Name.Length > 255 )
 				throw new InvalidDataException("Field: Name in entity: Device is over-size: 255, value=" + Name);

@@ -182,10 +182,7 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(Fee.FeeFields.Name.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Fee.FeeFields.Name.ToString())))
-				{
-					businessObject.Name = dataReader.GetString(GetIndex(Fee.FeeFields.Name.ToString()));
-				}
+				businessObject.Name = dataReader.GetString(GetIndex(Fee.FeeFields.Name.ToString()));
 
 			if (GetIndex(Fee.FeeFields.UpdatedAt.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Fee.FeeFields.UpdatedAt.ToString())))

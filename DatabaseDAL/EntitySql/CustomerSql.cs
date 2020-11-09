@@ -49,6 +49,7 @@ namespace Nexus.DatabaseDAL.EntitySql
 				sqlCommand.Parameters.Add(new SqlParameter("@CreatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedBy));
 				sqlCommand.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Email));
 				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
+				sqlCommand.Parameters.Add(new SqlParameter("@IsDeleted", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsDeleted));
 				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
 				sqlCommand.Parameters.Add(new SqlParameter("@Phone", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Phone));
 				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
@@ -91,6 +92,7 @@ namespace Nexus.DatabaseDAL.EntitySql
 				sqlCommand.Parameters.Add(new SqlParameter("@CreatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedBy));
 				sqlCommand.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Email));
 				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
+				sqlCommand.Parameters.Add(new SqlParameter("@IsDeleted", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsDeleted));
 				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
 				sqlCommand.Parameters.Add(new SqlParameter("@Phone", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Phone));
 				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
@@ -158,10 +160,7 @@ namespace Nexus.DatabaseDAL.EntitySql
             if (_dicIndex.Count == 0) FillDicIndex(dataReader);
 		
 			if (GetIndex(Customer.CustomerFields.Address.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.Address.ToString())))
-				{
-					businessObject.Address = dataReader.GetString(GetIndex(Customer.CustomerFields.Address.ToString()));
-				}
+				businessObject.Address = dataReader.GetString(GetIndex(Customer.CustomerFields.Address.ToString()));
 
 			if (GetIndex(Customer.CustomerFields.CreatedAt.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.CreatedAt.ToString())))
@@ -176,24 +175,21 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(Customer.CustomerFields.Email.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.Email.ToString())))
-				{
-					businessObject.Email = dataReader.GetString(GetIndex(Customer.CustomerFields.Email.ToString()));
-				}
+				businessObject.Email = dataReader.GetString(GetIndex(Customer.CustomerFields.Email.ToString()));
 
 				businessObject.Id = dataReader.GetInt32(GetIndex(Customer.CustomerFields.Id.ToString()));
 
-			if (GetIndex(Customer.CustomerFields.Name.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.Name.ToString())))
+			if (GetIndex(Customer.CustomerFields.IsDeleted.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.IsDeleted.ToString())))
 				{
-					businessObject.Name = dataReader.GetString(GetIndex(Customer.CustomerFields.Name.ToString()));
+					businessObject.IsDeleted = dataReader.GetInt32(GetIndex(Customer.CustomerFields.IsDeleted.ToString()));
 				}
 
+			if (GetIndex(Customer.CustomerFields.Name.ToString()) != -1)
+				businessObject.Name = dataReader.GetString(GetIndex(Customer.CustomerFields.Name.ToString()));
+
 			if (GetIndex(Customer.CustomerFields.Phone.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.Phone.ToString())))
-				{
-					businessObject.Phone = dataReader.GetString(GetIndex(Customer.CustomerFields.Phone.ToString()));
-				}
+				businessObject.Phone = dataReader.GetString(GetIndex(Customer.CustomerFields.Phone.ToString()));
 
 			if (GetIndex(Customer.CustomerFields.UpdatedAt.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Customer.CustomerFields.UpdatedAt.ToString())))

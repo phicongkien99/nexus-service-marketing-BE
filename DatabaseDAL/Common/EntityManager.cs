@@ -48,6 +48,7 @@ namespace Nexus.DatabaseDAL.Common
             if (entityName.Equals(ConnectionStatus.EntityName())) { return new ConnectionStatusSql(); }
             if (entityName.Equals(ConnectionType.EntityName())) { return new ConnectionTypeSql(); }
             if (entityName.Equals(Contract.EntityName())) { return new ContractSql(); }
+            if (entityName.Equals(ContractStatus.EntityName())) { return new ContractStatusSql(); }
             if (entityName.Equals(Customer.EntityName())) { return new CustomerSql(); }
             if (entityName.Equals(CustomerFeedback.EntityName())) { return new CustomerFeedbackSql(); }
             if (entityName.Equals(DetailImportReceipt.EntityName())) { return new DetailImportReceiptSql(); }

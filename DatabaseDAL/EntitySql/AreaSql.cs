@@ -176,16 +176,10 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(Area.AreaFields.Name.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Area.AreaFields.Name.ToString())))
-				{
-					businessObject.Name = dataReader.GetString(GetIndex(Area.AreaFields.Name.ToString()));
-				}
+				businessObject.Name = dataReader.GetString(GetIndex(Area.AreaFields.Name.ToString()));
 
 			if (GetIndex(Area.AreaFields.ShortName.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Area.AreaFields.ShortName.ToString())))
-				{
-					businessObject.ShortName = dataReader.GetString(GetIndex(Area.AreaFields.ShortName.ToString()));
-				}
+				businessObject.ShortName = dataReader.GetString(GetIndex(Area.AreaFields.ShortName.ToString()));
 
 			if (GetIndex(Area.AreaFields.UpdatedAt.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Area.AreaFields.UpdatedAt.ToString())))

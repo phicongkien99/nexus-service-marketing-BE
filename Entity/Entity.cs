@@ -56,6 +56,7 @@ namespace Nexus.Entity
         public ConnectionStatus ConnectionStatus { get; set; }
         public ConnectionType ConnectionType { get; set; }
         public Contract Contract { get; set; }
+        public ContractStatus ContractStatus { get; set; }
         public Customer Customer { get; set; }
         public CustomerFeedback CustomerFeedback { get; set; }
         public DetailImportReceipt DetailImportReceipt { get; set; }
@@ -74,6 +75,7 @@ namespace Nexus.Entity
         public ServicePack ServicePack { get; set; }
         public ServicePackFee ServicePackFee { get; set; }
         public Store Store { get; set; }
+
 
         #endregion
     }

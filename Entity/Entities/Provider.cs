@@ -55,15 +55,23 @@ namespace Nexus.Entity.Entities
 
 		public override bool IsValid()
 		{
+			if (Address == null)
+				throw new NoNullAllowedException("Field: Address in entity: Provider is Null");
 
 			if (Address != null && Address.Length > 255 )
 				throw new InvalidDataException("Field: Address in entity: Provider is over-size: 255, value=" + Address);
+			if (Email == null)
+				throw new NoNullAllowedException("Field: Email in entity: Provider is Null");
 
 			if (Email != null && Email.Length > 255 )
 				throw new InvalidDataException("Field: Email in entity: Provider is over-size: 255, value=" + Email);
+			if (Name == null)
+				throw new NoNullAllowedException("Field: Name in entity: Provider is Null");
 
 			if (Name != null && Name.Length > 255 )
 				throw new InvalidDataException("Field: Name in entity: Provider is over-size: 255, value=" + Name);
+			if (Phone == null)
+				throw new NoNullAllowedException("Field: Phone in entity: Provider is Null");
 
 			if (Phone != null && Phone.Length > 255 )
 				throw new InvalidDataException("Field: Phone in entity: Provider is over-size: 255, value=" + Phone);

@@ -11,10 +11,15 @@ namespace Nexus.Entity.Entities
 
 		public enum DetailImportReceiptFields
 		{
+			CreatedAt,
+			CreatedBy,
 			IdDevice,
 			IdImportReceipt,
+			IsDeleted,
 			Price,
-			Quantity
+			Quantity,
+			UpdatedAt,
+			UpdatedBy
 		}
 
 		public enum DetailImportReceiptKey
@@ -42,10 +47,15 @@ namespace Nexus.Entity.Entities
 
 		#region Properties
 
+		public DateTime?  CreatedAt { get; set; }
+		public int?  CreatedBy { get; set; }
 		public int  IdDevice { get; set; } //Key 
 		public int  IdImportReceipt { get; set; } //Key 
+		public int?  IsDeleted { get; set; }
 		public decimal?  Price { get; set; }
 		public int?  Quantity { get; set; }
+		public DateTime?  UpdatedAt { get; set; }
+		public int?  UpdatedBy { get; set; }
 
 		#endregion
 

@@ -10,10 +10,15 @@ namespace Nexus.Entity.Entities
 
 		public enum PaymentFields
 		{
+			CreatedAt,
+			CreatedBy,
 			Id,
 			IdContract,
+			IsDeleted,
 			PayDate,
-			TotalPrice
+			TotalPrice,
+			UpdatedAt,
+			UpdatedBy
 		}
 
 		public enum PaymentKey
@@ -32,10 +37,15 @@ namespace Nexus.Entity.Entities
 
 		#region Properties
 
+		public DateTime?  CreatedAt { get; set; }
+		public int?  CreatedBy { get; set; }
 		public int  Id { get; set; } //Key 
-		public int?  IdContract { get; set; }
+		public int  IdContract { get; set; }
+		public int?  IsDeleted { get; set; }
 		public DateTime?  PayDate { get; set; }
 		public decimal?  TotalPrice { get; set; }
+		public DateTime?  UpdatedAt { get; set; }
+		public int?  UpdatedBy { get; set; }
 
 		#endregion
 

@@ -50,6 +50,7 @@ namespace Nexus.DatabaseDAL.EntitySql
 				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdArea", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdArea));
 				sqlCommand.Parameters.Add(new SqlParameter("@IsClosed", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsClosed));
+				sqlCommand.Parameters.Add(new SqlParameter("@IsDeleted", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsDeleted));
 				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
 				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
 				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedBy));
@@ -92,6 +93,7 @@ namespace Nexus.DatabaseDAL.EntitySql
 				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdArea", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdArea));
 				sqlCommand.Parameters.Add(new SqlParameter("@IsClosed", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsClosed));
+				sqlCommand.Parameters.Add(new SqlParameter("@IsDeleted", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsDeleted));
 				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
 				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
 				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedBy));
@@ -158,10 +160,7 @@ namespace Nexus.DatabaseDAL.EntitySql
             if (_dicIndex.Count == 0) FillDicIndex(dataReader);
 		
 			if (GetIndex(Store.StoreFields.Address.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Store.StoreFields.Address.ToString())))
-				{
-					businessObject.Address = dataReader.GetString(GetIndex(Store.StoreFields.Address.ToString()));
-				}
+				businessObject.Address = dataReader.GetString(GetIndex(Store.StoreFields.Address.ToString()));
 
 			if (GetIndex(Store.StoreFields.CreatedAt.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Store.StoreFields.CreatedAt.ToString())))
@@ -178,10 +177,7 @@ namespace Nexus.DatabaseDAL.EntitySql
 				businessObject.Id = dataReader.GetInt32(GetIndex(Store.StoreFields.Id.ToString()));
 
 			if (GetIndex(Store.StoreFields.IdArea.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Store.StoreFields.IdArea.ToString())))
-				{
-					businessObject.IdArea = dataReader.GetInt32(GetIndex(Store.StoreFields.IdArea.ToString()));
-				}
+				businessObject.IdArea = dataReader.GetInt32(GetIndex(Store.StoreFields.IdArea.ToString()));
 
 			if (GetIndex(Store.StoreFields.IsClosed.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Store.StoreFields.IsClosed.ToString())))
@@ -189,11 +185,14 @@ namespace Nexus.DatabaseDAL.EntitySql
 					businessObject.IsClosed = dataReader.GetInt32(GetIndex(Store.StoreFields.IsClosed.ToString()));
 				}
 
-			if (GetIndex(Store.StoreFields.Name.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Store.StoreFields.Name.ToString())))
+			if (GetIndex(Store.StoreFields.IsDeleted.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(Store.StoreFields.IsDeleted.ToString())))
 				{
-					businessObject.Name = dataReader.GetString(GetIndex(Store.StoreFields.Name.ToString()));
+					businessObject.IsDeleted = dataReader.GetInt32(GetIndex(Store.StoreFields.IsDeleted.ToString()));
 				}
+
+			if (GetIndex(Store.StoreFields.Name.ToString()) != -1)
+				businessObject.Name = dataReader.GetString(GetIndex(Store.StoreFields.Name.ToString()));
 
 			if (GetIndex(Store.StoreFields.UpdatedAt.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Store.StoreFields.UpdatedAt.ToString())))

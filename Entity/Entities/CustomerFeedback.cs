@@ -12,9 +12,13 @@ namespace Nexus.Entity.Entities
 		{
 			Content,
 			CreatedAt,
+			CreatedBy,
 			Id,
 			IdCustomer,
-			Rating
+			IsDeleted,
+			Rating,
+			UpdatedAt,
+			UpdatedBy
 		}
 
 		public enum CustomerFeedbackKey
@@ -35,9 +39,13 @@ namespace Nexus.Entity.Entities
 
 		public string  Content { get; set; }
 		public DateTime?  CreatedAt { get; set; }
+		public int?  CreatedBy { get; set; }
 		public int  Id { get; set; } //Key 
 		public int  IdCustomer { get; set; }
+		public int?  IsDeleted { get; set; }
 		public int?  Rating { get; set; }
+		public DateTime?  UpdatedAt { get; set; }
+		public int?  UpdatedBy { get; set; }
 
 		#endregion
 
@@ -45,6 +53,8 @@ namespace Nexus.Entity.Entities
 
 		public override bool IsValid()
 		{
+			if (Content == null)
+				throw new NoNullAllowedException("Field: Content in entity: CustomerFeedback is Null");
 
 			if (Content != null && Content.Length > 255 )
 				throw new InvalidDataException("Field: Content in entity: CustomerFeedback is over-size: 255, value=" + Content);

@@ -44,10 +44,15 @@ namespace Nexus.DatabaseDAL.EntitySql
                 if (businessObject != null)
 				{
 
-								sqlCommand.Parameters.Add(new SqlParameter("@Description", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Description));
+								sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@CreatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedBy));
+				sqlCommand.Parameters.Add(new SqlParameter("@Description", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Description));
 				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdConnectionType", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdConnectionType));
+				sqlCommand.Parameters.Add(new SqlParameter("@IsDeleted", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsDeleted));
 				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedBy));
 
 
 				}
@@ -81,10 +86,15 @@ namespace Nexus.DatabaseDAL.EntitySql
                 if (businessObject != null)
                 {
 
-								sqlCommand.Parameters.Add(new SqlParameter("@Description", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Description));
+								sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@CreatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedBy));
+				sqlCommand.Parameters.Add(new SqlParameter("@Description", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Description));
 				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdConnectionType", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdConnectionType));
+				sqlCommand.Parameters.Add(new SqlParameter("@IsDeleted", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsDeleted));
 				sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Name));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedBy));
 
 				
 				}
@@ -147,6 +157,18 @@ namespace Nexus.DatabaseDAL.EntitySql
         {
             if (_dicIndex.Count == 0) FillDicIndex(dataReader);
 		
+			if (GetIndex(ServicePack.ServicePackFields.CreatedAt.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServicePack.ServicePackFields.CreatedAt.ToString())))
+				{
+					businessObject.CreatedAt = dataReader.GetDateTime(GetIndex(ServicePack.ServicePackFields.CreatedAt.ToString()));
+				}
+
+			if (GetIndex(ServicePack.ServicePackFields.CreatedBy.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServicePack.ServicePackFields.CreatedBy.ToString())))
+				{
+					businessObject.CreatedBy = dataReader.GetInt32(GetIndex(ServicePack.ServicePackFields.CreatedBy.ToString()));
+				}
+
 			if (GetIndex(ServicePack.ServicePackFields.Description.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(ServicePack.ServicePackFields.Description.ToString())))
 				{
@@ -156,15 +178,27 @@ namespace Nexus.DatabaseDAL.EntitySql
 				businessObject.Id = dataReader.GetInt32(GetIndex(ServicePack.ServicePackFields.Id.ToString()));
 
 			if (GetIndex(ServicePack.ServicePackFields.IdConnectionType.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(ServicePack.ServicePackFields.IdConnectionType.ToString())))
+				businessObject.IdConnectionType = dataReader.GetInt32(GetIndex(ServicePack.ServicePackFields.IdConnectionType.ToString()));
+
+			if (GetIndex(ServicePack.ServicePackFields.IsDeleted.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServicePack.ServicePackFields.IsDeleted.ToString())))
 				{
-					businessObject.IdConnectionType = dataReader.GetInt32(GetIndex(ServicePack.ServicePackFields.IdConnectionType.ToString()));
+					businessObject.IsDeleted = dataReader.GetInt32(GetIndex(ServicePack.ServicePackFields.IsDeleted.ToString()));
 				}
 
 			if (GetIndex(ServicePack.ServicePackFields.Name.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(ServicePack.ServicePackFields.Name.ToString())))
+				businessObject.Name = dataReader.GetString(GetIndex(ServicePack.ServicePackFields.Name.ToString()));
+
+			if (GetIndex(ServicePack.ServicePackFields.UpdatedAt.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServicePack.ServicePackFields.UpdatedAt.ToString())))
 				{
-					businessObject.Name = dataReader.GetString(GetIndex(ServicePack.ServicePackFields.Name.ToString()));
+					businessObject.UpdatedAt = dataReader.GetDateTime(GetIndex(ServicePack.ServicePackFields.UpdatedAt.ToString()));
+				}
+
+			if (GetIndex(ServicePack.ServicePackFields.UpdatedBy.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServicePack.ServicePackFields.UpdatedBy.ToString())))
+				{
+					businessObject.UpdatedBy = dataReader.GetInt32(GetIndex(ServicePack.ServicePackFields.UpdatedBy.ToString()));
 				}
 
 

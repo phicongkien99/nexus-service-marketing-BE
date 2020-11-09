@@ -11,8 +11,13 @@ namespace Nexus.Entity.Entities
 
 		public enum ServicePackFeeFields
 		{
+			CreatedAt,
+			CreatedBy,
 			IdFee,
 			IdServicePack,
+			IsDeleted,
+			UpdatedAt,
+			UpdatedBy,
 			Value
 		}
 
@@ -41,8 +46,13 @@ namespace Nexus.Entity.Entities
 
 		#region Properties
 
+		public DateTime?  CreatedAt { get; set; }
+		public int?  CreatedBy { get; set; }
 		public int  IdFee { get; set; } //Key 
 		public int  IdServicePack { get; set; } //Key 
+		public int?  IsDeleted { get; set; }
+		public DateTime?  UpdatedAt { get; set; }
+		public int?  UpdatedBy { get; set; }
 		public string  Value { get; set; }
 
 		#endregion
@@ -51,6 +61,8 @@ namespace Nexus.Entity.Entities
 
 		public override bool IsValid()
 		{
+			if (Value == null)
+				throw new NoNullAllowedException("Field: Value in entity: ServicePackFee is Null");
 
 			if (Value != null && Value.Length > 255 )
 				throw new InvalidDataException("Field: Value in entity: ServicePackFee is over-size: 255, value=" + Value);

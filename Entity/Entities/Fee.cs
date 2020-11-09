@@ -54,6 +54,8 @@ namespace Nexus.Entity.Entities
 
 			if (Description != null && Description.Length > 255 )
 				throw new InvalidDataException("Field: Description in entity: Fee is over-size: 255, value=" + Description);
+			if (Name == null)
+				throw new NoNullAllowedException("Field: Name in entity: Fee is Null");
 
 			if (Name != null && Name.Length > 255 )
 				throw new InvalidDataException("Field: Name in entity: Fee is over-size: 255, value=" + Name);

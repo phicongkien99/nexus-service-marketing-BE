@@ -51,9 +51,13 @@ namespace Nexus.Entity.Entities
 
 		public override bool IsValid()
 		{
+			if (Name == null)
+				throw new NoNullAllowedException("Field: Name in entity: Area is Null");
 
 			if (Name != null && Name.Length > 255 )
 				throw new InvalidDataException("Field: Name in entity: Area is over-size: 255, value=" + Name);
+			if (ShortName == null)
+				throw new NoNullAllowedException("Field: ShortName in entity: Area is Null");
 
 			if (ShortName != null && ShortName.Length > 255 )
 				throw new InvalidDataException("Field: ShortName in entity: Area is over-size: 255, value=" + ShortName);

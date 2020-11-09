@@ -1,20 +1,615 @@
-USE AptechProjectS4
+USE eproject3
 GO
 
 
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Area_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Area_Insert
+GO
+CREATE PROCEDURE Area_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Id int ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@ShortName varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[Area]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[Id],
+	[IsDeleted],
+	[Name],
+	[ShortName],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@CreatedAt,
+	@CreatedBy,
+	@Id,
+	@IsDeleted,
+	@Name,
+	@ShortName,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Area_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Area_Update
+GO
+CREATE PROCEDURE Area_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Id int,
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@ShortName varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[Area]
+SET
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Id] = @Id,
+	[IsDeleted] = @IsDeleted,
+	[Name] = @Name,
+	[ShortName] = @ShortName,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Area_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Area_SelectAll
+GO
+CREATE PROCEDURE Area_SelectAll
+AS
+
+	SELECT 
+		[CreatedAt], [CreatedBy], [Id], [IsDeleted], [Name], [ShortName], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[Area]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Area_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Area_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE Area_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[Area]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Connection_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Connection_Insert
+GO
+CREATE PROCEDURE Connection_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Id int ,
+	@IdConnectionStatus int = null ,
+	@IdContract int ,
+	@IdDevice int ,
+	@IdServicePack int ,
+	@IsDeleted int = null ,
+	@StartDate datetime2 ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[Connection]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[Id],
+	[IdConnectionStatus],
+	[IdContract],
+	[IdDevice],
+	[IdServicePack],
+	[IsDeleted],
+	[StartDate],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@CreatedAt,
+	@CreatedBy,
+	@Id,
+	@IdConnectionStatus,
+	@IdContract,
+	@IdDevice,
+	@IdServicePack,
+	@IsDeleted,
+	@StartDate,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Connection_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Connection_Update
+GO
+CREATE PROCEDURE Connection_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Id int,
+	@IdConnectionStatus int = null,
+	@IdContract int,
+	@IdDevice int,
+	@IdServicePack int,
+	@IsDeleted int = null,
+	@StartDate datetime2,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[Connection]
+SET
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Id] = @Id,
+	[IdConnectionStatus] = @IdConnectionStatus,
+	[IdContract] = @IdContract,
+	[IdDevice] = @IdDevice,
+	[IdServicePack] = @IdServicePack,
+	[IsDeleted] = @IsDeleted,
+	[StartDate] = @StartDate,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Connection_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Connection_SelectAll
+GO
+CREATE PROCEDURE Connection_SelectAll
+AS
+
+	SELECT 
+		[CreatedAt], [CreatedBy], [Id], [IdConnectionStatus], [IdContract], [IdDevice], [IdServicePack], [IsDeleted], [StartDate], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[Connection]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Connection_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Connection_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE Connection_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[Connection]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionStatus_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionStatus_Insert
+GO
+CREATE PROCEDURE ConnectionStatus_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Description varchar(255) = null ,
+	@Id int ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[ConnectionStatus]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[Description],
+	[Id],
+	[IsDeleted],
+	[Name],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@CreatedAt,
+	@CreatedBy,
+	@Description,
+	@Id,
+	@IsDeleted,
+	@Name,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionStatus_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionStatus_Update
+GO
+CREATE PROCEDURE ConnectionStatus_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Description varchar(255) = null,
+	@Id int,
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[ConnectionStatus]
+SET
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Description] = @Description,
+	[Id] = @Id,
+	[IsDeleted] = @IsDeleted,
+	[Name] = @Name,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionStatus_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionStatus_SelectAll
+GO
+CREATE PROCEDURE ConnectionStatus_SelectAll
+AS
+
+	SELECT 
+		[CreatedAt], [CreatedBy], [Description], [Id], [IsDeleted], [Name], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[ConnectionStatus]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionStatus_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionStatus_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE ConnectionStatus_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[ConnectionStatus]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionType_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionType_Insert
+GO
+CREATE PROCEDURE ConnectionType_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Description varchar(255) = null ,
+	@Id int ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[ConnectionType]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[Description],
+	[Id],
+	[IsDeleted],
+	[Name],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@CreatedAt,
+	@CreatedBy,
+	@Description,
+	@Id,
+	@IsDeleted,
+	@Name,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionType_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionType_Update
+GO
+CREATE PROCEDURE ConnectionType_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Description varchar(255) = null,
+	@Id int,
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[ConnectionType]
+SET
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Description] = @Description,
+	[Id] = @Id,
+	[IsDeleted] = @IsDeleted,
+	[Name] = @Name,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionType_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionType_SelectAll
+GO
+CREATE PROCEDURE ConnectionType_SelectAll
+AS
+
+	SELECT 
+		[CreatedAt], [CreatedBy], [Description], [Id], [IsDeleted], [Name], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[ConnectionType]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionType_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionType_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE ConnectionType_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[ConnectionType]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Contract_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Contract_Insert
+GO
+CREATE PROCEDURE Contract_Insert
+	@Address varchar(255) ,
+	@ContractId varchar(45) ,
+	@CreatedAt datetime2 ,
+	@CreatedBy int = null ,
+	@Id int ,
+	@IdArea int ,
+	@IdCustomer int ,
+	@IsDeleted int = null ,
+	@NextPayment datetime2 = null ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[Contract]
+(
+	[Address],
+	[ContractId],
+	[CreatedAt],
+	[CreatedBy],
+	[Id],
+	[IdArea],
+	[IdCustomer],
+	[IsDeleted],
+	[NextPayment],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@Address,
+	@ContractId,
+	@CreatedAt,
+	@CreatedBy,
+	@Id,
+	@IdArea,
+	@IdCustomer,
+	@IsDeleted,
+	@NextPayment,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Contract_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Contract_Update
+GO
+CREATE PROCEDURE Contract_Update
+	@Address varchar(255),
+	@ContractId varchar(45),
+	@CreatedAt datetime2,
+	@CreatedBy int = null,
+	@Id int,
+	@IdArea int,
+	@IdCustomer int,
+	@IsDeleted int = null,
+	@NextPayment datetime2 = null,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[Contract]
+SET
+	[Address] = @Address,
+	[ContractId] = @ContractId,
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Id] = @Id,
+	[IdArea] = @IdArea,
+	[IdCustomer] = @IdCustomer,
+	[IsDeleted] = @IsDeleted,
+	[NextPayment] = @NextPayment,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Contract_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Contract_SelectAll
+GO
+CREATE PROCEDURE Contract_SelectAll
+AS
+
+	SELECT 
+		[Address], [ContractId], [CreatedAt], [CreatedBy], [Id], [IdArea], [IdCustomer], [IsDeleted], [NextPayment], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[Contract]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Contract_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Contract_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE Contract_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[Contract]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ContractStatus_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ContractStatus_Insert
+GO
+CREATE PROCEDURE ContractStatus_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Description varchar(255) = null ,
+	@Id int ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[ContractStatus]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[Description],
+	[Id],
+	[IsDeleted],
+	[Name],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@CreatedAt,
+	@CreatedBy,
+	@Description,
+	@Id,
+	@IsDeleted,
+	@Name,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ContractStatus_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ContractStatus_Update
+GO
+CREATE PROCEDURE ContractStatus_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Description varchar(255) = null,
+	@Id int,
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[ContractStatus]
+SET
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Description] = @Description,
+	[Id] = @Id,
+	[IsDeleted] = @IsDeleted,
+	[Name] = @Name,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ContractStatus_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ContractStatus_SelectAll
+GO
+CREATE PROCEDURE ContractStatus_SelectAll
+AS
+
+	SELECT 
+		[CreatedAt], [CreatedBy], [Description], [Id], [IsDeleted], [Name], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[ContractStatus]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ContractStatus_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ContractStatus_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE ContractStatus_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[ContractStatus]
+ WHERE 
+	[Id] = @Id
+
+GO
 
 if exists (select * from dbo.sysobjects where id = object_id(N'Customer_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Customer_Insert
 GO
 CREATE PROCEDURE Customer_Insert
-	@Address nvarchar(255) = null ,
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Email varchar(255) = null ,
+	@Address varchar(255) ,
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Email varchar(255) ,
 	@Id int ,
-	@Name nvarchar(255) ,
-	@Phone varchar(255) = null ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@Phone varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
 
 AS
 
@@ -25,6 +620,7 @@ INSERT [dbo].[Customer]
 	[CreatedBy],
 	[Email],
 	[Id],
+	[IsDeleted],
 	[Name],
 	[Phone],
 	[UpdatedAt],
@@ -38,6 +634,7 @@ VALUES
 	@CreatedBy,
 	@Email,
 	@Id,
+	@IsDeleted,
 	@Name,
 	@Phone,
 	@UpdatedAt,
@@ -51,15 +648,16 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Customer_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Customer_Update
 GO
 CREATE PROCEDURE Customer_Update
-	@Address nvarchar(255) = null,
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Email varchar(255) = null,
+	@Address varchar(255),
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Email varchar(255),
 	@Id int,
-	@Name nvarchar(255),
-	@Phone varchar(255) = null,
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@Phone varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
 
 AS
 
@@ -70,6 +668,7 @@ SET
 	[CreatedBy] = @CreatedBy,
 	[Email] = @Email,
 	[Id] = @Id,
+	[IsDeleted] = @IsDeleted,
 	[Name] = @Name,
 	[Phone] = @Phone,
 	[UpdatedAt] = @UpdatedAt,
@@ -85,7 +684,7 @@ CREATE PROCEDURE Customer_SelectAll
 AS
 
 	SELECT 
-		[Address], [CreatedAt], [CreatedBy], [Email], [Id], [Name], [Phone], [UpdatedAt], [UpdatedBy]
+		[Address], [CreatedAt], [CreatedBy], [Email], [Id], [IsDeleted], [Name], [Phone], [UpdatedAt], [UpdatedBy]
 	FROM [dbo].[Customer]
 
 GO
@@ -102,24 +701,129 @@ DELETE FROM [dbo].[Customer]
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'Image_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Image_Insert
+if exists (select * from dbo.sysobjects where id = object_id(N'CustomerFeedback_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure CustomerFeedback_Insert
 GO
-CREATE PROCEDURE Image_Insert
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
+CREATE PROCEDURE CustomerFeedback_Insert
+	@Content varchar(255) ,
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
 	@Id int ,
-	@ImageUrl varchar(255) ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
+	@IdCustomer int ,
+	@IsDeleted int = null ,
+	@Rating int = null ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
 
 AS
 
-INSERT [dbo].[Image]
+INSERT [dbo].[CustomerFeedback]
 (
+	[Content],
 	[CreatedAt],
 	[CreatedBy],
 	[Id],
-	[ImageUrl],
+	[IdCustomer],
+	[IsDeleted],
+	[Rating],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@Content,
+	@CreatedAt,
+	@CreatedBy,
+	@Id,
+	@IdCustomer,
+	@IsDeleted,
+	@Rating,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'CustomerFeedback_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure CustomerFeedback_Update
+GO
+CREATE PROCEDURE CustomerFeedback_Update
+	@Content varchar(255),
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Id int,
+	@IdCustomer int,
+	@IsDeleted int = null,
+	@Rating int = null,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[CustomerFeedback]
+SET
+	[Content] = @Content,
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Id] = @Id,
+	[IdCustomer] = @IdCustomer,
+	[IsDeleted] = @IsDeleted,
+	[Rating] = @Rating,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'CustomerFeedback_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure CustomerFeedback_SelectAll
+GO
+CREATE PROCEDURE CustomerFeedback_SelectAll
+AS
+
+	SELECT 
+		[Content], [CreatedAt], [CreatedBy], [Id], [IdCustomer], [IsDeleted], [Rating], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[CustomerFeedback]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'CustomerFeedback_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure CustomerFeedback_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE CustomerFeedback_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[CustomerFeedback]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'DetailImportReceipt_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DetailImportReceipt_Insert
+GO
+CREATE PROCEDURE DetailImportReceipt_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@IdDevice int ,
+	@IdImportReceipt int ,
+	@IsDeleted int = null ,
+	@Price decimal(10,2) = null ,
+	@Quantity int = null ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[DetailImportReceipt]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[IdDevice],
+	[IdImportReceipt],
+	[IsDeleted],
+	[Price],
+	[Quantity],
 	[UpdatedAt],
 	[UpdatedBy]
 
@@ -128,10 +832,533 @@ VALUES
 (
 	@CreatedAt,
 	@CreatedBy,
-	@Id,
-	@ImageUrl,
+	@IdDevice,
+	@IdImportReceipt,
+	@IsDeleted,
+	@Price,
+	@Quantity,
 	@UpdatedAt,
 	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'DetailImportReceipt_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DetailImportReceipt_Update
+GO
+CREATE PROCEDURE DetailImportReceipt_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@IdDevice int,
+	@IdImportReceipt int,
+	@IsDeleted int = null,
+	@Price decimal(10,2) = null,
+	@Quantity int = null,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[DetailImportReceipt]
+SET
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[IdDevice] = @IdDevice,
+	[IdImportReceipt] = @IdImportReceipt,
+	[IsDeleted] = @IsDeleted,
+	[Price] = @Price,
+	[Quantity] = @Quantity,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[IdDevice] = @IdDevice AND 
+	[IdImportReceipt] = @IdImportReceipt
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'DetailImportReceipt_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DetailImportReceipt_SelectAll
+GO
+CREATE PROCEDURE DetailImportReceipt_SelectAll
+AS
+
+	SELECT 
+		[CreatedAt], [CreatedBy], [IdDevice], [IdImportReceipt], [IsDeleted], [Price], [Quantity], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[DetailImportReceipt]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'DetailImportReceipt_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DetailImportReceipt_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE DetailImportReceipt_DeleteByPrimaryKey
+	@IdDevice int,
+	@IdImportReceipt int
+AS
+
+DELETE FROM [dbo].[DetailImportReceipt]
+ WHERE 
+	[IdDevice] = @IdDevice AND 
+	[IdImportReceipt] = @IdImportReceipt
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Device_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Device_Insert
+GO
+CREATE PROCEDURE Device_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Id int ,
+	@IdDeviceType int ,
+	@IdManufacturer int ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@Stock int = null ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null ,
+	@Using int = null 
+
+AS
+
+INSERT [dbo].[Device]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[Id],
+	[IdDeviceType],
+	[IdManufacturer],
+	[IsDeleted],
+	[Name],
+	[Stock],
+	[UpdatedAt],
+	[UpdatedBy],
+	[Using]
+
+)
+VALUES
+(
+	@CreatedAt,
+	@CreatedBy,
+	@Id,
+	@IdDeviceType,
+	@IdManufacturer,
+	@IsDeleted,
+	@Name,
+	@Stock,
+	@UpdatedAt,
+	@UpdatedBy,
+	@Using
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Device_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Device_Update
+GO
+CREATE PROCEDURE Device_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Id int,
+	@IdDeviceType int,
+	@IdManufacturer int,
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@Stock int = null,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null,
+	@Using int = null
+
+AS
+
+UPDATE [dbo].[Device]
+SET
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Id] = @Id,
+	[IdDeviceType] = @IdDeviceType,
+	[IdManufacturer] = @IdManufacturer,
+	[IsDeleted] = @IsDeleted,
+	[Name] = @Name,
+	[Stock] = @Stock,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy,
+	[Using] = @Using
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Device_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Device_SelectAll
+GO
+CREATE PROCEDURE Device_SelectAll
+AS
+
+	SELECT 
+		[CreatedAt], [CreatedBy], [Id], [IdDeviceType], [IdManufacturer], [IsDeleted], [Name], [Stock], [UpdatedAt], [UpdatedBy], [Using]
+	FROM [dbo].[Device]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Device_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Device_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE Device_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[Device]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'DeviceType_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DeviceType_Insert
+GO
+CREATE PROCEDURE DeviceType_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Description varchar(255) = null ,
+	@Id int ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[DeviceType]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[Description],
+	[Id],
+	[IsDeleted],
+	[Name],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@CreatedAt,
+	@CreatedBy,
+	@Description,
+	@Id,
+	@IsDeleted,
+	@Name,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'DeviceType_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DeviceType_Update
+GO
+CREATE PROCEDURE DeviceType_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Description varchar(255) = null,
+	@Id int,
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[DeviceType]
+SET
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Description] = @Description,
+	[Id] = @Id,
+	[IsDeleted] = @IsDeleted,
+	[Name] = @Name,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'DeviceType_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DeviceType_SelectAll
+GO
+CREATE PROCEDURE DeviceType_SelectAll
+AS
+
+	SELECT 
+		[CreatedAt], [CreatedBy], [Description], [Id], [IsDeleted], [Name], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[DeviceType]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'DeviceType_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DeviceType_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE DeviceType_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[DeviceType]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Employee_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Employee_Insert
+GO
+CREATE PROCEDURE Employee_Insert
+	@Address varchar(255) ,
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Email varchar(255) ,
+	@Id int ,
+	@IdStore int ,
+	@IsActivated int = null ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@Password varchar(255) ,
+	@Phone varchar(255) ,
+	@Role varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[Employee]
+(
+	[Address],
+	[CreatedAt],
+	[CreatedBy],
+	[Email],
+	[Id],
+	[IdStore],
+	[IsActivated],
+	[IsDeleted],
+	[Name],
+	[Password],
+	[Phone],
+	[Role],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@Address,
+	@CreatedAt,
+	@CreatedBy,
+	@Email,
+	@Id,
+	@IdStore,
+	@IsActivated,
+	@IsDeleted,
+	@Name,
+	@Password,
+	@Phone,
+	@Role,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Employee_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Employee_Update
+GO
+CREATE PROCEDURE Employee_Update
+	@Address varchar(255),
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Email varchar(255),
+	@Id int,
+	@IdStore int,
+	@IsActivated int = null,
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@Password varchar(255),
+	@Phone varchar(255),
+	@Role varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[Employee]
+SET
+	[Address] = @Address,
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Email] = @Email,
+	[Id] = @Id,
+	[IdStore] = @IdStore,
+	[IsActivated] = @IsActivated,
+	[IsDeleted] = @IsDeleted,
+	[Name] = @Name,
+	[Password] = @Password,
+	[Phone] = @Phone,
+	[Role] = @Role,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Employee_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Employee_SelectAll
+GO
+CREATE PROCEDURE Employee_SelectAll
+AS
+
+	SELECT 
+		[Address], [CreatedAt], [CreatedBy], [Email], [Id], [IdStore], [IsActivated], [IsDeleted], [Name], [Password], [Phone], [Role], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[Employee]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Employee_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Employee_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE Employee_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[Employee]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Fee_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Fee_Insert
+GO
+CREATE PROCEDURE Fee_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Description varchar(255) = null ,
+	@Id int ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[Fee]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[Description],
+	[Id],
+	[IsDeleted],
+	[Name],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@CreatedAt,
+	@CreatedBy,
+	@Description,
+	@Id,
+	@IsDeleted,
+	@Name,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Fee_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Fee_Update
+GO
+CREATE PROCEDURE Fee_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Description varchar(255) = null,
+	@Id int,
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[Fee]
+SET
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Description] = @Description,
+	[Id] = @Id,
+	[IsDeleted] = @IsDeleted,
+	[Name] = @Name,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Fee_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Fee_SelectAll
+GO
+CREATE PROCEDURE Fee_SelectAll
+AS
+
+	SELECT 
+		[CreatedAt], [CreatedBy], [Description], [Id], [IsDeleted], [Name], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[Fee]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Fee_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Fee_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE Fee_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[Fee]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Image_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Image_Insert
+GO
+CREATE PROCEDURE Image_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Id int ,
+	@IdCustomer int = null ,
+	@IsDeleted int = null ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null ,
+	@Url varchar(255) = null 
+
+AS
+
+INSERT [dbo].[Image]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[Id],
+	[IdCustomer],
+	[IsDeleted],
+	[UpdatedAt],
+	[UpdatedBy],
+	[Url]
+
+)
+VALUES
+(
+	@CreatedAt,
+	@CreatedBy,
+	@Id,
+	@IdCustomer,
+	@IsDeleted,
+	@UpdatedAt,
+	@UpdatedBy,
+	@Url
 
 )
 
@@ -141,12 +1368,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Image_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Image_Update
 GO
 CREATE PROCEDURE Image_Update
-	@CreatedAt datetime = null,
-	@CreatedBy int,
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
 	@Id int,
-	@ImageUrl varchar(255),
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
+	@IdCustomer int = null,
+	@IsDeleted int = null,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null,
+	@Url varchar(255) = null
 
 AS
 
@@ -155,9 +1384,11 @@ SET
 	[CreatedAt] = @CreatedAt,
 	[CreatedBy] = @CreatedBy,
 	[Id] = @Id,
-	[ImageUrl] = @ImageUrl,
+	[IdCustomer] = @IdCustomer,
+	[IsDeleted] = @IsDeleted,
 	[UpdatedAt] = @UpdatedAt,
-	[UpdatedBy] = @UpdatedBy
+	[UpdatedBy] = @UpdatedBy,
+	[Url] = @Url
  WHERE 
 	[Id] = @Id
 
@@ -169,7 +1400,7 @@ CREATE PROCEDURE Image_SelectAll
 AS
 
 	SELECT 
-		[CreatedAt], [CreatedBy], [Id], [ImageUrl], [UpdatedAt], [UpdatedBy]
+		[CreatedAt], [CreatedBy], [Id], [IdCustomer], [IsDeleted], [UpdatedAt], [UpdatedBy], [Url]
 	FROM [dbo].[Image]
 
 GO
@@ -189,16 +1420,15 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ImportReceipt_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ImportReceipt_Insert
 GO
 CREATE PROCEDURE ImportReceipt_Insert
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Date datetime ,
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
 	@Id int ,
-	@IdEmployee int ,
 	@IdProvider int ,
-	@ListProductId varchar(255) = null ,
-	@TotalPrice decimal(19,4) ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
+	@ImportDate datetime2 ,
+	@IsDeleted int = null ,
+	@TotalPrice decimal(10,2) = null ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
 
 AS
 
@@ -206,11 +1436,10 @@ INSERT [dbo].[ImportReceipt]
 (
 	[CreatedAt],
 	[CreatedBy],
-	[Date],
 	[Id],
-	[IdEmployee],
 	[IdProvider],
-	[ListProductId],
+	[ImportDate],
+	[IsDeleted],
 	[TotalPrice],
 	[UpdatedAt],
 	[UpdatedBy]
@@ -220,11 +1449,10 @@ VALUES
 (
 	@CreatedAt,
 	@CreatedBy,
-	@Date,
 	@Id,
-	@IdEmployee,
 	@IdProvider,
-	@ListProductId,
+	@ImportDate,
+	@IsDeleted,
 	@TotalPrice,
 	@UpdatedAt,
 	@UpdatedBy
@@ -237,16 +1465,15 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ImportReceipt_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ImportReceipt_Update
 GO
 CREATE PROCEDURE ImportReceipt_Update
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Date datetime,
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
 	@Id int,
-	@IdEmployee int,
 	@IdProvider int,
-	@ListProductId varchar(255) = null,
-	@TotalPrice decimal(19,4),
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
+	@ImportDate datetime2,
+	@IsDeleted int = null,
+	@TotalPrice decimal(10,2) = null,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
 
 AS
 
@@ -254,11 +1481,10 @@ UPDATE [dbo].[ImportReceipt]
 SET
 	[CreatedAt] = @CreatedAt,
 	[CreatedBy] = @CreatedBy,
-	[Date] = @Date,
 	[Id] = @Id,
-	[IdEmployee] = @IdEmployee,
 	[IdProvider] = @IdProvider,
-	[ListProductId] = @ListProductId,
+	[ImportDate] = @ImportDate,
+	[IsDeleted] = @IsDeleted,
 	[TotalPrice] = @TotalPrice,
 	[UpdatedAt] = @UpdatedAt,
 	[UpdatedBy] = @UpdatedBy
@@ -273,7 +1499,7 @@ CREATE PROCEDURE ImportReceipt_SelectAll
 AS
 
 	SELECT 
-		[CreatedAt], [CreatedBy], [Date], [Id], [IdEmployee], [IdProvider], [ListProductId], [TotalPrice], [UpdatedAt], [UpdatedBy]
+		[CreatedAt], [CreatedBy], [Id], [IdProvider], [ImportDate], [IsDeleted], [TotalPrice], [UpdatedAt], [UpdatedBy]
 	FROM [dbo].[ImportReceipt]
 
 GO
@@ -293,13 +1519,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Manufacturer_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Manufacturer_Insert
 GO
 CREATE PROCEDURE Manufacturer_Insert
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
 	@Id int ,
-	@ImageId nvarchar(255) = null ,
-	@Name nvarchar(255) ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
+	@IsDeleted int = null ,
+	@Logo varchar(255) = null ,
+	@Name varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
 
 AS
 
@@ -308,7 +1535,8 @@ INSERT [dbo].[Manufacturer]
 	[CreatedAt],
 	[CreatedBy],
 	[Id],
-	[ImageId],
+	[IsDeleted],
+	[Logo],
 	[Name],
 	[UpdatedAt],
 	[UpdatedBy]
@@ -319,7 +1547,8 @@ VALUES
 	@CreatedAt,
 	@CreatedBy,
 	@Id,
-	@ImageId,
+	@IsDeleted,
+	@Logo,
 	@Name,
 	@UpdatedAt,
 	@UpdatedBy
@@ -332,13 +1561,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Manufacturer_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Manufacturer_Update
 GO
 CREATE PROCEDURE Manufacturer_Update
-	@CreatedAt datetime = null,
-	@CreatedBy int,
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
 	@Id int,
-	@ImageId nvarchar(255) = null,
-	@Name nvarchar(255),
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
+	@IsDeleted int = null,
+	@Logo varchar(255) = null,
+	@Name varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
 
 AS
 
@@ -347,7 +1577,8 @@ SET
 	[CreatedAt] = @CreatedAt,
 	[CreatedBy] = @CreatedBy,
 	[Id] = @Id,
-	[ImageId] = @ImageId,
+	[IsDeleted] = @IsDeleted,
+	[Logo] = @Logo,
 	[Name] = @Name,
 	[UpdatedAt] = @UpdatedAt,
 	[UpdatedBy] = @UpdatedBy
@@ -362,7 +1593,7 @@ CREATE PROCEDURE Manufacturer_SelectAll
 AS
 
 	SELECT 
-		[CreatedAt], [CreatedBy], [Id], [ImageId], [Name], [UpdatedAt], [UpdatedBy]
+		[CreatedAt], [CreatedBy], [Id], [IsDeleted], [Logo], [Name], [UpdatedAt], [UpdatedBy]
 	FROM [dbo].[Manufacturer]
 
 GO
@@ -379,39 +1610,29 @@ DELETE FROM [dbo].[Manufacturer]
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'OrderDetail_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure OrderDetail_Insert
+if exists (select * from dbo.sysobjects where id = object_id(N'Payment_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Payment_Insert
 GO
-CREATE PROCEDURE OrderDetail_Insert
-	@Address nvarchar(255) = null ,
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Date datetime ,
+CREATE PROCEDURE Payment_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
 	@Id int ,
-	@IdCustomer int = null ,
-	@IdEmployee int ,
-	@ListProductId varchar(255) = null ,
-	@Name varchar(255) = null ,
-	@OrderStatus varchar(255) = null ,
-	@Phone varchar(255) = null ,
-	@TotalPrice decimal(19,4) ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
+	@IdContract int ,
+	@IsDeleted int = null ,
+	@PayDate datetime2 = null ,
+	@TotalPrice decimal(10,2) = null ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
 
 AS
 
-INSERT [dbo].[OrderDetail]
+INSERT [dbo].[Payment]
 (
-	[Address],
 	[CreatedAt],
 	[CreatedBy],
-	[Date],
 	[Id],
-	[IdCustomer],
-	[IdEmployee],
-	[ListProductId],
-	[Name],
-	[OrderStatus],
-	[Phone],
+	[IdContract],
+	[IsDeleted],
+	[PayDate],
 	[TotalPrice],
 	[UpdatedAt],
 	[UpdatedBy]
@@ -419,17 +1640,12 @@ INSERT [dbo].[OrderDetail]
 )
 VALUES
 (
-	@Address,
 	@CreatedAt,
 	@CreatedBy,
-	@Date,
 	@Id,
-	@IdCustomer,
-	@IdEmployee,
-	@ListProductId,
-	@Name,
-	@OrderStatus,
-	@Phone,
+	@IdContract,
+	@IsDeleted,
+	@PayDate,
 	@TotalPrice,
 	@UpdatedAt,
 	@UpdatedBy
@@ -439,39 +1655,29 @@ VALUES
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'OrderDetail_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure OrderDetail_Update
+if exists (select * from dbo.sysobjects where id = object_id(N'Payment_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Payment_Update
 GO
-CREATE PROCEDURE OrderDetail_Update
-	@Address nvarchar(255) = null,
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Date datetime,
+CREATE PROCEDURE Payment_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
 	@Id int,
-	@IdCustomer int = null,
-	@IdEmployee int,
-	@ListProductId varchar(255) = null,
-	@Name varchar(255) = null,
-	@OrderStatus varchar(255) = null,
-	@Phone varchar(255) = null,
-	@TotalPrice decimal(19,4),
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
+	@IdContract int,
+	@IsDeleted int = null,
+	@PayDate datetime2 = null,
+	@TotalPrice decimal(10,2) = null,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
 
 AS
 
-UPDATE [dbo].[OrderDetail]
+UPDATE [dbo].[Payment]
 SET
-	[Address] = @Address,
 	[CreatedAt] = @CreatedAt,
 	[CreatedBy] = @CreatedBy,
-	[Date] = @Date,
 	[Id] = @Id,
-	[IdCustomer] = @IdCustomer,
-	[IdEmployee] = @IdEmployee,
-	[ListProductId] = @ListProductId,
-	[Name] = @Name,
-	[OrderStatus] = @OrderStatus,
-	[Phone] = @Phone,
+	[IdContract] = @IdContract,
+	[IsDeleted] = @IsDeleted,
+	[PayDate] = @PayDate,
 	[TotalPrice] = @TotalPrice,
 	[UpdatedAt] = @UpdatedAt,
 	[UpdatedBy] = @UpdatedBy
@@ -480,532 +1686,139 @@ SET
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'OrderDetail_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure OrderDetail_SelectAll
+if exists (select * from dbo.sysobjects where id = object_id(N'Payment_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Payment_SelectAll
 GO
-CREATE PROCEDURE OrderDetail_SelectAll
+CREATE PROCEDURE Payment_SelectAll
 AS
 
 	SELECT 
-		[Address], [CreatedAt], [CreatedBy], [Date], [Id], [IdCustomer], [IdEmployee], [ListProductId], [Name], [OrderStatus], [Phone], [TotalPrice], [UpdatedAt], [UpdatedBy]
-	FROM [dbo].[OrderDetail]
+		[CreatedAt], [CreatedBy], [Id], [IdContract], [IsDeleted], [PayDate], [TotalPrice], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[Payment]
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'OrderDetail_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure OrderDetail_DeleteByPrimaryKey
+if exists (select * from dbo.sysobjects where id = object_id(N'Payment_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Payment_DeleteByPrimaryKey
 GO
-CREATE PROCEDURE OrderDetail_DeleteByPrimaryKey
+CREATE PROCEDURE Payment_DeleteByPrimaryKey
 	@Id int
 AS
 
-DELETE FROM [dbo].[OrderDetail]
+DELETE FROM [dbo].[Payment]
  WHERE 
 	[Id] = @Id
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'Permission_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Permission_Insert
+if exists (select * from dbo.sysobjects where id = object_id(N'PaymentFee_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure PaymentFee_Insert
 GO
-CREATE PROCEDURE Permission_Insert
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Description nvarchar(255) ,
-	@Id int ,
-	@Name nvarchar(255) ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
+CREATE PROCEDURE PaymentFee_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@IdFee int ,
+	@IdPayment int ,
+	@IsDeleted int = null ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null ,
+	@Value varchar(255) 
 
 AS
 
-INSERT [dbo].[Permission]
+INSERT [dbo].[PaymentFee]
 (
 	[CreatedAt],
 	[CreatedBy],
-	[Description],
-	[Id],
-	[Name],
+	[IdFee],
+	[IdPayment],
+	[IsDeleted],
 	[UpdatedAt],
-	[UpdatedBy]
+	[UpdatedBy],
+	[Value]
 
 )
 VALUES
 (
 	@CreatedAt,
 	@CreatedBy,
-	@Description,
-	@Id,
-	@Name,
+	@IdFee,
+	@IdPayment,
+	@IsDeleted,
 	@UpdatedAt,
-	@UpdatedBy
+	@UpdatedBy,
+	@Value
 
 )
 
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'Permission_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Permission_Update
+if exists (select * from dbo.sysobjects where id = object_id(N'PaymentFee_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure PaymentFee_Update
 GO
-CREATE PROCEDURE Permission_Update
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Description nvarchar(255),
-	@Id int,
-	@Name nvarchar(255),
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
+CREATE PROCEDURE PaymentFee_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@IdFee int,
+	@IdPayment int,
+	@IsDeleted int = null,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null,
+	@Value varchar(255)
 
 AS
 
-UPDATE [dbo].[Permission]
+UPDATE [dbo].[PaymentFee]
 SET
 	[CreatedAt] = @CreatedAt,
 	[CreatedBy] = @CreatedBy,
-	[Description] = @Description,
-	[Id] = @Id,
-	[Name] = @Name,
+	[IdFee] = @IdFee,
+	[IdPayment] = @IdPayment,
+	[IsDeleted] = @IsDeleted,
 	[UpdatedAt] = @UpdatedAt,
-	[UpdatedBy] = @UpdatedBy
+	[UpdatedBy] = @UpdatedBy,
+	[Value] = @Value
  WHERE 
-	[Id] = @Id
+	[IdFee] = @IdFee AND 
+	[IdPayment] = @IdPayment
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'Permission_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Permission_SelectAll
+if exists (select * from dbo.sysobjects where id = object_id(N'PaymentFee_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure PaymentFee_SelectAll
 GO
-CREATE PROCEDURE Permission_SelectAll
+CREATE PROCEDURE PaymentFee_SelectAll
 AS
 
 	SELECT 
-		[CreatedAt], [CreatedBy], [Description], [Id], [Name], [UpdatedAt], [UpdatedBy]
-	FROM [dbo].[Permission]
+		[CreatedAt], [CreatedBy], [IdFee], [IdPayment], [IsDeleted], [UpdatedAt], [UpdatedBy], [Value]
+	FROM [dbo].[PaymentFee]
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'Permission_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Permission_DeleteByPrimaryKey
+if exists (select * from dbo.sysobjects where id = object_id(N'PaymentFee_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure PaymentFee_DeleteByPrimaryKey
 GO
-CREATE PROCEDURE Permission_DeleteByPrimaryKey
-	@Id int
+CREATE PROCEDURE PaymentFee_DeleteByPrimaryKey
+	@IdFee int,
+	@IdPayment int
 AS
 
-DELETE FROM [dbo].[Permission]
+DELETE FROM [dbo].[PaymentFee]
  WHERE 
-	[Id] = @Id
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Post_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Post_Insert
-GO
-CREATE PROCEDURE Post_Insert
-	@Content text = null ,
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Id int ,
-	@Tittle varchar(255) ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
-
-AS
-
-INSERT [dbo].[Post]
-(
-	[Content],
-	[CreatedAt],
-	[CreatedBy],
-	[Id],
-	[Tittle],
-	[UpdatedAt],
-	[UpdatedBy]
-
-)
-VALUES
-(
-	@Content,
-	@CreatedAt,
-	@CreatedBy,
-	@Id,
-	@Tittle,
-	@UpdatedAt,
-	@UpdatedBy
-
-)
-
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Post_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Post_Update
-GO
-CREATE PROCEDURE Post_Update
-	@Content text = null,
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Id int,
-	@Tittle varchar(255),
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
-
-AS
-
-UPDATE [dbo].[Post]
-SET
-	[Content] = @Content,
-	[CreatedAt] = @CreatedAt,
-	[CreatedBy] = @CreatedBy,
-	[Id] = @Id,
-	[Tittle] = @Tittle,
-	[UpdatedAt] = @UpdatedAt,
-	[UpdatedBy] = @UpdatedBy
- WHERE 
-	[Id] = @Id
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Post_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Post_SelectAll
-GO
-CREATE PROCEDURE Post_SelectAll
-AS
-
-	SELECT 
-		[Content], [CreatedAt], [CreatedBy], [Id], [Tittle], [UpdatedAt], [UpdatedBy]
-	FROM [dbo].[Post]
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Post_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Post_DeleteByPrimaryKey
-GO
-CREATE PROCEDURE Post_DeleteByPrimaryKey
-	@Id int
-AS
-
-DELETE FROM [dbo].[Post]
- WHERE 
-	[Id] = @Id
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Product_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Product_Insert
-GO
-CREATE PROCEDURE Product_Insert
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Description nvarchar(255) = null ,
-	@Id int ,
-	@IdDisplay varchar(50) ,
-	@IdManufacturer int ,
-	@IdProductType int ,
-	@ImageId nvarchar(255) = null ,
-	@Name nvarchar(255) ,
-	@Quantity int = null ,
-	@SupportDuration int = null ,
-	@UnitPrice decimal(19,4) = null ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
-
-AS
-
-INSERT [dbo].[Product]
-(
-	[CreatedAt],
-	[CreatedBy],
-	[Description],
-	[Id],
-	[IdDisplay],
-	[IdManufacturer],
-	[IdProductType],
-	[ImageId],
-	[Name],
-	[Quantity],
-	[SupportDuration],
-	[UnitPrice],
-	[UpdatedAt],
-	[UpdatedBy]
-
-)
-VALUES
-(
-	@CreatedAt,
-	@CreatedBy,
-	@Description,
-	@Id,
-	@IdDisplay,
-	@IdManufacturer,
-	@IdProductType,
-	@ImageId,
-	@Name,
-	@Quantity,
-	@SupportDuration,
-	@UnitPrice,
-	@UpdatedAt,
-	@UpdatedBy
-
-)
-
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Product_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Product_Update
-GO
-CREATE PROCEDURE Product_Update
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Description nvarchar(255) = null,
-	@Id int,
-	@IdDisplay varchar(50),
-	@IdManufacturer int,
-	@IdProductType int,
-	@ImageId nvarchar(255) = null,
-	@Name nvarchar(255),
-	@Quantity int = null,
-	@SupportDuration int = null,
-	@UnitPrice decimal(19,4) = null,
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
-
-AS
-
-UPDATE [dbo].[Product]
-SET
-	[CreatedAt] = @CreatedAt,
-	[CreatedBy] = @CreatedBy,
-	[Description] = @Description,
-	[Id] = @Id,
-	[IdDisplay] = @IdDisplay,
-	[IdManufacturer] = @IdManufacturer,
-	[IdProductType] = @IdProductType,
-	[ImageId] = @ImageId,
-	[Name] = @Name,
-	[Quantity] = @Quantity,
-	[SupportDuration] = @SupportDuration,
-	[UnitPrice] = @UnitPrice,
-	[UpdatedAt] = @UpdatedAt,
-	[UpdatedBy] = @UpdatedBy
- WHERE 
-	[Id] = @Id
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Product_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Product_SelectAll
-GO
-CREATE PROCEDURE Product_SelectAll
-AS
-
-	SELECT 
-		[CreatedAt], [CreatedBy], [Description], [Id], [IdDisplay], [IdManufacturer], [IdProductType], [ImageId], [Name], [Quantity], [SupportDuration], [UnitPrice], [UpdatedAt], [UpdatedBy]
-	FROM [dbo].[Product]
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Product_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Product_DeleteByPrimaryKey
-GO
-CREATE PROCEDURE Product_DeleteByPrimaryKey
-	@Id int
-AS
-
-DELETE FROM [dbo].[Product]
- WHERE 
-	[Id] = @Id
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'ProductType_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ProductType_Insert
-GO
-CREATE PROCEDURE ProductType_Insert
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Id int ,
-	@ImageId nvarchar(255) = null ,
-	@Name nvarchar(255) ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
-
-AS
-
-INSERT [dbo].[ProductType]
-(
-	[CreatedAt],
-	[CreatedBy],
-	[Id],
-	[ImageId],
-	[Name],
-	[UpdatedAt],
-	[UpdatedBy]
-
-)
-VALUES
-(
-	@CreatedAt,
-	@CreatedBy,
-	@Id,
-	@ImageId,
-	@Name,
-	@UpdatedAt,
-	@UpdatedBy
-
-)
-
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'ProductType_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ProductType_Update
-GO
-CREATE PROCEDURE ProductType_Update
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Id int,
-	@ImageId nvarchar(255) = null,
-	@Name nvarchar(255),
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
-
-AS
-
-UPDATE [dbo].[ProductType]
-SET
-	[CreatedAt] = @CreatedAt,
-	[CreatedBy] = @CreatedBy,
-	[Id] = @Id,
-	[ImageId] = @ImageId,
-	[Name] = @Name,
-	[UpdatedAt] = @UpdatedAt,
-	[UpdatedBy] = @UpdatedBy
- WHERE 
-	[Id] = @Id
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'ProductType_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ProductType_SelectAll
-GO
-CREATE PROCEDURE ProductType_SelectAll
-AS
-
-	SELECT 
-		[CreatedAt], [CreatedBy], [Id], [ImageId], [Name], [UpdatedAt], [UpdatedBy]
-	FROM [dbo].[ProductType]
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'ProductType_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ProductType_DeleteByPrimaryKey
-GO
-CREATE PROCEDURE ProductType_DeleteByPrimaryKey
-	@Id int
-AS
-
-DELETE FROM [dbo].[ProductType]
- WHERE 
-	[Id] = @Id
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Property_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Property_Insert
-GO
-CREATE PROCEDURE Property_Insert
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Data nvarchar(255) ,
-	@Id int ,
-	@IdProduct int ,
-	@ImageId nvarchar(255) = null ,
-	@Name nvarchar(255) ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
-
-AS
-
-INSERT [dbo].[Property]
-(
-	[CreatedAt],
-	[CreatedBy],
-	[Data],
-	[Id],
-	[IdProduct],
-	[ImageId],
-	[Name],
-	[UpdatedAt],
-	[UpdatedBy]
-
-)
-VALUES
-(
-	@CreatedAt,
-	@CreatedBy,
-	@Data,
-	@Id,
-	@IdProduct,
-	@ImageId,
-	@Name,
-	@UpdatedAt,
-	@UpdatedBy
-
-)
-
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Property_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Property_Update
-GO
-CREATE PROCEDURE Property_Update
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Data nvarchar(255),
-	@Id int,
-	@IdProduct int,
-	@ImageId nvarchar(255) = null,
-	@Name nvarchar(255),
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
-
-AS
-
-UPDATE [dbo].[Property]
-SET
-	[CreatedAt] = @CreatedAt,
-	[CreatedBy] = @CreatedBy,
-	[Data] = @Data,
-	[Id] = @Id,
-	[IdProduct] = @IdProduct,
-	[ImageId] = @ImageId,
-	[Name] = @Name,
-	[UpdatedAt] = @UpdatedAt,
-	[UpdatedBy] = @UpdatedBy
- WHERE 
-	[Id] = @Id
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Property_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Property_SelectAll
-GO
-CREATE PROCEDURE Property_SelectAll
-AS
-
-	SELECT 
-		[CreatedAt], [CreatedBy], [Data], [Id], [IdProduct], [ImageId], [Name], [UpdatedAt], [UpdatedBy]
-	FROM [dbo].[Property]
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'Property_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Property_DeleteByPrimaryKey
-GO
-CREATE PROCEDURE Property_DeleteByPrimaryKey
-	@Id int
-AS
-
-DELETE FROM [dbo].[Property]
- WHERE 
-	[Id] = @Id
+	[IdFee] = @IdFee AND 
+	[IdPayment] = @IdPayment
 
 GO
 
 if exists (select * from dbo.sysobjects where id = object_id(N'Provider_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Provider_Insert
 GO
 CREATE PROCEDURE Provider_Insert
-	@Address nvarchar(255) = null ,
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Email varchar(255) = null ,
+	@Address varchar(255) ,
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Email varchar(255) ,
 	@Id int ,
-	@ImageId nvarchar(255) = null ,
-	@Name nvarchar(255) ,
-	@Phone varchar(255) = null ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@Phone varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
 
 AS
 
@@ -1016,7 +1829,7 @@ INSERT [dbo].[Provider]
 	[CreatedBy],
 	[Email],
 	[Id],
-	[ImageId],
+	[IsDeleted],
 	[Name],
 	[Phone],
 	[UpdatedAt],
@@ -1030,7 +1843,7 @@ VALUES
 	@CreatedBy,
 	@Email,
 	@Id,
-	@ImageId,
+	@IsDeleted,
 	@Name,
 	@Phone,
 	@UpdatedAt,
@@ -1044,16 +1857,16 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Provider_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Provider_Update
 GO
 CREATE PROCEDURE Provider_Update
-	@Address nvarchar(255) = null,
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Email varchar(255) = null,
+	@Address varchar(255),
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Email varchar(255),
 	@Id int,
-	@ImageId nvarchar(255) = null,
-	@Name nvarchar(255),
-	@Phone varchar(255) = null,
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@Phone varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
 
 AS
 
@@ -1064,7 +1877,7 @@ SET
 	[CreatedBy] = @CreatedBy,
 	[Email] = @Email,
 	[Id] = @Id,
-	[ImageId] = @ImageId,
+	[IsDeleted] = @IsDeleted,
 	[Name] = @Name,
 	[Phone] = @Phone,
 	[UpdatedAt] = @UpdatedAt,
@@ -1080,7 +1893,7 @@ CREATE PROCEDURE Provider_SelectAll
 AS
 
 	SELECT 
-		[Address], [CreatedAt], [CreatedBy], [Email], [Id], [ImageId], [Name], [Phone], [UpdatedAt], [UpdatedBy]
+		[Address], [CreatedAt], [CreatedBy], [Email], [Id], [IsDeleted], [Name], [Phone], [UpdatedAt], [UpdatedBy]
 	FROM [dbo].[Provider]
 
 GO
@@ -1097,25 +1910,146 @@ DELETE FROM [dbo].[Provider]
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'Role_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Role_Insert
+if exists (select * from dbo.sysobjects where id = object_id(N'ServiceForm_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServiceForm_Insert
 GO
-CREATE PROCEDURE Role_Insert
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Description nvarchar(255) ,
+CREATE PROCEDURE ServiceForm_Insert
+	@Address varchar(255) ,
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
 	@Id int ,
-	@Name nvarchar(255) ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
+	@IdArea int ,
+	@IdCustomer int = null ,
+	@IdEmployee int = null ,
+	@IdServiceFormStatus int = null ,
+	@IdServicePack int ,
+	@IsDeleted int = null ,
+	@ServiceFormId varchar(255) = null ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
 
 AS
 
-INSERT [dbo].[Role]
+INSERT [dbo].[ServiceForm]
+(
+	[Address],
+	[CreatedAt],
+	[CreatedBy],
+	[Id],
+	[IdArea],
+	[IdCustomer],
+	[IdEmployee],
+	[IdServiceFormStatus],
+	[IdServicePack],
+	[IsDeleted],
+	[ServiceFormId],
+	[UpdatedAt],
+	[UpdatedBy]
+
+)
+VALUES
+(
+	@Address,
+	@CreatedAt,
+	@CreatedBy,
+	@Id,
+	@IdArea,
+	@IdCustomer,
+	@IdEmployee,
+	@IdServiceFormStatus,
+	@IdServicePack,
+	@IsDeleted,
+	@ServiceFormId,
+	@UpdatedAt,
+	@UpdatedBy
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ServiceForm_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServiceForm_Update
+GO
+CREATE PROCEDURE ServiceForm_Update
+	@Address varchar(255),
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Id int,
+	@IdArea int,
+	@IdCustomer int = null,
+	@IdEmployee int = null,
+	@IdServiceFormStatus int = null,
+	@IdServicePack int,
+	@IsDeleted int = null,
+	@ServiceFormId varchar(255) = null,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
+
+AS
+
+UPDATE [dbo].[ServiceForm]
+SET
+	[Address] = @Address,
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Id] = @Id,
+	[IdArea] = @IdArea,
+	[IdCustomer] = @IdCustomer,
+	[IdEmployee] = @IdEmployee,
+	[IdServiceFormStatus] = @IdServiceFormStatus,
+	[IdServicePack] = @IdServicePack,
+	[IsDeleted] = @IsDeleted,
+	[ServiceFormId] = @ServiceFormId,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ServiceForm_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServiceForm_SelectAll
+GO
+CREATE PROCEDURE ServiceForm_SelectAll
+AS
+
+	SELECT 
+		[Address], [CreatedAt], [CreatedBy], [Id], [IdArea], [IdCustomer], [IdEmployee], [IdServiceFormStatus], [IdServicePack], [IsDeleted], [ServiceFormId], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[ServiceForm]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ServiceForm_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServiceForm_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE ServiceForm_DeleteByPrimaryKey
+	@Id int
+AS
+
+DELETE FROM [dbo].[ServiceForm]
+ WHERE 
+	[Id] = @Id
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ServiceFormStatus_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServiceFormStatus_Insert
+GO
+CREATE PROCEDURE ServiceFormStatus_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Description varchar(255) = null ,
+	@Id int ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[ServiceFormStatus]
 (
 	[CreatedAt],
 	[CreatedBy],
 	[Description],
 	[Id],
+	[IsDeleted],
 	[Name],
 	[UpdatedAt],
 	[UpdatedBy]
@@ -1127,6 +2061,7 @@ VALUES
 	@CreatedBy,
 	@Description,
 	@Id,
+	@IsDeleted,
 	@Name,
 	@UpdatedAt,
 	@UpdatedBy
@@ -1136,25 +2071,27 @@ VALUES
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'Role_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Role_Update
+if exists (select * from dbo.sysobjects where id = object_id(N'ServiceFormStatus_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServiceFormStatus_Update
 GO
-CREATE PROCEDURE Role_Update
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Description nvarchar(255),
+CREATE PROCEDURE ServiceFormStatus_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Description varchar(255) = null,
 	@Id int,
-	@Name nvarchar(255),
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
 
 AS
 
-UPDATE [dbo].[Role]
+UPDATE [dbo].[ServiceFormStatus]
 SET
 	[CreatedAt] = @CreatedAt,
 	[CreatedBy] = @CreatedBy,
 	[Description] = @Description,
 	[Id] = @Id,
+	[IsDeleted] = @IsDeleted,
 	[Name] = @Name,
 	[UpdatedAt] = @UpdatedAt,
 	[UpdatedBy] = @UpdatedBy
@@ -1163,122 +2100,251 @@ SET
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'Role_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Role_SelectAll
+if exists (select * from dbo.sysobjects where id = object_id(N'ServiceFormStatus_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServiceFormStatus_SelectAll
 GO
-CREATE PROCEDURE Role_SelectAll
+CREATE PROCEDURE ServiceFormStatus_SelectAll
 AS
 
 	SELECT 
-		[CreatedAt], [CreatedBy], [Description], [Id], [Name], [UpdatedAt], [UpdatedBy]
-	FROM [dbo].[Role]
+		[CreatedAt], [CreatedBy], [Description], [Id], [IsDeleted], [Name], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[ServiceFormStatus]
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'Role_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Role_DeleteByPrimaryKey
+if exists (select * from dbo.sysobjects where id = object_id(N'ServiceFormStatus_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServiceFormStatus_DeleteByPrimaryKey
 GO
-CREATE PROCEDURE Role_DeleteByPrimaryKey
+CREATE PROCEDURE ServiceFormStatus_DeleteByPrimaryKey
 	@Id int
 AS
 
-DELETE FROM [dbo].[Role]
+DELETE FROM [dbo].[ServiceFormStatus]
  WHERE 
 	[Id] = @Id
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'RolePermission_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure RolePermission_Insert
+if exists (select * from dbo.sysobjects where id = object_id(N'ServicePack_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePack_Insert
 GO
-CREATE PROCEDURE RolePermission_Insert
-	@IdPermission int ,
-	@IdRole int 
+CREATE PROCEDURE ServicePack_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Description varchar(255) = null ,
+	@Id int ,
+	@IdConnectionType int ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
 
 AS
 
-INSERT [dbo].[RolePermission]
+INSERT [dbo].[ServicePack]
 (
-	[IdPermission],
-	[IdRole]
+	[CreatedAt],
+	[CreatedBy],
+	[Description],
+	[Id],
+	[IdConnectionType],
+	[IsDeleted],
+	[Name],
+	[UpdatedAt],
+	[UpdatedBy]
 
 )
 VALUES
 (
-	@IdPermission,
-	@IdRole
+	@CreatedAt,
+	@CreatedBy,
+	@Description,
+	@Id,
+	@IdConnectionType,
+	@IsDeleted,
+	@Name,
+	@UpdatedAt,
+	@UpdatedBy
 
 )
 
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'RolePermission_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure RolePermission_Update
+if exists (select * from dbo.sysobjects where id = object_id(N'ServicePack_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePack_Update
 GO
-CREATE PROCEDURE RolePermission_Update
-	@IdPermission int,
-	@IdRole int
+CREATE PROCEDURE ServicePack_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Description varchar(255) = null,
+	@Id int,
+	@IdConnectionType int,
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
 
 AS
 
-UPDATE [dbo].[RolePermission]
+UPDATE [dbo].[ServicePack]
 SET
-	[IdPermission] = @IdPermission,
-	[IdRole] = @IdRole
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[Description] = @Description,
+	[Id] = @Id,
+	[IdConnectionType] = @IdConnectionType,
+	[IsDeleted] = @IsDeleted,
+	[Name] = @Name,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy
  WHERE 
-	[IdPermission] = @IdPermission AND 
-	[IdRole] = @IdRole
+	[Id] = @Id
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'RolePermission_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure RolePermission_SelectAll
+if exists (select * from dbo.sysobjects where id = object_id(N'ServicePack_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePack_SelectAll
 GO
-CREATE PROCEDURE RolePermission_SelectAll
+CREATE PROCEDURE ServicePack_SelectAll
 AS
 
 	SELECT 
-		[IdPermission], [IdRole]
-	FROM [dbo].[RolePermission]
+		[CreatedAt], [CreatedBy], [Description], [Id], [IdConnectionType], [IsDeleted], [Name], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[ServicePack]
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'RolePermission_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure RolePermission_DeleteByPrimaryKey
+if exists (select * from dbo.sysobjects where id = object_id(N'ServicePack_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePack_DeleteByPrimaryKey
 GO
-CREATE PROCEDURE RolePermission_DeleteByPrimaryKey
-	@IdPermission int,
-	@IdRole int
+CREATE PROCEDURE ServicePack_DeleteByPrimaryKey
+	@Id int
 AS
 
-DELETE FROM [dbo].[RolePermission]
+DELETE FROM [dbo].[ServicePack]
  WHERE 
-	[IdPermission] = @IdPermission AND 
-	[IdRole] = @IdRole
+	[Id] = @Id
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'UserInfo_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserInfo_Insert
+if exists (select * from dbo.sysobjects where id = object_id(N'ServicePackFee_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePackFee_Insert
 GO
-CREATE PROCEDURE UserInfo_Insert
-	@Address nvarchar(255) = null ,
-	@CreatedAt datetime = null ,
-	@CreatedBy int ,
-	@Email varchar(255) = null ,
-	@IdUserLogin int ,
-	@ImageId nvarchar(255) = null ,
-	@Name nvarchar(255) ,
-	@Phone varchar(255) = null ,
-	@UpdatedAt datetime = null ,
-	@UpdatedBy int 
+CREATE PROCEDURE ServicePackFee_Insert
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@IdFee int ,
+	@IdServicePack int ,
+	@IsDeleted int = null ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null ,
+	@Value varchar(255) 
 
 AS
 
-INSERT [dbo].[UserInfo]
+INSERT [dbo].[ServicePackFee]
+(
+	[CreatedAt],
+	[CreatedBy],
+	[IdFee],
+	[IdServicePack],
+	[IsDeleted],
+	[UpdatedAt],
+	[UpdatedBy],
+	[Value]
+
+)
+VALUES
+(
+	@CreatedAt,
+	@CreatedBy,
+	@IdFee,
+	@IdServicePack,
+	@IsDeleted,
+	@UpdatedAt,
+	@UpdatedBy,
+	@Value
+
+)
+
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ServicePackFee_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePackFee_Update
+GO
+CREATE PROCEDURE ServicePackFee_Update
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@IdFee int,
+	@IdServicePack int,
+	@IsDeleted int = null,
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null,
+	@Value varchar(255)
+
+AS
+
+UPDATE [dbo].[ServicePackFee]
+SET
+	[CreatedAt] = @CreatedAt,
+	[CreatedBy] = @CreatedBy,
+	[IdFee] = @IdFee,
+	[IdServicePack] = @IdServicePack,
+	[IsDeleted] = @IsDeleted,
+	[UpdatedAt] = @UpdatedAt,
+	[UpdatedBy] = @UpdatedBy,
+	[Value] = @Value
+ WHERE 
+	[IdFee] = @IdFee AND 
+	[IdServicePack] = @IdServicePack
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ServicePackFee_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePackFee_SelectAll
+GO
+CREATE PROCEDURE ServicePackFee_SelectAll
+AS
+
+	SELECT 
+		[CreatedAt], [CreatedBy], [IdFee], [IdServicePack], [IsDeleted], [UpdatedAt], [UpdatedBy], [Value]
+	FROM [dbo].[ServicePackFee]
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'ServicePackFee_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePackFee_DeleteByPrimaryKey
+GO
+CREATE PROCEDURE ServicePackFee_DeleteByPrimaryKey
+	@IdFee int,
+	@IdServicePack int
+AS
+
+DELETE FROM [dbo].[ServicePackFee]
+ WHERE 
+	[IdFee] = @IdFee AND 
+	[IdServicePack] = @IdServicePack
+
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'Store_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Store_Insert
+GO
+CREATE PROCEDURE Store_Insert
+	@Address varchar(255) ,
+	@CreatedAt datetime2 = null ,
+	@CreatedBy int = null ,
+	@Id int ,
+	@IdArea int ,
+	@IsClosed int = null ,
+	@IsDeleted int = null ,
+	@Name varchar(255) ,
+	@UpdatedAt datetime2 = null ,
+	@UpdatedBy int = null 
+
+AS
+
+INSERT [dbo].[Store]
 (
 	[Address],
 	[CreatedAt],
 	[CreatedBy],
-	[Email],
-	[IdUserLogin],
-	[ImageId],
+	[Id],
+	[IdArea],
+	[IsClosed],
+	[IsDeleted],
 	[Name],
-	[Phone],
 	[UpdatedAt],
 	[UpdatedBy]
 
@@ -1288,11 +2354,11 @@ VALUES
 	@Address,
 	@CreatedAt,
 	@CreatedBy,
-	@Email,
-	@IdUserLogin,
-	@ImageId,
+	@Id,
+	@IdArea,
+	@IsClosed,
+	@IsDeleted,
 	@Name,
-	@Phone,
 	@UpdatedAt,
 	@UpdatedBy
 
@@ -1301,199 +2367,58 @@ VALUES
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'UserInfo_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserInfo_Update
+if exists (select * from dbo.sysobjects where id = object_id(N'Store_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Store_Update
 GO
-CREATE PROCEDURE UserInfo_Update
-	@Address nvarchar(255) = null,
-	@CreatedAt datetime = null,
-	@CreatedBy int,
-	@Email varchar(255) = null,
-	@IdUserLogin int,
-	@ImageId nvarchar(255) = null,
-	@Name nvarchar(255),
-	@Phone varchar(255) = null,
-	@UpdatedAt datetime = null,
-	@UpdatedBy int
+CREATE PROCEDURE Store_Update
+	@Address varchar(255),
+	@CreatedAt datetime2 = null,
+	@CreatedBy int = null,
+	@Id int,
+	@IdArea int,
+	@IsClosed int = null,
+	@IsDeleted int = null,
+	@Name varchar(255),
+	@UpdatedAt datetime2 = null,
+	@UpdatedBy int = null
 
 AS
 
-UPDATE [dbo].[UserInfo]
+UPDATE [dbo].[Store]
 SET
 	[Address] = @Address,
 	[CreatedAt] = @CreatedAt,
 	[CreatedBy] = @CreatedBy,
-	[Email] = @Email,
-	[IdUserLogin] = @IdUserLogin,
-	[ImageId] = @ImageId,
+	[Id] = @Id,
+	[IdArea] = @IdArea,
+	[IsClosed] = @IsClosed,
+	[IsDeleted] = @IsDeleted,
 	[Name] = @Name,
-	[Phone] = @Phone,
 	[UpdatedAt] = @UpdatedAt,
 	[UpdatedBy] = @UpdatedBy
  WHERE 
-	[IdUserLogin] = @IdUserLogin
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'UserInfo_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserInfo_SelectAll
-GO
-CREATE PROCEDURE UserInfo_SelectAll
-AS
-
-	SELECT 
-		[Address], [CreatedAt], [CreatedBy], [Email], [IdUserLogin], [ImageId], [Name], [Phone], [UpdatedAt], [UpdatedBy]
-	FROM [dbo].[UserInfo]
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'UserInfo_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserInfo_DeleteByPrimaryKey
-GO
-CREATE PROCEDURE UserInfo_DeleteByPrimaryKey
-	@IdUserLogin int
-AS
-
-DELETE FROM [dbo].[UserInfo]
- WHERE 
-	[IdUserLogin] = @IdUserLogin
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'UserLogin_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserLogin_Insert
-GO
-CREATE PROCEDURE UserLogin_Insert
-	@Id int ,
-	@Password varchar(255) ,
-	@Username varchar(255) ,
-	@UserStatus int 
-
-AS
-
-INSERT [dbo].[UserLogin]
-(
-	[Id],
-	[Password],
-	[Username],
-	[UserStatus]
-
-)
-VALUES
-(
-	@Id,
-	@Password,
-	@Username,
-	@UserStatus
-
-)
-
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'UserLogin_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserLogin_Update
-GO
-CREATE PROCEDURE UserLogin_Update
-	@Id int,
-	@Password varchar(255),
-	@Username varchar(255),
-	@UserStatus int
-
-AS
-
-UPDATE [dbo].[UserLogin]
-SET
-	[Id] = @Id,
-	[Password] = @Password,
-	[Username] = @Username,
-	[UserStatus] = @UserStatus
- WHERE 
 	[Id] = @Id
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'UserLogin_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserLogin_SelectAll
+if exists (select * from dbo.sysobjects where id = object_id(N'Store_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Store_SelectAll
 GO
-CREATE PROCEDURE UserLogin_SelectAll
+CREATE PROCEDURE Store_SelectAll
 AS
 
 	SELECT 
-		[Id], [Password], [Username], [UserStatus]
-	FROM [dbo].[UserLogin]
+		[Address], [CreatedAt], [CreatedBy], [Id], [IdArea], [IsClosed], [IsDeleted], [Name], [UpdatedAt], [UpdatedBy]
+	FROM [dbo].[Store]
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'UserLogin_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserLogin_DeleteByPrimaryKey
+if exists (select * from dbo.sysobjects where id = object_id(N'Store_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Store_DeleteByPrimaryKey
 GO
-CREATE PROCEDURE UserLogin_DeleteByPrimaryKey
+CREATE PROCEDURE Store_DeleteByPrimaryKey
 	@Id int
 AS
 
-DELETE FROM [dbo].[UserLogin]
+DELETE FROM [dbo].[Store]
  WHERE 
 	[Id] = @Id
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'UserRole_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserRole_Insert
-GO
-CREATE PROCEDURE UserRole_Insert
-	@IdRole int ,
-	@IdUserLogin int 
-
-AS
-
-INSERT [dbo].[UserRole]
-(
-	[IdRole],
-	[IdUserLogin]
-
-)
-VALUES
-(
-	@IdRole,
-	@IdUserLogin
-
-)
-
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'UserRole_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserRole_Update
-GO
-CREATE PROCEDURE UserRole_Update
-	@IdRole int,
-	@IdUserLogin int
-
-AS
-
-UPDATE [dbo].[UserRole]
-SET
-	[IdRole] = @IdRole,
-	[IdUserLogin] = @IdUserLogin
- WHERE 
-	[IdRole] = @IdRole AND 
-	[IdUserLogin] = @IdUserLogin
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'UserRole_SelectAll') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserRole_SelectAll
-GO
-CREATE PROCEDURE UserRole_SelectAll
-AS
-
-	SELECT 
-		[IdRole], [IdUserLogin]
-	FROM [dbo].[UserRole]
-
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'UserRole_DeleteByPrimaryKey') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure UserRole_DeleteByPrimaryKey
-GO
-CREATE PROCEDURE UserRole_DeleteByPrimaryKey
-	@IdRole int,
-	@IdUserLogin int
-AS
-
-DELETE FROM [dbo].[UserRole]
- WHERE 
-	[IdRole] = @IdRole AND 
-	[IdUserLogin] = @IdUserLogin
 
 GO

@@ -15,6 +15,7 @@ namespace Nexus.Entity.Entities
 			CreatedBy,
 			Email,
 			Id,
+			IsDeleted,
 			Name,
 			Phone,
 			UpdatedAt,
@@ -42,6 +43,7 @@ namespace Nexus.Entity.Entities
 		public int?  CreatedBy { get; set; }
 		public string  Email { get; set; }
 		public int  Id { get; set; } //Key 
+		public int?  IsDeleted { get; set; }
 		public string  Name { get; set; }
 		public string  Phone { get; set; }
 		public DateTime?  UpdatedAt { get; set; }
@@ -53,15 +55,23 @@ namespace Nexus.Entity.Entities
 
 		public override bool IsValid()
 		{
+			if (Address == null)
+				throw new NoNullAllowedException("Field: Address in entity: Customer is Null");
 
 			if (Address != null && Address.Length > 255 )
 				throw new InvalidDataException("Field: Address in entity: Customer is over-size: 255, value=" + Address);
+			if (Email == null)
+				throw new NoNullAllowedException("Field: Email in entity: Customer is Null");
 
 			if (Email != null && Email.Length > 255 )
 				throw new InvalidDataException("Field: Email in entity: Customer is over-size: 255, value=" + Email);
+			if (Name == null)
+				throw new NoNullAllowedException("Field: Name in entity: Customer is Null");
 
 			if (Name != null && Name.Length > 255 )
 				throw new InvalidDataException("Field: Name in entity: Customer is over-size: 255, value=" + Name);
+			if (Phone == null)
+				throw new NoNullAllowedException("Field: Phone in entity: Customer is Null");
 
 			if (Phone != null && Phone.Length > 255 )
 				throw new InvalidDataException("Field: Phone in entity: Customer is over-size: 255, value=" + Phone);

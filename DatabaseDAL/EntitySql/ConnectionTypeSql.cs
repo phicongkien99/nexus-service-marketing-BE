@@ -182,10 +182,7 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(ConnectionType.ConnectionTypeFields.Name.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(ConnectionType.ConnectionTypeFields.Name.ToString())))
-				{
-					businessObject.Name = dataReader.GetString(GetIndex(ConnectionType.ConnectionTypeFields.Name.ToString()));
-				}
+				businessObject.Name = dataReader.GetString(GetIndex(ConnectionType.ConnectionTypeFields.Name.ToString()));
 
 			if (GetIndex(ConnectionType.ConnectionTypeFields.UpdatedAt.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(ConnectionType.ConnectionTypeFields.UpdatedAt.ToString())))

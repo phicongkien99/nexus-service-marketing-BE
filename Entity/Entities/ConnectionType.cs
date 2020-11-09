@@ -54,6 +54,8 @@ namespace Nexus.Entity.Entities
 
 			if (Description != null && Description.Length > 255 )
 				throw new InvalidDataException("Field: Description in entity: ConnectionType is over-size: 255, value=" + Description);
+			if (Name == null)
+				throw new NoNullAllowedException("Field: Name in entity: ConnectionType is Null");
 
 			if (Name != null && Name.Length > 255 )
 				throw new InvalidDataException("Field: Name in entity: ConnectionType is over-size: 255, value=" + Name);

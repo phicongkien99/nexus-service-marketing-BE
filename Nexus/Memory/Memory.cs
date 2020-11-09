@@ -41,6 +41,7 @@ namespace Nexus.Memory
 
         #endregion
 
+
         public static Dictionary<string, int> DicMaxKeyEntity = new Dictionary<string, int>();
         public static Dictionary<int, Area> DicArea = new Dictionary<int, Area>();
 
@@ -52,12 +53,13 @@ namespace Nexus.Memory
 
         public static Dictionary<int, Contract> DicContract = new Dictionary<int, Contract>();
 
+        public static Dictionary<int, ContractStatus> DicContractStatus = new Dictionary<int, ContractStatus>();
+
         public static Dictionary<int, Customer> DicCustomer = new Dictionary<int, Customer>();
 
         public static Dictionary<int, CustomerFeedback> DicCustomerFeedback = new Dictionary<int, CustomerFeedback>();
 
-        public static Dictionary<DetailImportReceiptKeys, DetailImportReceipt> DicDetailImportReceipt =
-            new Dictionary<DetailImportReceiptKeys, DetailImportReceipt>();
+        public static Dictionary<DetailImportReceiptKeys, DetailImportReceipt> DicDetailImportReceipt = new Dictionary<DetailImportReceiptKeys, DetailImportReceipt>();
 
         public static Dictionary<int, Device> DicDevice = new Dictionary<int, Device>();
 
@@ -75,20 +77,17 @@ namespace Nexus.Memory
 
         public static Dictionary<int, Payment> DicPayment = new Dictionary<int, Payment>();
 
-        public static Dictionary<PaymentFeeKeys, PaymentFee> DicPaymentFee =
-            new Dictionary<PaymentFeeKeys, PaymentFee>();
+        public static Dictionary<PaymentFeeKeys, PaymentFee> DicPaymentFee = new Dictionary<PaymentFeeKeys, PaymentFee>();
 
         public static Dictionary<int, Provider> DicProvider = new Dictionary<int, Provider>();
 
         public static Dictionary<int, ServiceForm> DicServiceForm = new Dictionary<int, ServiceForm>();
 
-        public static Dictionary<int, ServiceFormStatus>
-            DicServiceFormStatus = new Dictionary<int, ServiceFormStatus>();
+        public static Dictionary<int, ServiceFormStatus> DicServiceFormStatus = new Dictionary<int, ServiceFormStatus>();
 
         public static Dictionary<int, ServicePack> DicServicePack = new Dictionary<int, ServicePack>();
 
-        public static Dictionary<ServicePackFeeKeys, ServicePackFee> DicServicePackFee =
-            new Dictionary<ServicePackFeeKeys, ServicePackFee>();
+        public static Dictionary<ServicePackFeeKeys, ServicePackFee> DicServicePackFee = new Dictionary<ServicePackFeeKeys, ServicePackFee>();
 
         public static Dictionary<int, Store> DicStore = new Dictionary<int, Store>();
 

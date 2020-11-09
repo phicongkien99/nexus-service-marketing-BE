@@ -12,11 +12,15 @@ namespace Nexus.Entity.Entities
 		{
 			Address,
 			ContractId,
-			CreatedDate,
+			CreatedAt,
+			CreatedBy,
 			Id,
 			IdArea,
 			IdCustomer,
-			NextPayment
+			IsDeleted,
+			NextPayment,
+			UpdatedAt,
+			UpdatedBy
 		}
 
 		public enum ContractKey
@@ -37,11 +41,15 @@ namespace Nexus.Entity.Entities
 
 		public string  Address { get; set; }
 		public string  ContractId { get; set; }
-		public DateTime?  CreatedDate { get; set; }
+		public DateTime  CreatedAt { get; set; }
+		public int?  CreatedBy { get; set; }
 		public int  Id { get; set; } //Key 
-		public int?  IdArea { get; set; }
-		public int?  IdCustomer { get; set; }
+		public int  IdArea { get; set; }
+		public int  IdCustomer { get; set; }
+		public int?  IsDeleted { get; set; }
 		public DateTime?  NextPayment { get; set; }
+		public DateTime?  UpdatedAt { get; set; }
+		public int?  UpdatedBy { get; set; }
 
 		#endregion
 
@@ -49,9 +57,13 @@ namespace Nexus.Entity.Entities
 
 		public override bool IsValid()
 		{
+			if (Address == null)
+				throw new NoNullAllowedException("Field: Address in entity: Contract is Null");
 
 			if (Address != null && Address.Length > 255 )
 				throw new InvalidDataException("Field: Address in entity: Contract is over-size: 255, value=" + Address);
+			if (ContractId == null)
+				throw new NoNullAllowedException("Field: ContractId in entity: Contract is Null");
 
 			if (ContractId != null && ContractId.Length > 45 )
 				throw new InvalidDataException("Field: ContractId in entity: Contract is over-size: 45, value=" + ContractId);

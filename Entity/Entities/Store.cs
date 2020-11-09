@@ -16,6 +16,7 @@ namespace Nexus.Entity.Entities
 			Id,
 			IdArea,
 			IsClosed,
+			IsDeleted,
 			Name,
 			UpdatedAt,
 			UpdatedBy
@@ -41,8 +42,9 @@ namespace Nexus.Entity.Entities
 		public DateTime?  CreatedAt { get; set; }
 		public int?  CreatedBy { get; set; }
 		public int  Id { get; set; } //Key 
-		public int?  IdArea { get; set; }
+		public int  IdArea { get; set; }
 		public int?  IsClosed { get; set; }
+		public int?  IsDeleted { get; set; }
 		public string  Name { get; set; }
 		public DateTime?  UpdatedAt { get; set; }
 		public int?  UpdatedBy { get; set; }
@@ -53,9 +55,13 @@ namespace Nexus.Entity.Entities
 
 		public override bool IsValid()
 		{
+			if (Address == null)
+				throw new NoNullAllowedException("Field: Address in entity: Store is Null");
 
 			if (Address != null && Address.Length > 255 )
 				throw new InvalidDataException("Field: Address in entity: Store is over-size: 255, value=" + Address);
+			if (Name == null)
+				throw new NoNullAllowedException("Field: Name in entity: Store is Null");
 
 			if (Name != null && Name.Length > 255 )
 				throw new InvalidDataException("Field: Name in entity: Store is over-size: 255, value=" + Name);

@@ -114,6 +114,7 @@
     <Compile Include="EntitySql\ConnectionStatusSql.cs" />
     <Compile Include="EntitySql\ConnectionTypeSql.cs" />
     <Compile Include="EntitySql\ContractSql.cs" />
+    <Compile Include="EntitySql\ContractStatusSql.cs" />
     <Compile Include="EntitySql\CustomerFeedbackSql.cs" />
     <Compile Include="EntitySql\CustomerSql.cs" />
     <Compile Include="EntitySql\DetailImportReceiptSql.cs" />

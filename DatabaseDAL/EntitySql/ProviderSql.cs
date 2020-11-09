@@ -160,10 +160,7 @@ namespace Nexus.DatabaseDAL.EntitySql
             if (_dicIndex.Count == 0) FillDicIndex(dataReader);
 		
 			if (GetIndex(Provider.ProviderFields.Address.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Provider.ProviderFields.Address.ToString())))
-				{
-					businessObject.Address = dataReader.GetString(GetIndex(Provider.ProviderFields.Address.ToString()));
-				}
+				businessObject.Address = dataReader.GetString(GetIndex(Provider.ProviderFields.Address.ToString()));
 
 			if (GetIndex(Provider.ProviderFields.CreatedAt.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Provider.ProviderFields.CreatedAt.ToString())))
@@ -178,10 +175,7 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(Provider.ProviderFields.Email.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Provider.ProviderFields.Email.ToString())))
-				{
-					businessObject.Email = dataReader.GetString(GetIndex(Provider.ProviderFields.Email.ToString()));
-				}
+				businessObject.Email = dataReader.GetString(GetIndex(Provider.ProviderFields.Email.ToString()));
 
 				businessObject.Id = dataReader.GetInt32(GetIndex(Provider.ProviderFields.Id.ToString()));
 
@@ -192,16 +186,10 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(Provider.ProviderFields.Name.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Provider.ProviderFields.Name.ToString())))
-				{
-					businessObject.Name = dataReader.GetString(GetIndex(Provider.ProviderFields.Name.ToString()));
-				}
+				businessObject.Name = dataReader.GetString(GetIndex(Provider.ProviderFields.Name.ToString()));
 
 			if (GetIndex(Provider.ProviderFields.Phone.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(Provider.ProviderFields.Phone.ToString())))
-				{
-					businessObject.Phone = dataReader.GetString(GetIndex(Provider.ProviderFields.Phone.ToString()));
-				}
+				businessObject.Phone = dataReader.GetString(GetIndex(Provider.ProviderFields.Phone.ToString()));
 
 			if (GetIndex(Provider.ProviderFields.UpdatedAt.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(Provider.ProviderFields.UpdatedAt.ToString())))

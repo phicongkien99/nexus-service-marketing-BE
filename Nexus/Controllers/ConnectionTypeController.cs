@@ -20,6 +20,19 @@ namespace Nexus.Controllers
 		{
 			try
 			{
+				#region token
+				var header = Request.Headers;
+				if (header.Authorization == null)
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				var token = header.Authorization.Parameter;
+				Employee employee;
+				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				#endregion
 				var lstData = MemoryInfo.GetAllConnectionType();
 				var res = new RequestErrorCode(true, null, null);
 				res.ListDataResult.AddRange(lstData);
@@ -37,6 +50,19 @@ namespace Nexus.Controllers
 		{
 			try
 			{
+				#region token
+				var header = Request.Headers;
+				if (header.Authorization == null)
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				var token = header.Authorization.Parameter;
+				Employee employee;
+				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				#endregion
 				var data = MemoryInfo.GetConnectionType(id);
 				var res = new RequestErrorCode(true, null, null);
 				res.DataResult = data;
@@ -56,6 +82,19 @@ namespace Nexus.Controllers
 			{
 				string errorMessage = "UnknowError";
 				string errorCode = ErrorCodeEnum.UnknownError.ToString();
+				#region token
+				var header = Request.Headers;
+				if (header.Authorization == null)
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				var token = header.Authorization.Parameter;
+				Employee employee;
+				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				#endregion
 
 				#region Validate
 				if (!Validate(req, out errorCode, out errorMessage))
@@ -72,6 +111,8 @@ namespace Nexus.Controllers
 				#endregion
 
 				#region Process
+				req.CreatedAt = DateTime.Now;
+				req.CreatedBy = employee.Id;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Insert });
@@ -101,6 +142,19 @@ namespace Nexus.Controllers
 			{
 				string errorMessage = "UnknowError";
 				string errorCode = ErrorCodeEnum.UnknownError.ToString();
+				#region token
+				var header = Request.Headers;
+				if (header.Authorization == null)
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				var token = header.Authorization.Parameter;
+				Employee employee;
+				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				#endregion
 
 				#region Validate
 				if (!ValidateUpdate(req, out errorCode, out errorMessage))
@@ -118,6 +172,8 @@ namespace Nexus.Controllers
 				#endregion
 				req.Id = obj.Id; // gan lai id de update
 				#region Process
+				req.UpdatedAt = DateTime.Now;
+				req.UpdatedBy = employee.Id;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Update });
@@ -147,6 +203,19 @@ namespace Nexus.Controllers
 			{
 				string errorMessage = "UnknowError";
 				string errorCode = ErrorCodeEnum.UnknownError.ToString();
+				#region token
+				var header = Request.Headers;
+				if (header.Authorization == null)
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				var token = header.Authorization.Parameter;
+				Employee employee;
+				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				#endregion
 
 				#region Check exist
 				var obj = MemoryInfo.GetConnectionType(id);
@@ -156,11 +225,17 @@ namespace Nexus.Controllers
 				}
 				#endregion
 
+				bool isHasDeleteProperties = obj.GetType().GetProperty("IsDeleted") != null;
+				if (!isHasDeleteProperties)
+				{
+					return Ok(new RequestErrorCode(false, ErrorCodeEnum.DataNotExist.ToString(), "Khong ton tai"));
+				}
+				obj.IsDeleted = 1;
 
 				#region Process
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
-				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(obj), EntityAction = EntityAction.Delete });
+				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(obj), EntityAction = EntityAction.Update });
 				bool isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
 				{
@@ -168,7 +243,7 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				// update memory
-				MemorySet.RemoveEntity(obj);
+				MemorySet.UpdateAndInsertEntity(obj);
 				var result = new RequestErrorCode(true);
 				result.DataResult = obj;
 				return Ok(result);

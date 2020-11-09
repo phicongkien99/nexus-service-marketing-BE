@@ -44,11 +44,19 @@ namespace Nexus.DatabaseDAL.EntitySql
                 if (businessObject != null)
 				{
 
-								sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
+								sqlCommand.Parameters.Add(new SqlParameter("@Address", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Address));
+				sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@CreatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedBy));
+				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
+				sqlCommand.Parameters.Add(new SqlParameter("@IdArea", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdArea));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdCustomer", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdCustomer));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdEmployee", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdEmployee));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdServiceFormStatus", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdServiceFormStatus));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdServicePack", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdServicePack));
+				sqlCommand.Parameters.Add(new SqlParameter("@IsDeleted", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsDeleted));
+				sqlCommand.Parameters.Add(new SqlParameter("@ServiceFormId", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.ServiceFormId));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedBy));
 
 
 				}
@@ -82,11 +90,19 @@ namespace Nexus.DatabaseDAL.EntitySql
                 if (businessObject != null)
                 {
 
-								sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
+								sqlCommand.Parameters.Add(new SqlParameter("@Address", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Address));
+				sqlCommand.Parameters.Add(new SqlParameter("@CreatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@CreatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.CreatedBy));
+				sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.Id));
+				sqlCommand.Parameters.Add(new SqlParameter("@IdArea", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdArea));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdCustomer", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdCustomer));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdEmployee", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdEmployee));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdServiceFormStatus", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdServiceFormStatus));
 				sqlCommand.Parameters.Add(new SqlParameter("@IdServicePack", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IdServicePack));
+				sqlCommand.Parameters.Add(new SqlParameter("@IsDeleted", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.IsDeleted));
+				sqlCommand.Parameters.Add(new SqlParameter("@ServiceFormId", SqlDbType.VarChar, 255, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.ServiceFormId));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedAt", SqlDbType.Text, 8, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedAt));
+				sqlCommand.Parameters.Add(new SqlParameter("@UpdatedBy", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, businessObject.UpdatedBy));
 
 				
 				}
@@ -149,7 +165,25 @@ namespace Nexus.DatabaseDAL.EntitySql
         {
             if (_dicIndex.Count == 0) FillDicIndex(dataReader);
 		
+			if (GetIndex(ServiceForm.ServiceFormFields.Address.ToString()) != -1)
+				businessObject.Address = dataReader.GetString(GetIndex(ServiceForm.ServiceFormFields.Address.ToString()));
+
+			if (GetIndex(ServiceForm.ServiceFormFields.CreatedAt.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServiceForm.ServiceFormFields.CreatedAt.ToString())))
+				{
+					businessObject.CreatedAt = dataReader.GetDateTime(GetIndex(ServiceForm.ServiceFormFields.CreatedAt.ToString()));
+				}
+
+			if (GetIndex(ServiceForm.ServiceFormFields.CreatedBy.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServiceForm.ServiceFormFields.CreatedBy.ToString())))
+				{
+					businessObject.CreatedBy = dataReader.GetInt32(GetIndex(ServiceForm.ServiceFormFields.CreatedBy.ToString()));
+				}
+
 				businessObject.Id = dataReader.GetInt32(GetIndex(ServiceForm.ServiceFormFields.Id.ToString()));
+
+			if (GetIndex(ServiceForm.ServiceFormFields.IdArea.ToString()) != -1)
+				businessObject.IdArea = dataReader.GetInt32(GetIndex(ServiceForm.ServiceFormFields.IdArea.ToString()));
 
 			if (GetIndex(ServiceForm.ServiceFormFields.IdCustomer.ToString()) != -1)
 				if (!dataReader.IsDBNull(GetIndex(ServiceForm.ServiceFormFields.IdCustomer.ToString())))
@@ -170,9 +204,30 @@ namespace Nexus.DatabaseDAL.EntitySql
 				}
 
 			if (GetIndex(ServiceForm.ServiceFormFields.IdServicePack.ToString()) != -1)
-				if (!dataReader.IsDBNull(GetIndex(ServiceForm.ServiceFormFields.IdServicePack.ToString())))
+				businessObject.IdServicePack = dataReader.GetInt32(GetIndex(ServiceForm.ServiceFormFields.IdServicePack.ToString()));
+
+			if (GetIndex(ServiceForm.ServiceFormFields.IsDeleted.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServiceForm.ServiceFormFields.IsDeleted.ToString())))
 				{
-					businessObject.IdServicePack = dataReader.GetInt32(GetIndex(ServiceForm.ServiceFormFields.IdServicePack.ToString()));
+					businessObject.IsDeleted = dataReader.GetInt32(GetIndex(ServiceForm.ServiceFormFields.IsDeleted.ToString()));
+				}
+
+			if (GetIndex(ServiceForm.ServiceFormFields.ServiceFormId.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServiceForm.ServiceFormFields.ServiceFormId.ToString())))
+				{
+					businessObject.ServiceFormId = dataReader.GetString(GetIndex(ServiceForm.ServiceFormFields.ServiceFormId.ToString()));
+				}
+
+			if (GetIndex(ServiceForm.ServiceFormFields.UpdatedAt.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServiceForm.ServiceFormFields.UpdatedAt.ToString())))
+				{
+					businessObject.UpdatedAt = dataReader.GetDateTime(GetIndex(ServiceForm.ServiceFormFields.UpdatedAt.ToString()));
+				}
+
+			if (GetIndex(ServiceForm.ServiceFormFields.UpdatedBy.ToString()) != -1)
+				if (!dataReader.IsDBNull(GetIndex(ServiceForm.ServiceFormFields.UpdatedBy.ToString())))
+				{
+					businessObject.UpdatedBy = dataReader.GetInt32(GetIndex(ServiceForm.ServiceFormFields.UpdatedBy.ToString()));
 				}
 
 

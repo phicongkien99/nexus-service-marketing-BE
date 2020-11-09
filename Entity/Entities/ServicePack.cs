@@ -10,10 +10,15 @@ namespace Nexus.Entity.Entities
 
 		public enum ServicePackFields
 		{
+			CreatedAt,
+			CreatedBy,
 			Description,
 			Id,
 			IdConnectionType,
-			Name
+			IsDeleted,
+			Name,
+			UpdatedAt,
+			UpdatedBy
 		}
 
 		public enum ServicePackKey
@@ -32,10 +37,15 @@ namespace Nexus.Entity.Entities
 
 		#region Properties
 
+		public DateTime?  CreatedAt { get; set; }
+		public int?  CreatedBy { get; set; }
 		public string  Description { get; set; }
 		public int  Id { get; set; } //Key 
-		public int?  IdConnectionType { get; set; }
+		public int  IdConnectionType { get; set; }
+		public int?  IsDeleted { get; set; }
 		public string  Name { get; set; }
+		public DateTime?  UpdatedAt { get; set; }
+		public int?  UpdatedBy { get; set; }
 
 		#endregion
 
@@ -46,6 +56,8 @@ namespace Nexus.Entity.Entities
 
 			if (Description != null && Description.Length > 255 )
 				throw new InvalidDataException("Field: Description in entity: ServicePack is over-size: 255, value=" + Description);
+			if (Name == null)
+				throw new NoNullAllowedException("Field: Name in entity: ServicePack is Null");
 
 			if (Name != null && Name.Length > 255 )
 				throw new InvalidDataException("Field: Name in entity: ServicePack is over-size: 255, value=" + Name);
