@@ -8,6 +8,7 @@ using Nexus.Common.Enum;
 using Nexus.Entity.Entities;
 using Nexus.Memory;
 using Nexus.Models;
+using Nexus.Models.Request;
 using Nexus.Models.Response;
 using Nexus.Utils;
 
@@ -16,7 +17,7 @@ namespace ElectricShop.Controllers
     public class AuthController : ApiController
     {
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public async Task<IHttpActionResult> Post([FromBody]Employee req)
+        public async Task<IHttpActionResult> Post([FromBody] UserLogin req)
         {
             try
             {
@@ -68,7 +69,7 @@ namespace ElectricShop.Controllers
 
         #region Custom Function
 
-        private bool Validate(Employee userLogin , out string errorCode, out string errorMess)
+        private bool Validate(UserLogin userLogin , out string errorCode, out string errorMess)
         {
             errorCode = null;
             errorMess = null;
