@@ -149,6 +149,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ConnectionController.cs" />
     <Compile Include="Controllers\ConnectionStatusController.cs" />
     <Compile Include="Controllers\ConnectionTypeController.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Models\Request\ConfirmOrder.cs" />
     <Compile Include="Models\Response\ImportReceiptResponse.cs" />
     <Compile Include="Models\ErrorCode.cs" />
+    <Compile Include="Models\Response\TokenResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReaderDatabase\ProcessReadDatabaseUtils.cs" />
     <Compile Include="Utils\CheckUtils.cs" />
