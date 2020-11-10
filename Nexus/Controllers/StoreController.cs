@@ -10,6 +10,7 @@ using Nexus.Entity;
 using Nexus.Entity.Entities;
 using Nexus.Memory;
 using Nexus.Models;
+using Nexus.Models.Response;
 using Nexus.Utils;
 namespace Nexus.Controllers
 {
@@ -33,9 +34,17 @@ namespace Nexus.Controllers
 					return StatusCode(HttpStatusCode.Unauthorized);
 				}
 				#endregion
+                List<StoreRes> lstResult = new List<StoreRes>();
 				var lstData = MemoryInfo.GetAllStore();
+                foreach (var store in lstData)
+                {
+                    var lstEmployees = MemoryInfo.GetListEmployeeByField(store.Id.ToString(),Employee.EmployeeFields.IdStore);
+                    lstEmployees.ForEach(x => x.Password = null);
+					StoreRes itemRes = new StoreRes(store, lstEmployees);
+                    lstResult.Add(itemRes);
+                }
 				var res = new RequestErrorCode(true, null, null);
-				res.ListDataResult.AddRange(lstData);
+				res.ListDataResult.AddRange(lstResult);
 				return Ok(res);
 			}
 			catch (Exception ex)
@@ -64,8 +73,15 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var data = MemoryInfo.GetStore(id);
+                StoreRes storeRes = null;
+                if (data != null)
+                {
+                    var lstEmployees = MemoryInfo.GetListEmployeeByField(data.Id.ToString(), Employee.EmployeeFields.IdStore);
+                    lstEmployees.ForEach(x => x.Password = null);
+					storeRes = new StoreRes(data,lstEmployees);
+                }
 				var res = new RequestErrorCode(true, null, null);
-				res.DataResult = data;
+				res.DataResult = storeRes;
 				return Ok(res);
 			}
 			catch (Exception ex)

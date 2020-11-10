@@ -64,13 +64,17 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var data = MemoryInfo.GetServicePack(id);
-                string cnTypeName = "";
-                var connectType = MemoryInfo.GetConnectionType(data.IdConnectionType);
-                if (connectType != null)
+                ServicesPackRes itemRes = null;
+                if (data != null)
                 {
-                    cnTypeName = connectType.Name;
-                }
-                ServicesPackRes itemRes = new ServicesPackRes(data, cnTypeName);
+                    string cnTypeName = "";
+                    var connectType = MemoryInfo.GetConnectionType(data.IdConnectionType);
+                    if (connectType != null)
+                    {
+                        cnTypeName = connectType.Name;
+                    }
+                    itemRes = new ServicesPackRes(data, cnTypeName);
+				}
 				var res = new RequestErrorCode(true, null, null);
 				res.DataResult = itemRes;
 				return Ok(res);
