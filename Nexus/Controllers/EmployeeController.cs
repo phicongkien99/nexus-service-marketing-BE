@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Nexus.Common.Enum;
@@ -34,6 +35,8 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var lstData = MemoryInfo.GetAllEmployee();
+                if (lstData != null)
+                    lstData.ForEach(x => x.Password = null);
 				var res = new RequestErrorCode(true, null, null);
 				res.ListDataResult.AddRange(lstData);
 				return Ok(res);
@@ -64,6 +67,7 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var data = MemoryInfo.GetEmployee(id);
+                data.Password = null;
 				var res = new RequestErrorCode(true, null, null);
 				res.DataResult = data;
 				return Ok(res);
@@ -94,6 +98,11 @@ namespace Nexus.Controllers
 				{
 					return StatusCode(HttpStatusCode.Unauthorized);
 				}
+
+                if (employee == null || employee.Role != RoleDefinitionEnum.admin.ToString())
+                {
+                    return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen tao user"));
+				}
 				#endregion
 
 				#region Validate
@@ -113,6 +122,7 @@ namespace Nexus.Controllers
 				#region Process
 				req.CreatedAt = DateTime.Now;
 				req.CreatedBy = employee.Id;
+                req.Password = PasswordGenerator.EncodePassword(req.Password);
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Insert });
@@ -174,6 +184,7 @@ namespace Nexus.Controllers
 				#region Process
 				req.UpdatedAt = DateTime.Now;
 				req.UpdatedBy = employee.Id;
+                req.Password = PasswordGenerator.EncodePassword(req.Password);
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Update });
