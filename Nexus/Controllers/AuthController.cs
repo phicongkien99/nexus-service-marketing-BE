@@ -81,12 +81,12 @@ namespace ElectricShop.Controllers
                     errorCode = ErrorCodeEnum.Error_UsernameIsNull.ToString();
                     return false;
                 }
-
-                if (!CheckUtils.ContainsUnicodeCharacter(userLogin.Email))
+                if (string.IsNullOrEmpty(userLogin.Password))
                 {
-                    errorMess = "Username không được nhập Tiếng Việt có dấu, khoảng trắng, ký tự đặc biệt";
-                    errorCode = ErrorCodeEnum.Error_UsernameIsNull.ToString();
+                    errorMess = "Password is null";
+                    errorCode = ErrorCodeEnum.Error_PasswordIsNull.ToString();
                     return false;
+
                 }
             }
             catch (Exception ex)
