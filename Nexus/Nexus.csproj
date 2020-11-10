@@ -184,6 +184,7 @@
     <Compile Include="Models\Request\UserLogin.cs" />
     <Compile Include="Models\Request\ChangePasswordReq.cs" />
     <Compile Include="Models\Request\ConfirmOrder.cs" />
+    <Compile Include="Models\Response\ServicesPackRes.cs" />
     <Compile Include="Models\Response\ImportReceiptResponse.cs" />
     <Compile Include="Models\ErrorCode.cs" />
     <Compile Include="Models\Response\TokenResponse.cs" />

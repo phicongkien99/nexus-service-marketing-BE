@@ -10,6 +10,7 @@ using Nexus.Entity;
 using Nexus.Entity.Entities;
 using Nexus.Memory;
 using Nexus.Models;
+using Nexus.Models.Response;
 using Nexus.Utils;
 namespace Nexus.Controllers
 {
@@ -20,22 +21,21 @@ namespace Nexus.Controllers
 		{
 			try
 			{
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
+				List<ServicesPackRes> lstResult = new List<ServicesPackRes>();
 				var lstData = MemoryInfo.GetAllServicePack();
+                foreach (var servicePack in lstData)
+                {
+                    string cnTypeName = "";
+                    var connectType = MemoryInfo.GetConnectionType(servicePack.IdConnectionType);
+                    if (connectType != null)
+                    {
+                        cnTypeName = connectType.Name;
+                    }
+                    ServicesPackRes itemRes = new ServicesPackRes(servicePack, cnTypeName);
+					lstResult.Add(itemRes);
+                }
 				var res = new RequestErrorCode(true, null, null);
-				res.ListDataResult.AddRange(lstData);
+				res.ListDataResult.AddRange(lstResult);
 				return Ok(res);
 			}
 			catch (Exception ex)
@@ -64,8 +64,15 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var data = MemoryInfo.GetServicePack(id);
+                string cnTypeName = "";
+                var connectType = MemoryInfo.GetConnectionType(data.IdConnectionType);
+                if (connectType != null)
+                {
+                    cnTypeName = connectType.Name;
+                }
+                ServicesPackRes itemRes = new ServicesPackRes(data, cnTypeName);
 				var res = new RequestErrorCode(true, null, null);
-				res.DataResult = data;
+				res.DataResult = itemRes;
 				return Ok(res);
 			}
 			catch (Exception ex)
