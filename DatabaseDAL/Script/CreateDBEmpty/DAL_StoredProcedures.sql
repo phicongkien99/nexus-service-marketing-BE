@@ -6,13 +6,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Area_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Area_Insert
 GO
 CREATE PROCEDURE Area_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
 	@ShortName varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -48,13 +48,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Area_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Area_Update
 GO
 CREATE PROCEDURE Area_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Id int,
 	@IsDeleted int = null,
 	@Name varchar(255),
 	@ShortName varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -100,7 +100,7 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Connection_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Connection_Insert
 GO
 CREATE PROCEDURE Connection_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IdConnectionStatus int = null ,
@@ -108,8 +108,8 @@ CREATE PROCEDURE Connection_Insert
 	@IdDevice int ,
 	@IdServicePack int ,
 	@IsDeleted int = null ,
-	@StartDate datetime2 ,
-	@UpdatedAt datetime2 = null ,
+	@StartDate datetime ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -151,7 +151,7 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Connection_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Connection_Update
 GO
 CREATE PROCEDURE Connection_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Id int,
 	@IdConnectionStatus int = null,
@@ -159,8 +159,8 @@ CREATE PROCEDURE Connection_Update
 	@IdDevice int,
 	@IdServicePack int,
 	@IsDeleted int = null,
-	@StartDate datetime2,
-	@UpdatedAt datetime2 = null,
+	@StartDate datetime,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -209,13 +209,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionStatus_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionStatus_Insert
 GO
 CREATE PROCEDURE ConnectionStatus_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Description varchar(255) = null ,
 	@Id int ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -251,13 +251,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionStatus_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionStatus_Update
 GO
 CREATE PROCEDURE ConnectionStatus_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Description varchar(255) = null,
 	@Id int,
 	@IsDeleted int = null,
 	@Name varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -303,13 +303,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionType_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionType_Insert
 GO
 CREATE PROCEDURE ConnectionType_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Description varchar(255) = null ,
 	@Id int ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -345,13 +345,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ConnectionType_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ConnectionType_Update
 GO
 CREATE PROCEDURE ConnectionType_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Description varchar(255) = null,
 	@Id int,
 	@IsDeleted int = null,
 	@Name varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -399,14 +399,14 @@ GO
 CREATE PROCEDURE Contract_Insert
 	@Address varchar(255) ,
 	@ContractId varchar(45) ,
-	@CreatedAt datetime2 ,
+	@CreatedAt datetime ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IdArea int ,
 	@IdCustomer int ,
 	@IsDeleted int = null ,
-	@NextPayment datetime2 = null ,
-	@UpdatedAt datetime2 = null ,
+	@NextPayment datetime = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -450,14 +450,14 @@ GO
 CREATE PROCEDURE Contract_Update
 	@Address varchar(255),
 	@ContractId varchar(45),
-	@CreatedAt datetime2,
+	@CreatedAt datetime,
 	@CreatedBy int = null,
 	@Id int,
 	@IdArea int,
 	@IdCustomer int,
 	@IsDeleted int = null,
-	@NextPayment datetime2 = null,
-	@UpdatedAt datetime2 = null,
+	@NextPayment datetime = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -506,13 +506,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ContractStatus_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ContractStatus_Insert
 GO
 CREATE PROCEDURE ContractStatus_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Description varchar(255) = null ,
 	@Id int ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -548,13 +548,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ContractStatus_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ContractStatus_Update
 GO
 CREATE PROCEDURE ContractStatus_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Description varchar(255) = null,
 	@Id int,
 	@IsDeleted int = null,
 	@Name varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -601,14 +601,14 @@ if exists (select * from dbo.sysobjects where id = object_id(N'Customer_Insert')
 GO
 CREATE PROCEDURE Customer_Insert
 	@Address varchar(255) ,
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Email varchar(255) ,
 	@Id int ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
 	@Phone varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -649,14 +649,14 @@ if exists (select * from dbo.sysobjects where id = object_id(N'Customer_Update')
 GO
 CREATE PROCEDURE Customer_Update
 	@Address varchar(255),
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Email varchar(255),
 	@Id int,
 	@IsDeleted int = null,
 	@Name varchar(255),
 	@Phone varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -705,13 +705,13 @@ if exists (select * from dbo.sysobjects where id = object_id(N'CustomerFeedback_
 GO
 CREATE PROCEDURE CustomerFeedback_Insert
 	@Content varchar(255) ,
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IdCustomer int ,
 	@IsDeleted int = null ,
 	@Rating int = null ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -750,13 +750,13 @@ if exists (select * from dbo.sysobjects where id = object_id(N'CustomerFeedback_
 GO
 CREATE PROCEDURE CustomerFeedback_Update
 	@Content varchar(255),
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Id int,
 	@IdCustomer int,
 	@IsDeleted int = null,
 	@Rating int = null,
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -803,14 +803,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'DetailImportReceipt_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DetailImportReceipt_Insert
 GO
 CREATE PROCEDURE DetailImportReceipt_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@IdDevice int ,
 	@IdImportReceipt int ,
 	@IsDeleted int = null ,
 	@Price decimal(10,2) = null ,
 	@Quantity int = null ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -848,14 +848,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'DetailImportReceipt_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DetailImportReceipt_Update
 GO
 CREATE PROCEDURE DetailImportReceipt_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@IdDevice int,
 	@IdImportReceipt int,
 	@IsDeleted int = null,
 	@Price decimal(10,2) = null,
 	@Quantity int = null,
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -905,7 +905,7 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Device_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Device_Insert
 GO
 CREATE PROCEDURE Device_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IdDeviceType int ,
@@ -913,7 +913,7 @@ CREATE PROCEDURE Device_Insert
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
 	@Stock int = null ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null ,
 	@Using int = null 
 
@@ -956,7 +956,7 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Device_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Device_Update
 GO
 CREATE PROCEDURE Device_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Id int,
 	@IdDeviceType int,
@@ -964,7 +964,7 @@ CREATE PROCEDURE Device_Update
 	@IsDeleted int = null,
 	@Name varchar(255),
 	@Stock int = null,
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null,
 	@Using int = null
 
@@ -1014,13 +1014,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'DeviceType_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DeviceType_Insert
 GO
 CREATE PROCEDURE DeviceType_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Description varchar(255) = null ,
 	@Id int ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -1056,13 +1056,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'DeviceType_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure DeviceType_Update
 GO
 CREATE PROCEDURE DeviceType_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Description varchar(255) = null,
 	@Id int,
 	@IsDeleted int = null,
 	@Name varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -1109,7 +1109,7 @@ if exists (select * from dbo.sysobjects where id = object_id(N'Employee_Insert')
 GO
 CREATE PROCEDURE Employee_Insert
 	@Address varchar(255) ,
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Email varchar(255) ,
 	@Id int ,
@@ -1120,7 +1120,7 @@ CREATE PROCEDURE Employee_Insert
 	@Password varchar(255) ,
 	@Phone varchar(255) ,
 	@Role varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -1169,7 +1169,7 @@ if exists (select * from dbo.sysobjects where id = object_id(N'Employee_Update')
 GO
 CREATE PROCEDURE Employee_Update
 	@Address varchar(255),
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Email varchar(255),
 	@Id int,
@@ -1180,7 +1180,7 @@ CREATE PROCEDURE Employee_Update
 	@Password varchar(255),
 	@Phone varchar(255),
 	@Role varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -1232,13 +1232,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Fee_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Fee_Insert
 GO
 CREATE PROCEDURE Fee_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Description varchar(255) = null ,
 	@Id int ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -1274,13 +1274,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Fee_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Fee_Update
 GO
 CREATE PROCEDURE Fee_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Description varchar(255) = null,
 	@Id int,
 	@IsDeleted int = null,
 	@Name varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -1326,12 +1326,12 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Image_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Image_Insert
 GO
 CREATE PROCEDURE Image_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IdCustomer int = null ,
 	@IsDeleted int = null ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null ,
 	@Url varchar(255) = null 
 
@@ -1368,12 +1368,12 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Image_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Image_Update
 GO
 CREATE PROCEDURE Image_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Id int,
 	@IdCustomer int = null,
 	@IsDeleted int = null,
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null,
 	@Url varchar(255) = null
 
@@ -1420,14 +1420,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ImportReceipt_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ImportReceipt_Insert
 GO
 CREATE PROCEDURE ImportReceipt_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IdProvider int ,
-	@ImportDate datetime2 ,
+	@ImportDate datetime ,
 	@IsDeleted int = null ,
 	@TotalPrice decimal(10,2) = null ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -1465,14 +1465,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ImportReceipt_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ImportReceipt_Update
 GO
 CREATE PROCEDURE ImportReceipt_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Id int,
 	@IdProvider int,
-	@ImportDate datetime2,
+	@ImportDate datetime,
 	@IsDeleted int = null,
 	@TotalPrice decimal(10,2) = null,
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -1519,13 +1519,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Manufacturer_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Manufacturer_Insert
 GO
 CREATE PROCEDURE Manufacturer_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IsDeleted int = null ,
 	@Logo varchar(255) = null ,
 	@Name varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -1561,13 +1561,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Manufacturer_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Manufacturer_Update
 GO
 CREATE PROCEDURE Manufacturer_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Id int,
 	@IsDeleted int = null,
 	@Logo varchar(255) = null,
 	@Name varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -1613,14 +1613,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Payment_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Payment_Insert
 GO
 CREATE PROCEDURE Payment_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IdContract int ,
 	@IsDeleted int = null ,
-	@PayDate datetime2 = null ,
+	@PayDate datetime = null ,
 	@TotalPrice decimal(10,2) = null ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -1658,14 +1658,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'Payment_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure Payment_Update
 GO
 CREATE PROCEDURE Payment_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Id int,
 	@IdContract int,
 	@IsDeleted int = null,
-	@PayDate datetime2 = null,
+	@PayDate datetime = null,
 	@TotalPrice decimal(10,2) = null,
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -1712,12 +1712,12 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'PaymentFee_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure PaymentFee_Insert
 GO
 CREATE PROCEDURE PaymentFee_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@IdFee int ,
 	@IdPayment int ,
 	@IsDeleted int = null ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null ,
 	@Value varchar(255) 
 
@@ -1754,12 +1754,12 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'PaymentFee_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure PaymentFee_Update
 GO
 CREATE PROCEDURE PaymentFee_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@IdFee int,
 	@IdPayment int,
 	@IsDeleted int = null,
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null,
 	@Value varchar(255)
 
@@ -1810,14 +1810,14 @@ if exists (select * from dbo.sysobjects where id = object_id(N'Provider_Insert')
 GO
 CREATE PROCEDURE Provider_Insert
 	@Address varchar(255) ,
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Email varchar(255) ,
 	@Id int ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
 	@Phone varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -1858,14 +1858,14 @@ if exists (select * from dbo.sysobjects where id = object_id(N'Provider_Update')
 GO
 CREATE PROCEDURE Provider_Update
 	@Address varchar(255),
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Email varchar(255),
 	@Id int,
 	@IsDeleted int = null,
 	@Name varchar(255),
 	@Phone varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -1914,7 +1914,7 @@ if exists (select * from dbo.sysobjects where id = object_id(N'ServiceForm_Inser
 GO
 CREATE PROCEDURE ServiceForm_Insert
 	@Address varchar(255) ,
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IdArea int ,
@@ -1924,7 +1924,7 @@ CREATE PROCEDURE ServiceForm_Insert
 	@IdServicePack int ,
 	@IsDeleted int = null ,
 	@ServiceFormId varchar(255) = null ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -1971,7 +1971,7 @@ if exists (select * from dbo.sysobjects where id = object_id(N'ServiceForm_Updat
 GO
 CREATE PROCEDURE ServiceForm_Update
 	@Address varchar(255),
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Id int,
 	@IdArea int,
@@ -1981,7 +1981,7 @@ CREATE PROCEDURE ServiceForm_Update
 	@IdServicePack int,
 	@IsDeleted int = null,
 	@ServiceFormId varchar(255) = null,
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -2032,13 +2032,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ServiceFormStatus_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServiceFormStatus_Insert
 GO
 CREATE PROCEDURE ServiceFormStatus_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Description varchar(255) = null ,
 	@Id int ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -2074,13 +2074,13 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ServiceFormStatus_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServiceFormStatus_Update
 GO
 CREATE PROCEDURE ServiceFormStatus_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Description varchar(255) = null,
 	@Id int,
 	@IsDeleted int = null,
 	@Name varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -2126,14 +2126,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ServicePack_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePack_Insert
 GO
 CREATE PROCEDURE ServicePack_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Description varchar(255) = null ,
 	@Id int ,
 	@IdConnectionType int ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -2171,14 +2171,14 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ServicePack_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePack_Update
 GO
 CREATE PROCEDURE ServicePack_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Description varchar(255) = null,
 	@Id int,
 	@IdConnectionType int,
 	@IsDeleted int = null,
 	@Name varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
@@ -2225,12 +2225,12 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ServicePackFee_Insert') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePackFee_Insert
 GO
 CREATE PROCEDURE ServicePackFee_Insert
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@IdFee int ,
 	@IdServicePack int ,
 	@IsDeleted int = null ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null ,
 	@Value varchar(255) 
 
@@ -2267,12 +2267,12 @@ GO
 if exists (select * from dbo.sysobjects where id = object_id(N'ServicePackFee_Update') and OBJECTPROPERTY(id, N'IsProcedure') = 1) drop procedure ServicePackFee_Update
 GO
 CREATE PROCEDURE ServicePackFee_Update
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@IdFee int,
 	@IdServicePack int,
 	@IsDeleted int = null,
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null,
 	@Value varchar(255)
 
@@ -2323,14 +2323,14 @@ if exists (select * from dbo.sysobjects where id = object_id(N'Store_Insert') an
 GO
 CREATE PROCEDURE Store_Insert
 	@Address varchar(255) ,
-	@CreatedAt datetime2 = null ,
+	@CreatedAt datetime = null ,
 	@CreatedBy int = null ,
 	@Id int ,
 	@IdArea int ,
 	@IsClosed int = null ,
 	@IsDeleted int = null ,
 	@Name varchar(255) ,
-	@UpdatedAt datetime2 = null ,
+	@UpdatedAt datetime = null ,
 	@UpdatedBy int = null 
 
 AS
@@ -2371,14 +2371,14 @@ if exists (select * from dbo.sysobjects where id = object_id(N'Store_Update') an
 GO
 CREATE PROCEDURE Store_Update
 	@Address varchar(255),
-	@CreatedAt datetime2 = null,
+	@CreatedAt datetime = null,
 	@CreatedBy int = null,
 	@Id int,
 	@IdArea int,
 	@IsClosed int = null,
 	@IsDeleted int = null,
 	@Name varchar(255),
-	@UpdatedAt datetime2 = null,
+	@UpdatedAt datetime = null,
 	@UpdatedBy int = null
 
 AS
