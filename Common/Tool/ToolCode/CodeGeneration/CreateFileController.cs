@@ -20,6 +20,12 @@ namespace CommonicationMemory.CodeGeneration
 
             string file = forderEntity + table.ClassName + "Controller.cs";
             string className = table.ClassName;
+            bool isHasDeleteFidle = false;
+            foreach (var column in table.Columns)
+            {
+                if (column.PropertyName == "IsDeleted")
+                    isHasDeleteFidle = true;
+            }
 
             #region Lấy thông tin Entity trong bảng hiện tại (Lấy comment và custom method)
             Dictionary<string, string> dicComment = null;
@@ -51,6 +57,7 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("using System;");
                 stringBuild.AppendLine("using System.Net;");
                 stringBuild.AppendLine("using System.Collections.Generic;");
+                stringBuild.AppendLine("using System.Linq;");
                 stringBuild.AppendLine("using System.Threading.Tasks;");
                 stringBuild.AppendLine("using System.Web.Http;");
                 stringBuild.AppendLine("using Nexus.Common.Enum;");
@@ -90,6 +97,11 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t}");
                 stringBuild.AppendLine("\t\t\t\t#endregion");
                 stringBuild.AppendLine($"\t\t\t\tvar lstData = MemoryInfo.GetAll{className}();");
+                if (isHasDeleteFidle)
+                {
+                    stringBuild.AppendLine("\t\t\t\tif (lstData != null)");
+                    stringBuild.AppendLine("\t\t\t\t\tlstData = lstData.Where(x => x.IsDeleted != null && x.IsDeleted != 1).ToList();");
+                }
                 stringBuild.AppendLine("\t\t\t\tvar res = new RequestErrorCode(true, null, null);");
                 stringBuild.AppendLine("\t\t\t\tres.ListDataResult.AddRange(lstData);");
                 stringBuild.AppendLine("\t\t\t\treturn Ok(res);");
@@ -123,6 +135,11 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t}");
                 stringBuild.AppendLine("\t\t\t\t#endregion");
                 stringBuild.AppendLine($"\t\t\t\tvar data = MemoryInfo.Get{className}(id);");
+                if (isHasDeleteFidle)
+                {
+                    stringBuild.AppendLine("\t\t\t\tif (data != null && data.IsDeleted == 1)");
+                    stringBuild.AppendLine("\t\t\t\t\tdata = null;");
+                }
                 stringBuild.AppendLine("\t\t\t\tvar res = new RequestErrorCode(true, null, null);");
                 stringBuild.AppendLine("\t\t\t\tres.DataResult = data;");
                 stringBuild.AppendLine("\t\t\t\treturn Ok(res);");
@@ -159,6 +176,8 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t\treturn StatusCode(HttpStatusCode.Unauthorized);");
                 stringBuild.AppendLine("\t\t\t\t}");
                 stringBuild.AppendLine("\t\t\t\t#endregion");
+                stringBuild.AppendLine("\t\t\t\tif (!Operator.IsAdmin(employee))");
+                stringBuild.AppendLine("\t\t\t\t\treturn Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), \"Khong co quyen\"));");
                 stringBuild.AppendLine("");
                 stringBuild.AppendLine("\t\t\t\t#region Validate");
                 stringBuild.AppendLine("\t\t\t\tif (!Validate(req, out errorCode, out errorMessage))");
@@ -177,6 +196,10 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t#region Process");
                 stringBuild.AppendLine("\t\t\t\treq.CreatedAt = DateTime.Now;");
                 stringBuild.AppendLine("\t\t\t\treq.CreatedBy = employee.Id;");
+                if (isHasDeleteFidle)
+                {
+                    stringBuild.AppendLine("\t\t\t\treq.IsDeleted = 0;");
+                }
                 stringBuild.AppendLine("\t\t\t\tUpdateEntitySql updateEntitySql = new UpdateEntitySql();");
                 stringBuild.AppendLine("\t\t\t\tvar lstCommand = new List<EntityCommand>();");
                 stringBuild.AppendLine("\t\t\t\tlstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Insert });");
@@ -222,6 +245,8 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t\treturn StatusCode(HttpStatusCode.Unauthorized);");
                 stringBuild.AppendLine("\t\t\t\t}");
                 stringBuild.AppendLine("\t\t\t\t#endregion");
+                stringBuild.AppendLine("\t\t\t\tif (!Operator.IsAdmin(employee))");
+                stringBuild.AppendLine("\t\t\t\t\treturn Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), \"Khong co quyen\"));");
                 stringBuild.AppendLine("");
                 stringBuild.AppendLine("\t\t\t\t#region Validate");
                 stringBuild.AppendLine("\t\t\t\tif (!ValidateUpdate(req, out errorCode, out errorMessage))");
@@ -286,6 +311,8 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t\treturn StatusCode(HttpStatusCode.Unauthorized);");
                 stringBuild.AppendLine("\t\t\t\t}");
                 stringBuild.AppendLine("\t\t\t\t#endregion");
+                stringBuild.AppendLine("\t\t\t\tif (!Operator.IsAdmin(employee))");
+                stringBuild.AppendLine("\t\t\t\t\treturn Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), \"Khong co quyen\"));");
                 stringBuild.AppendLine("");
                 stringBuild.AppendLine("\t\t\t\t#region Check exist");
                 stringBuild.AppendLine($"\t\t\t\tvar obj = MemoryInfo.Get{table.ClassName}(id);");
@@ -300,13 +327,6 @@ namespace CommonicationMemory.CodeGeneration
                 stringBuild.AppendLine("\t\t\t\t{");
                 stringBuild.AppendLine("\t\t\t\t\treturn Ok(new RequestErrorCode(false, ErrorCodeEnum.DataNotExist.ToString(), \"Khong ton tai\"));");
                 stringBuild.AppendLine("\t\t\t\t}");
-                bool isHasDeleteFidle = false;
-                foreach (var column in table.Columns)
-                {
-                    if (column.PropertyName == "IsDeleted")
-                        isHasDeleteFidle = true;
-                }
-
                 if (isHasDeleteFidle)
                 {
                     stringBuild.AppendLine("\t\t\t\tobj.IsDeleted = 1;");

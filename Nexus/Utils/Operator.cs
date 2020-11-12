@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Nexus.Common.Enum;
+using Nexus.Entity.Entities;
 
 namespace Nexus.Utils
 {
@@ -7,18 +9,21 @@ namespace Nexus.Utils
     {
         public static readonly string SPECIAL_CHARS = "~@#$%^()_[]{}";
 
-        public static bool HasPermision(int userId, RoleDefinitionEnum role)
+        public static bool IsAdmin(Employee employee)
         {
-            if (role == RoleDefinitionEnum.None)
-                return true;
-            if (Memory.Memory.DicUserPermission.ContainsKey(userId))
+            try
             {
-                if (Memory.Memory.DicUserPermission[userId].Any(x => x.Name == role.ToString()))
+                if (employee != null && employee.Role == RoleDefinitionEnum.admin.ToString())
                 {
                     return true;
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                Logger.Write(ex.ToString(), true);
+                return false;
+            }
         }
         
     }

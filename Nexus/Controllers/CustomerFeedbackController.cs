@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Nexus.Common.Enum;
@@ -34,6 +35,8 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var lstData = MemoryInfo.GetAllCustomerFeedback();
+				if (lstData != null)
+					lstData = lstData.Where(x => x.IsDeleted != null && x.IsDeleted != 1).ToList();
 				var res = new RequestErrorCode(true, null, null);
 				res.ListDataResult.AddRange(lstData);
 				return Ok(res);
@@ -64,6 +67,8 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var data = MemoryInfo.GetCustomerFeedback(id);
+				if (data != null && data.IsDeleted == 1)
+					data = null;
 				var res = new RequestErrorCode(true, null, null);
 				res.DataResult = data;
 				return Ok(res);
@@ -95,6 +100,8 @@ namespace Nexus.Controllers
 					return StatusCode(HttpStatusCode.Unauthorized);
 				}
 				#endregion
+				if (!Operator.IsAdmin(employee))
+					return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen"));
 
 				#region Validate
 				if (!Validate(req, out errorCode, out errorMessage))
@@ -113,6 +120,7 @@ namespace Nexus.Controllers
 				#region Process
 				req.CreatedAt = DateTime.Now;
 				req.CreatedBy = employee.Id;
+				req.IsDeleted = 0;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Insert });
@@ -155,6 +163,8 @@ namespace Nexus.Controllers
 					return StatusCode(HttpStatusCode.Unauthorized);
 				}
 				#endregion
+				if (!Operator.IsAdmin(employee))
+					return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen"));
 
 				#region Validate
 				if (!ValidateUpdate(req, out errorCode, out errorMessage))
@@ -216,6 +226,8 @@ namespace Nexus.Controllers
 					return StatusCode(HttpStatusCode.Unauthorized);
 				}
 				#endregion
+				if (!Operator.IsAdmin(employee))
+					return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen"));
 
 				#region Check exist
 				var obj = MemoryInfo.GetCustomerFeedback(id);
