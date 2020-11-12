@@ -25,14 +25,17 @@ namespace Nexus.Controllers
 				var lstData = MemoryInfo.GetAllServicePack();
                 foreach (var servicePack in lstData)
                 {
-                    string cnTypeName = "";
-                    var connectType = MemoryInfo.GetConnectionType(servicePack.IdConnectionType);
-                    if (connectType != null)
+                    if (servicePack.IsDeleted != 1)
                     {
-                        cnTypeName = connectType.Name;
-                    }
-                    ServicesPackRes itemRes = new ServicesPackRes(servicePack, cnTypeName);
-					lstResult.Add(itemRes);
+                        string cnTypeName = "";
+                        var connectType = MemoryInfo.GetConnectionType(servicePack.IdConnectionType);
+                        if (connectType != null)
+                        {
+                            cnTypeName = connectType.Name;
+                        }
+                        ServicesPackRes itemRes = new ServicesPackRes(servicePack, cnTypeName);
+                        lstResult.Add(itemRes);
+					}
                 }
 				var res = new RequestErrorCode(true, null, null);
 				res.ListDataResult.AddRange(lstResult);
@@ -67,13 +70,16 @@ namespace Nexus.Controllers
                 ServicesPackRes itemRes = null;
                 if (data != null)
                 {
-                    string cnTypeName = "";
-                    var connectType = MemoryInfo.GetConnectionType(data.IdConnectionType);
-                    if (connectType != null)
+                    if (data.IsDeleted != 1)
                     {
-                        cnTypeName = connectType.Name;
-                    }
-                    itemRes = new ServicesPackRes(data, cnTypeName);
+                        string cnTypeName = "";
+                        var connectType = MemoryInfo.GetConnectionType(data.IdConnectionType);
+                        if (connectType != null)
+                        {
+                            cnTypeName = connectType.Name;
+                        }
+                        itemRes = new ServicesPackRes(data, cnTypeName);
+					}
 				}
 				var res = new RequestErrorCode(true, null, null);
 				res.DataResult = itemRes;
@@ -124,6 +130,7 @@ namespace Nexus.Controllers
 				#region Process
 				req.CreatedAt = DateTime.Now;
 				req.CreatedBy = employee.Id;
+				req.IsDeleted = 0;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Insert });

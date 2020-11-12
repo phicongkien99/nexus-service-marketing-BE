@@ -38,10 +38,13 @@ namespace Nexus.Controllers
 				var lstData = MemoryInfo.GetAllStore();
                 foreach (var store in lstData)
                 {
-                    var lstEmployees = MemoryInfo.GetListEmployeeByField(store.Id.ToString(),Employee.EmployeeFields.IdStore);
-                    lstEmployees.ForEach(x => x.Password = null);
-					StoreRes itemRes = new StoreRes(store, lstEmployees);
-                    lstResult.Add(itemRes);
+                    if (store.IsDeleted != 1)
+                    {
+                        var lstEmployees = MemoryInfo.GetListEmployeeByField(store.Id.ToString(), Employee.EmployeeFields.IdStore);
+                        lstEmployees.ForEach(x => x.Password = null);
+                        StoreRes itemRes = new StoreRes(store, lstEmployees);
+                        lstResult.Add(itemRes);
+					}
                 }
 				var res = new RequestErrorCode(true, null, null);
 				res.ListDataResult.AddRange(lstResult);
@@ -76,9 +79,12 @@ namespace Nexus.Controllers
                 StoreRes storeRes = null;
                 if (data != null)
                 {
-                    var lstEmployees = MemoryInfo.GetListEmployeeByField(data.Id.ToString(), Employee.EmployeeFields.IdStore);
-                    lstEmployees.ForEach(x => x.Password = null);
-					storeRes = new StoreRes(data,lstEmployees);
+                    if (data.IsDeleted != 1)
+                    {
+                        var lstEmployees = MemoryInfo.GetListEmployeeByField(data.Id.ToString(), Employee.EmployeeFields.IdStore);
+                        lstEmployees.ForEach(x => x.Password = null);
+                        storeRes = new StoreRes(data, lstEmployees);
+					}
                 }
 				var res = new RequestErrorCode(true, null, null);
 				res.DataResult = storeRes;
@@ -110,6 +116,8 @@ namespace Nexus.Controllers
 				{
 					return StatusCode(HttpStatusCode.Unauthorized);
 				}
+                if (!Operator.IsAdmin(employee))
+                    return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen"));
 				#endregion
 
 				#region Validate
@@ -129,6 +137,7 @@ namespace Nexus.Controllers
 				#region Process
 				req.CreatedAt = DateTime.Now;
 				req.CreatedBy = employee.Id;
+				req.IsDeleted = 0;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Insert });

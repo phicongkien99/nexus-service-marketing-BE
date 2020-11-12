@@ -35,8 +35,13 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var lstData = MemoryInfo.GetAllEmployee();
-                if (lstData != null)
-                    lstData.ForEach(x => x.Password = null);
+                foreach (var item in lstData)
+                {
+                    item.Password = null;
+                    if (item.IsDeleted == 1)
+                        lstData.Remove(item);
+					
+                }
 				var res = new RequestErrorCode(true, null, null);
 				res.ListDataResult.AddRange(lstData);
 				return Ok(res);
@@ -68,6 +73,8 @@ namespace Nexus.Controllers
 				#endregion
 				var data = MemoryInfo.GetEmployee(id);
                 data.Password = null;
+                if (data.IsDeleted == 1)
+                    data = null;
 				var res = new RequestErrorCode(true, null, null);
 				res.DataResult = data;
 				return Ok(res);
@@ -122,6 +129,7 @@ namespace Nexus.Controllers
 				#region Process
 				req.CreatedAt = DateTime.Now;
 				req.CreatedBy = employee.Id;
+				req.IsDeleted = 0;
                 req.Password = PasswordGenerator.EncodePassword(req.Password);
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
