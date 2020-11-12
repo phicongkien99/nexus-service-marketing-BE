@@ -47,6 +47,35 @@ namespace Nexus.Controllers
 			}
 			return BadRequest("Unknow");
 		}
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+		public async Task<IHttpActionResult> Get(string phone)
+		{
+			try
+			{
+				#region token
+				var header = Request.Headers;
+				if (header.Authorization == null)
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				var token = header.Authorization.Parameter;
+				Employee employee;
+				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
+				{
+					return StatusCode(HttpStatusCode.Unauthorized);
+				}
+				#endregion
+				var result  = MemoryInfo.GetCustomersByPhone(phone);
+				var res = new RequestErrorCode(true, null, null);
+                res.DataResult = result;
+				return Ok(res);
+			}
+			catch (Exception ex)
+			{
+				Logger.Write(ex.ToString());
+			}
+			return BadRequest("Unknow");
+		}
 
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
 		public async Task<IHttpActionResult> Get(int id)
