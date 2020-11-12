@@ -281,7 +281,11 @@ namespace Nexus.Controllers
 			errorMess = null;
 			try
 			{
-
+                if (obj == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
 			}
 			catch (Exception ex)
 			{

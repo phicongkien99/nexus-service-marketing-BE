@@ -100,8 +100,6 @@ namespace Nexus.Controllers
 					return StatusCode(HttpStatusCode.Unauthorized);
 				}
 				#endregion
-				if (!Operator.IsAdmin(employee))
-					return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen"));
 
 				#region Validate
 				if (!Validate(req, out errorCode, out errorMessage))
@@ -109,7 +107,34 @@ namespace Nexus.Controllers
 					return Ok(new RequestErrorCode(false, errorCode, errorMessage));
 				}
 				#endregion
+				// lay connectionTypeName
+                string cnTypeName = "S";
+                var svPack =
+                    MemoryInfo.GetListServicePackByField(req.IdServicePack.ToString(),
+                        ServicePack.ServicePackFields.Id);
+                if (svPack != null && svPack.Count > 0 && svPack[0] != null)
+                {
+                    var cnType = MemoryInfo.GetListConnectionTypeByField(svPack[0].IdConnectionType.ToString(),
+                        ConnectionType.ConnectionTypeFields.Id);
+                    if (cnType != null && cnType.Count > 0 && cnType[0] != null)
+                    {
+                        cnTypeName = cnType[0].Name;
+                    }
 
+				}
+
+                var startStringId = cnTypeName[0];
+                var lstSvFormWithStartId = MemoryInfo.GetListServicesFormByStartId(startStringId.ToString());
+                int idSvFormWithStartId = lstSvFormWithStartId.Count + 1;
+                string serviceFormId = startStringId.ToString();
+                int countZeroNumber = 10 - idSvFormWithStartId.ToString().Length;
+                for (int i = 0; i < countZeroNumber; i++)
+                {
+                    serviceFormId += "0";
+
+                }
+                serviceFormId += idSvFormWithStartId.ToString();
+                req.ServiceFormId = serviceFormId;
 				#region Tạo key
 				var oldKey = Memory.Memory.GetMaxKey(req.GetName());
 				int newKey = oldKey + 1;
@@ -274,7 +299,11 @@ namespace Nexus.Controllers
 			errorMess = null;
 			try
 			{
-
+				if (obj == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
 			}
 			catch (Exception ex)
 			{

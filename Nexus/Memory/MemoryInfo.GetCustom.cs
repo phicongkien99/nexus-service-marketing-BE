@@ -13,6 +13,10 @@ namespace Nexus.Memory
                 return null;
             return result;
         }
+        public static List<ServiceForm> GetListServicesFormByStartId(string startId)
+        {
+            return DicServiceForm.Values.ToList().FindAll(x => x.ServiceFormId != null && x.ServiceFormId.StartsWith(startId));
+        }
     }
 }
 
