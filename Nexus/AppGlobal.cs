@@ -17,7 +17,7 @@ namespace Nexus
     {
         private const string EXTENSION_FILE_NAME = ".qes"; // quant edge setting
         public const string DEFAULT_FOLDER_CONFIG = @"\Config\";
-        public static ElectricConfig ElectricConfig { get; set; }
+        public static NexusConfig NexusConfig { get; set; }
         public static bool InitMemory()
         {
             try
@@ -99,15 +99,15 @@ namespace Nexus
             try
             {
                 #region Lay WebapiCnf
-                var path = GetAppPath() + DEFAULT_FOLDER_CONFIG + ElectricConfig.FileName() + EXTENSION_FILE_NAME;
+                var path = GetAppPath() + DEFAULT_FOLDER_CONFIG + NexusConfig.FileName() + EXTENSION_FILE_NAME;
                 if (!File.Exists(path))
                 {
                     var strMsg = "Not found file in path:" + path;
                     throw new Exception(strMsg);
                 }
                 var fullText = File.ReadAllText(path);
-                ElectricConfig = JsonConvert.DeserializeObject<ElectricConfig>(fullText);
-                if (ElectricConfig == null)
+                NexusConfig = JsonConvert.DeserializeObject<NexusConfig>(fullText);
+                if (NexusConfig == null)
                 {
                     Logger.Write("Not get ElectricConfig");
                     Process.GetCurrentProcess().Kill();

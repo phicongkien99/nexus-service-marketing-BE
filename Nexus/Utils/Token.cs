@@ -19,9 +19,9 @@ namespace Nexus.Utils
             try
             {
                 var keySec = _secret;
-                if (string.IsNullOrWhiteSpace(AppGlobal.ElectricConfig.Secret))
+                if (string.IsNullOrWhiteSpace(AppGlobal.NexusConfig.Secret))
                 {
-                    keySec = AppGlobal.ElectricConfig.Secret;
+                    keySec = AppGlobal.NexusConfig.Secret;
                 }
                 if (expire <= 0) expire = _expire;
                 var provider = new UtcDateTimeProvider();
@@ -57,9 +57,9 @@ namespace Nexus.Utils
             try
             {
                 var keySec = _secret;
-                if (string.IsNullOrWhiteSpace(AppGlobal.ElectricConfig.Secret))
+                if (string.IsNullOrWhiteSpace(AppGlobal.NexusConfig.Secret))
                 {
-                    keySec = AppGlobal.ElectricConfig.Secret;
+                    keySec = AppGlobal.NexusConfig.Secret;
                 }
 
                 JWT.IJsonSerializer serializer = new JsonNetSerializer();

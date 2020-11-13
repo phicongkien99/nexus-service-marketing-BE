@@ -1,6 +1,6 @@
 ﻿namespace Nexus.Common.Config
 {
-    public class ElectricConfig : IConfig
+    public class NexusConfig : IConfig
     {
         public string Secret { get; set; }
         public int Port { get; set; }
@@ -17,7 +17,7 @@
 
         public static string FileName()
         {
-            return typeof(ElectricConfig).Name;
+            return typeof(NexusConfig).Name;
         }
 
         public string GetFileName()
