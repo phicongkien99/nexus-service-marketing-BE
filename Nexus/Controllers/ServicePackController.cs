@@ -33,7 +33,10 @@ namespace Nexus.Controllers
                         {
                             cnTypeName = connectType.Name;
                         }
-                        ServicesPackRes itemRes = new ServicesPackRes(servicePack, cnTypeName);
+
+                        var lstSvPackFee = MemoryInfo.GetListServicePackFeeByField(servicePack.Id.ToString(),
+                            ServicePackFee.ServicePackFeeFields.IdServicePack);
+                        ServicesPackRes itemRes = new ServicesPackRes(servicePack, cnTypeName, lstSvPackFee);
                         lstResult.Add(itemRes);
 					}
                 }
@@ -65,7 +68,9 @@ namespace Nexus.Controllers
                         {
                             cnTypeName = connectType.Name;
                         }
-                        itemRes = new ServicesPackRes(data, cnTypeName);
+                        var lstSvPackFee = MemoryInfo.GetListServicePackFeeByField(data.Id.ToString(),
+                            ServicePackFee.ServicePackFeeFields.IdServicePack);
+						itemRes = new ServicesPackRes(data, cnTypeName, lstSvPackFee);
 					}
 				}
 				var res = new RequestErrorCode(true, null, null);

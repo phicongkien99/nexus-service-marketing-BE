@@ -4,31 +4,29 @@ using Nexus.Entity.Entities;
 
 namespace Nexus.Models.Response
 {
-    public class ServicesPackRes
+    public class PaymentRes
     {
-        public ServicesPackRes(ServicePack entity, string connectionTypeName, List<ServicePackFee> listServicePackFee)
+        public PaymentRes(Payment entity, List<PaymentFee> listPaymentFee)
         {
-            ConnectionTypeName = connectionTypeName;
-            ListServicePackFee = listServicePackFee;
+            ListPaymentFee = listPaymentFee;
+            IdContract = entity.IdContract;
+            PayDate = entity.PayDate;
+            TotalPrice = entity.TotalPrice;
             CreatedAt = entity.CreatedAt;
             CreatedBy = entity.CreatedBy;
-            Description = entity.Description;
             Id = entity.Id;
-            IdConnectionType = entity.IdConnectionType;
             IsDeleted = entity.IsDeleted;
-            Name = entity.Name;
             UpdatedAt = entity.UpdatedAt;
             UpdatedBy = entity.UpdatedBy;
         }
-        public string ConnectionTypeName { get; set; }
-        public List<ServicePackFee>  ListServicePackFee { get; set; }
+        public List<PaymentFee> ListPaymentFee { get; set; }
         public DateTime? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }
-        public string Description { get; set; }
         public int Id { get; set; } //Key 
-        public int IdConnectionType { get; set; }
+        public int IdContract { get; set; }
         public int? IsDeleted { get; set; }
-        public string Name { get; set; }
+        public DateTime? PayDate { get; set; }
+        public decimal? TotalPrice { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int? UpdatedBy { get; set; }
     }
