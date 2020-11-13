@@ -5,7 +5,7 @@ namespace Nexus.Models.Request
 {
     public class ContractReq : ImportReceipt
     {
-		public string IdServiceForm { get; set; }
+		public string ServiceFormId { get; set; }
 		public string Address { get; set; }
         public string ContractId { get; set; }
         public DateTime CreatedAt { get; set; }

@@ -111,7 +111,7 @@ namespace Nexus.Controllers
 				}
 				#endregion
                 // lay connectionTypeName
-                var startStringId = req.IdServiceForm[0];
+                var startStringId = req.ServiceFormId[0];
                 var lstContractWithStartId = MemoryInfo.GetListContractByStartId(startStringId.ToString());
                 int idContractWithStartId = lstContractWithStartId.Count + 1;
                 string contractId = startStringId.ToString();
@@ -293,7 +293,7 @@ namespace Nexus.Controllers
                     errorCode = ErrorCodeEnum.DataInputWrong.ToString();
                     return false;
                 }
-                if (obj.IdServiceForm == null)
+                if (obj.ServiceFormId == null)
                 {
                     errorCode = ErrorCodeEnum.DataInputWrong.ToString();
                     return false;
