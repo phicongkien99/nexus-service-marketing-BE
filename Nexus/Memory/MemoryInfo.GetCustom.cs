@@ -17,6 +17,10 @@ namespace Nexus.Memory
         {
             return DicServiceForm.Values.ToList().FindAll(x => x.ServiceFormId != null && x.ServiceFormId.StartsWith(startId));
         }
+        public static List<Contract> GetListContractByStartId(string startId)
+        {
+            return DicContract.Values.ToList().FindAll(x => x.ContractId != null && x.ContractId.StartsWith(startId));
+        }
     }
 }
 

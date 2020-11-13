@@ -182,6 +182,7 @@
     <Compile Include="Memory\MemoryInfo.IsExist.cs" />
     <Compile Include="Memory\MemorySet.Entity.cs" />
     <Compile Include="Memory\MemorySet.SetAndRemove.cs" />
+    <Compile Include="Models\Request\ContractReq.cs" />
     <Compile Include="Models\Request\UserLogin.cs" />
     <Compile Include="Models\Request\ChangePasswordReq.cs" />
     <Compile Include="Models\Request\ConfirmOrder.cs" />

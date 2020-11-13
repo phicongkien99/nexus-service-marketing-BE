@@ -11,6 +11,7 @@ using Nexus.Entity;
 using Nexus.Entity.Entities;
 using Nexus.Memory;
 using Nexus.Models;
+using Nexus.Models.Request;
 using Nexus.Utils;
 namespace Nexus.Controllers
 {
@@ -81,7 +82,7 @@ namespace Nexus.Controllers
 		}
 
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
-		public async Task<IHttpActionResult> Post([FromBody]Contract req)
+		public async Task<IHttpActionResult> Post([FromBody] ContractReq req)
 		{
 			try
 			{
@@ -109,7 +110,19 @@ namespace Nexus.Controllers
 					return Ok(new RequestErrorCode(false, errorCode, errorMessage));
 				}
 				#endregion
+                // lay connectionTypeName
+                var startStringId = req.IdServiceForm[0];
+                var lstContractWithStartId = MemoryInfo.GetListContractByStartId(startStringId.ToString());
+                int idContractWithStartId = lstContractWithStartId.Count + 1;
+                string contractId = startStringId.ToString();
+                int countZeroNumber = 15 - idContractWithStartId.ToString().Length;
+                for (int i = 0; i < countZeroNumber; i++)
+                {
+                    contractId += "0";
 
+                }
+                contractId += idContractWithStartId.ToString();
+                req.ContractId = contractId;
 				#region Tạo key
 				var oldKey = Memory.Memory.GetMaxKey(req.GetName());
 				int newKey = oldKey + 1;
@@ -268,13 +281,23 @@ namespace Nexus.Controllers
 		}
 
 		#region Validation
-		private bool Validate(Contract obj, out string errorCode, out string errorMess)
+		private bool Validate(ContractReq obj, out string errorCode, out string errorMess)
 		{
 			errorCode = null;
 			errorMess = null;
 			try
 			{
 
+                if (obj == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
+                if (obj.IdServiceForm == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
 			}
 			catch (Exception ex)
 			{
