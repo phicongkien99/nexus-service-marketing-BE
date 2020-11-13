@@ -23,7 +23,7 @@ namespace Nexus
                     _logger = LogManager.GetCurrentClassLogger();
                 if (isError)
                 {
-                    if (AppGlobal.ElectricConfig == null || AppGlobal.ElectricConfig.IsSendLogToBot)
+                    if (AppGlobal.NexusConfig == null || AppGlobal.NexusConfig.IsSendLogToBot)
                     {
                         var values = new Dictionary<string, string>
                         {
