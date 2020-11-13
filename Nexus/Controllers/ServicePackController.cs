@@ -53,19 +53,6 @@ namespace Nexus.Controllers
 		{
 			try
 			{
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
 				var data = MemoryInfo.GetServicePack(id);
                 ServicesPackRes itemRes = null;
                 if (data != null)

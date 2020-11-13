@@ -23,19 +23,6 @@ namespace Nexus.Controllers
 		{
 			try
 			{
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
 				var lstData = MemoryInfo.GetAllContract();
                 List<ContractRes> lstResult = new List<ContractRes>();
 				if (lstData != null)
@@ -63,19 +50,6 @@ namespace Nexus.Controllers
 		{
 			try
 			{
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
 				var data = MemoryInfo.GetContract(id);
 				if (data != null && data.IsDeleted == 1)
 					data = null;
@@ -88,8 +62,10 @@ namespace Nexus.Controllers
 
                 if (data != null)
                 {
+                    var lstPayment =
+                        MemoryInfo.GetListPaymentByField(data.ContractId, Payment.PaymentFields.IdContract);
                     var customer = MemoryInfo.GetCustomer(data.IdCustomer);
-                    ContractRes result = new ContractRes(data, customer);
+                    ContractRes result = new ContractRes(data, customer, lstPayment);
                     res.DataResult = result;
                     return Ok(res);
                 }

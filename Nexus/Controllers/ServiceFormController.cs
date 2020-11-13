@@ -21,19 +21,6 @@ namespace Nexus.Controllers
 		{
 			try
 			{
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
 				var lstData = MemoryInfo.GetAllServiceForm();
 				if (lstData != null)
 					lstData = lstData.Where(x => x.IsDeleted != null && x.IsDeleted != 1).ToList();
@@ -53,19 +40,6 @@ namespace Nexus.Controllers
 		{
 			try
 			{
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
 				var data = MemoryInfo.GetServiceForm(id);
 				if (data != null && data.IsDeleted == 1)
 					data = null;
@@ -87,20 +61,7 @@ namespace Nexus.Controllers
 			{
 				string errorMessage = "UnknowError";
 				string errorCode = ErrorCodeEnum.UnknownError.ToString();
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
-
+				
 				#region Validate
 				if (!Validate(req, out errorCode, out errorMessage))
 				{
@@ -144,7 +105,7 @@ namespace Nexus.Controllers
 
 				#region Process
 				req.CreatedAt = DateTime.Now;
-				req.CreatedBy = employee.Id;
+				req.CreatedBy = 0;
 				req.IsDeleted = 0;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
