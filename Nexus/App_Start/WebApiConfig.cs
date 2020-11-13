@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.IO;
+using System.Web.Http;
 
 namespace Nexus
 {
@@ -19,12 +20,11 @@ namespace Nexus
                 Logger.Write("Khong init duoc du lieu!");
                 return;
             }
-//            if (!AppGlobal.InitUserPermission("Init Start Services"))
-//            {
-//                Logger.Write("Khong init duoc permission!");
-//                return;
-//            }
-            
+            //            if (!AppGlobal.InitUserPermission("Init Start Services"))
+            //            {
+            //                Logger.Write("Khong init duoc permission!");
+            //                return;
+            //            }
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -34,5 +34,6 @@ namespace Nexus
                 defaults: new { id = RouteParameter.Optional }
             );
         }
+
     }
 }

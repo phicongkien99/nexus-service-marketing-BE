@@ -1,8 +1,8 @@
 ﻿{
-  "Secret": "QirJsqTK22Q87CYnqoFHoz5GN2-zAEtVNI8sB2_9FsFmCjIAsLbVIIQhWMNqnu1RKcg_tNZ8ZF1W",
-  "Port": 5672,
-  "SendConfirmEmail": true,
-  "FolderSaveImages": "C:\\NexusData\\Resources",
-  "BaseUrl": "http://localhost:2000/",
-  "IsSendLogToBot": false
+    "Secret": "QirJsqTK22Q87CYnqoFHoz5GN2-zAEtVNI8sB2_9FsFmCjIAsLbVIIQhWMNqnu1RKcg_tNZ8ZF1W",
+    "Port": 5672,
+    "SendConfirmEmail": true,
+    "FolderSaveImages": "C:\\NexusData\\Resources",
+    "BaseUrl": "C:/NexusData/Resources/",
+    "IsSendLogToBot": false
 }

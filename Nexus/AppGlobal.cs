@@ -113,6 +113,11 @@ namespace Nexus
                     Process.GetCurrentProcess().Kill();
                     return false;
                 }
+
+                if (NexusConfig.FolderSaveImages != null && !Directory.Exists(NexusConfig.FolderSaveImages))
+                {
+                    Directory.CreateDirectory(NexusConfig.FolderSaveImages);
+                }
                 Logger.Write("Get config CashTranferWebAPi success!");
                 #endregion
                 return true;
