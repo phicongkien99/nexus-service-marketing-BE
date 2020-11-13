@@ -186,6 +186,9 @@
     <Compile Include="Models\Request\UserLogin.cs" />
     <Compile Include="Models\Request\ChangePasswordReq.cs" />
     <Compile Include="Models\Request\ConfirmOrder.cs" />
+    <Compile Include="Models\Response\DeviceRes.cs" />
+    <Compile Include="Models\Response\ContractRes.cs" />
+    <Compile Include="Models\Response\CustomerFeedbackRes.cs" />
     <Compile Include="Models\Response\StoreRes.cs" />
     <Compile Include="Models\Response\ServicesPackRes.cs" />
     <Compile Include="Models\Response\ImportReceiptResponse.cs" />

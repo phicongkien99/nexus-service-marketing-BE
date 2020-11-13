@@ -11,6 +11,7 @@ using Nexus.Entity;
 using Nexus.Entity.Entities;
 using Nexus.Memory;
 using Nexus.Models;
+using Nexus.Models.Response;
 using Nexus.Utils;
 namespace Nexus.Controllers
 {
@@ -34,11 +35,19 @@ namespace Nexus.Controllers
 					return StatusCode(HttpStatusCode.Unauthorized);
 				}
 				#endregion
+				List<CustomerFeedbackRes> lstResult = new List<CustomerFeedbackRes>();
 				var lstData = MemoryInfo.GetAllCustomerFeedback();
 				if (lstData != null)
 					lstData = lstData.Where(x => x.IsDeleted != null && x.IsDeleted != 1).ToList();
+                foreach (var item in lstData)
+                {
+                    var customer = MemoryInfo.GetCustomer(item.IdCustomer);
+					CustomerFeedbackRes temp = new CustomerFeedbackRes(item,customer);
+                    lstResult.Add(temp);
+
+				}
 				var res = new RequestErrorCode(true, null, null);
-				res.ListDataResult.AddRange(lstData);
+				res.ListDataResult.AddRange(lstResult);
 				return Ok(res);
 			}
 			catch (Exception ex)
@@ -67,11 +76,22 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var data = MemoryInfo.GetCustomerFeedback(id);
+                var res = new RequestErrorCode(true, null, null);
 				if (data != null && data.IsDeleted == 1)
-					data = null;
-				var res = new RequestErrorCode(true, null, null);
-				res.DataResult = data;
-				return Ok(res);
+                {
+                    res.DataResult = null;
+                    return Ok(res);
+				}
+
+                if (data != null)
+                {
+                    var customer = MemoryInfo.GetCustomer(data.IdCustomer);
+					CustomerFeedbackRes result = new CustomerFeedbackRes(data,customer);
+                    res.DataResult = result;
+                    return Ok(res);
+				}
+                res.DataResult = data;
+                return Ok(res);
 			}
 			catch (Exception ex)
 			{

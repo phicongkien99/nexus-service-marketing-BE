@@ -12,6 +12,7 @@ using Nexus.Entity.Entities;
 using Nexus.Memory;
 using Nexus.Models;
 using Nexus.Models.Request;
+using Nexus.Models.Response;
 using Nexus.Utils;
 namespace Nexus.Controllers
 {
@@ -36,10 +37,18 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var lstData = MemoryInfo.GetAllContract();
+                List<ContractRes> lstResult = new List<ContractRes>();
 				if (lstData != null)
 					lstData = lstData.Where(x => x.IsDeleted != null && x.IsDeleted != 1).ToList();
+                foreach (var item in lstData)
+                {
+                    var customer = MemoryInfo.GetCustomer(item.IdCustomer);
+                    ContractRes temp = new ContractRes(item, customer);
+                    lstResult.Add(temp);
+
+                }
 				var res = new RequestErrorCode(true, null, null);
-				res.ListDataResult.AddRange(lstData);
+				res.ListDataResult.AddRange(lstResult);
 				return Ok(res);
 			}
 			catch (Exception ex)
@@ -71,8 +80,21 @@ namespace Nexus.Controllers
 				if (data != null && data.IsDeleted == 1)
 					data = null;
 				var res = new RequestErrorCode(true, null, null);
-				res.DataResult = data;
-				return Ok(res);
+                if (data != null && data.IsDeleted == 1)
+                {
+                    res.DataResult = null;
+                    return Ok(res);
+                }
+
+                if (data != null)
+                {
+                    var customer = MemoryInfo.GetCustomer(data.IdCustomer);
+                    ContractRes result = new ContractRes(data, customer);
+                    res.DataResult = result;
+                    return Ok(res);
+                }
+                res.DataResult = data;
+                return Ok(res);
 			}
 			catch (Exception ex)
 			{

@@ -11,6 +11,7 @@ using Nexus.Entity;
 using Nexus.Entity.Entities;
 using Nexus.Memory;
 using Nexus.Models;
+using Nexus.Models.Response;
 using Nexus.Utils;
 namespace Nexus.Controllers
 {
@@ -37,8 +38,16 @@ namespace Nexus.Controllers
 				var lstData = MemoryInfo.GetAllDevice();
 				if (lstData != null)
 					lstData = lstData.Where(x => x.IsDeleted != null && x.IsDeleted != 1).ToList();
+                List<DeviceRes> lstResult = new List<DeviceRes>();
+				foreach (var item in lstData)
+                {
+                    var manufacturer = MemoryInfo.GetManufacturer(item.IdManufacturer);
+                    DeviceRes temp = new DeviceRes(item, manufacturer);
+                    lstResult.Add(temp);
+
+                }
 				var res = new RequestErrorCode(true, null, null);
-				res.ListDataResult.AddRange(lstData);
+				res.ListDataResult.AddRange(lstResult);
 				return Ok(res);
 			}
 			catch (Exception ex)
@@ -69,9 +78,22 @@ namespace Nexus.Controllers
 				var data = MemoryInfo.GetDevice(id);
 				if (data != null && data.IsDeleted == 1)
 					data = null;
-				var res = new RequestErrorCode(true, null, null);
-				res.DataResult = data;
-				return Ok(res);
+                var res = new RequestErrorCode(true, null, null);
+				if (data != null && data.IsDeleted == 1)
+                {
+                    res.DataResult = null;
+                    return Ok(res);
+                }
+
+                if (data != null)
+                {
+					var manufacturer = MemoryInfo.GetManufacturer(data.IdManufacturer);
+					DeviceRes result = new DeviceRes(data, manufacturer);
+                    res.DataResult = result;
+                    return Ok(res);
+                }
+                res.DataResult = data;
+                return Ok(res);
 			}
 			catch (Exception ex)
 			{
