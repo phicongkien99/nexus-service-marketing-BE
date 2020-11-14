@@ -103,22 +103,6 @@ namespace Nexus.Controllers
 			{
 				string errorMessage = "UnknowError";
 				string errorCode = ErrorCodeEnum.UnknownError.ToString();
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
-				if (!Operator.IsAdmin(employee))
-					return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen"));
-
 				#region Validate
 				if (!Validate(req, out errorCode, out errorMessage))
 				{
@@ -135,7 +119,6 @@ namespace Nexus.Controllers
 
 				#region Process
 				req.CreatedAt = DateTime.Now;
-				req.CreatedBy = employee.Id;
 				req.IsDeleted = 0;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();

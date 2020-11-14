@@ -16,6 +16,8 @@ namespace Nexus.Models.Response
             Stock = entity.Stock;
             UpdatedAt = entity.UpdatedAt;
             UpdatedBy = entity.UpdatedBy;
+            IsDeleted = entity.IsDeleted;
+            Name = entity.Name;
         }
         public Manufacturer Manufacturer { get; set; }
         public DateTime? CreatedAt { get; set; }
