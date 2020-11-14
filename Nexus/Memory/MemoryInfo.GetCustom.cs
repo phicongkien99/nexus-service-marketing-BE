@@ -8,8 +8,8 @@ namespace Nexus.Memory
     {
         public static Customer GetCustomersByPhone(string phone)
         {
-            var result  = DicCustomer.Values.First(x => x.Phone.Equals(phone) || x.Phone == phone) as  Customer;
-            if (result != null && result.IsDeleted == 1)
+            var result  = DicCustomer.Values.FirstOrDefault(x => x.Phone.Equals(phone) || x.Phone == phone) as  Customer;
+            if ((result != null && result.IsDeleted == 1) || result == null)
                 return null;
             return result;
         }
