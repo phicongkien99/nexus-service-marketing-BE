@@ -130,7 +130,8 @@ namespace Nexus.Controllers
                 {
                     foreach (var servicePackFee in req.ListDataTemp)
                     {
-                        lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(servicePackFee), EntityAction = EntityAction.Insert });
+                        servicePackFee.IdServicePack = newKey;
+						lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(servicePackFee), EntityAction = EntityAction.Insert });
                     }
                 }
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(entityData), EntityAction = EntityAction.Insert });
