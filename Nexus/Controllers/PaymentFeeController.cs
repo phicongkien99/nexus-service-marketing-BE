@@ -48,38 +48,7 @@ namespace Nexus.Controllers
 			return BadRequest("Unknow");
 		}
 
-		[EnableCors(origins: "*", headers: "*", methods: "*")]
-		public async Task<IHttpActionResult> Get(int id)
-		{
-			try
-			{
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
-				var data = MemoryInfo.GetPaymentFee(id);
-				if (data != null && data.IsDeleted == 1)
-					data = null;
-				var res = new RequestErrorCode(true, null, null);
-				res.DataResult = data;
-				return Ok(res);
-			}
-			catch (Exception ex)
-			{
-				Logger.Write(ex.ToString());
-			}
-			return BadRequest("Unknow");
-		}
-
+		
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
 		public async Task<IHttpActionResult> Post([FromBody]PaymentFee req)
 		{
@@ -110,13 +79,6 @@ namespace Nexus.Controllers
 				}
 				#endregion
 
-				#region Tạo key
-				var oldKey = Memory.Memory.GetMaxKey(req.GetName());
-				int newKey = oldKey + 1;
-				// set key
-				req.Id = newKey;
-				#endregion
-
 				#region Process
 				req.CreatedAt = DateTime.Now;
 				req.CreatedBy = employee.Id;
@@ -144,7 +106,7 @@ namespace Nexus.Controllers
 		}
 
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
-		public async Task<IHttpActionResult> Put(int id,[FromBody]PaymentFee req)
+		public async Task<IHttpActionResult> Put([FromBody]PaymentFee req)
 		{
 			try
 			{
@@ -174,13 +136,12 @@ namespace Nexus.Controllers
 				#endregion
 
 				#region Check exist
-				var obj = MemoryInfo.GetPaymentFee(id);
+				var obj = MemoryInfo.GetPaymentFee(req.GetPaymentFeeKeys());
 				if (obj == null)
 				{
 					return Ok(new RequestErrorCode(false, ErrorCodeEnum.DataNotExist.ToString(), "Khong ton tai"));
 				}
 				#endregion
-				req.Id = obj.Id; // gan lai id de update
 				#region Process
 				req.UpdatedAt = DateTime.Now;
 				req.UpdatedBy = employee.Id;
@@ -207,7 +168,7 @@ namespace Nexus.Controllers
 		}
 
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
-		public async Task<IHttpActionResult> Delete(int id)
+		public async Task<IHttpActionResult> Delete([FromBody] PaymentFee req)
 		{
 			try
 			{
@@ -230,7 +191,7 @@ namespace Nexus.Controllers
 					return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen"));
 
 				#region Check exist
-				var obj = MemoryInfo.GetPaymentFee(id);
+				var obj = MemoryInfo.GetPaymentFee(req.GetPaymentFeeKeys());
 				if (obj == null)
 				{
 					return Ok(new RequestErrorCode(false, ErrorCodeEnum.DataNotExist.ToString(), "Khong ton tai"));

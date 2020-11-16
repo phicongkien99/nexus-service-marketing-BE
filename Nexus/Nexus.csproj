@@ -155,6 +155,7 @@
     <Compile Include="Controllers\ConnectionStatusController.cs" />
     <Compile Include="Controllers\ConnectionTypeController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\ContractStatusController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\CustomerFeedbackController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
@@ -182,6 +183,8 @@
     <Compile Include="Memory\MemoryInfo.IsExist.cs" />
     <Compile Include="Memory\MemorySet.Entity.cs" />
     <Compile Include="Memory\MemorySet.SetAndRemove.cs" />
+    <Compile Include="Models\Request\ServicePackReq.cs" />
+    <Compile Include="Models\Request\PaymentReq.cs" />
     <Compile Include="Models\Request\ContractReq.cs" />
     <Compile Include="Models\Request\UserLogin.cs" />
     <Compile Include="Models\Request\ChangePasswordReq.cs" />

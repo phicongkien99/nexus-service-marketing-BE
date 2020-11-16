@@ -10,6 +10,7 @@ using Nexus.Entity;
 using Nexus.Entity.Entities;
 using Nexus.Memory;
 using Nexus.Models;
+using Nexus.Models.Request;
 using Nexus.Models.Response;
 using Nexus.Utils;
 namespace Nexus.Controllers
@@ -85,7 +86,7 @@ namespace Nexus.Controllers
 		}
 
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
-		public async Task<IHttpActionResult> Post([FromBody]ServicePack req)
+		public async Task<IHttpActionResult> Post([FromBody]ServicePackReq req)
 		{
 			try
 			{
@@ -104,16 +105,16 @@ namespace Nexus.Controllers
 					return StatusCode(HttpStatusCode.Unauthorized);
 				}
 				#endregion
-
+                var entityData = req.GetEntity();
 				#region Validate
-				if (!Validate(req, out errorCode, out errorMessage))
+				if (!Validate(entityData, out errorCode, out errorMessage))
 				{
 					return Ok(new RequestErrorCode(false, errorCode, errorMessage));
 				}
 				#endregion
 
 				#region Tạo key
-				var oldKey = Memory.Memory.GetMaxKey(req.GetName());
+				var oldKey = Memory.Memory.GetMaxKey(entityData.GetName());
 				int newKey = oldKey + 1;
 				// set key
 				req.Id = newKey;
@@ -125,7 +126,14 @@ namespace Nexus.Controllers
 				req.IsDeleted = 0;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
-				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Insert });
+                if (req.ListDataTemp != null)
+                {
+                    foreach (var servicePackFee in req.ListDataTemp)
+                    {
+                        lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(servicePackFee), EntityAction = EntityAction.Insert });
+                    }
+                }
+				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(entityData), EntityAction = EntityAction.Insert });
 				bool isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
 				{
@@ -133,7 +141,7 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				// update memory
-				MemorySet.UpdateAndInsertEntity(req);
+				MemorySet.UpdateAndInsertEntity(entityData);
 				var result = new RequestErrorCode(true);
 				result.DataResult = req;
 				return Ok(result);
@@ -146,7 +154,7 @@ namespace Nexus.Controllers
 		}
 
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
-		public async Task<IHttpActionResult> Put(int id,[FromBody]ServicePack req)
+		public async Task<IHttpActionResult> Put(int id,[FromBody]ServicePackReq req)
 		{
 			try
 			{
@@ -165,9 +173,9 @@ namespace Nexus.Controllers
 					return StatusCode(HttpStatusCode.Unauthorized);
 				}
 				#endregion
-
+                var entityData = req.GetEntity();
 				#region Validate
-				if (!ValidateUpdate(req, out errorCode, out errorMessage))
+				if (!ValidateUpdate(entityData, out errorCode, out errorMessage))
 				{
 					return Ok(new RequestErrorCode(false, errorCode, errorMessage));
 				}
@@ -185,16 +193,33 @@ namespace Nexus.Controllers
 				req.UpdatedAt = DateTime.Now;
 				req.UpdatedBy = employee.Id;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
-				var lstCommand = new List<EntityCommand>();
-				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Update });
-				bool isOkDone = updateEntitySql.UpdateDefault(lstCommand);
+                var lstCommandDelete = new List<EntityCommand>();
+                var lstCommand = new List<EntityCommand>();
+                var lstSvPackFee = MemoryInfo.GetListServicePackFeeByField(obj.Id.ToString(), ServicePackFee.ServicePackFeeFields.IdServicePack);
+                foreach (var svPackFee in lstSvPackFee)
+                {
+                    lstCommandDelete.Add(new EntityCommand { BaseEntity = new Entity.Entity(svPackFee), EntityAction = EntityAction.Delete });
+                }
+                bool isOkDone = updateEntitySql.UpdateDefault(lstCommandDelete);
+                if (isOkDone)
+                {
+                    if (req.ListDataTemp != null)
+                    {
+                        foreach (var svPackFee in req.ListDataTemp)
+                        {
+                            lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(svPackFee), EntityAction = EntityAction.Insert });
+                        }
+                    }
+                }
+				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(entityData), EntityAction = EntityAction.Update });
+                isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
 				{
 					return Ok(new RequestErrorCode(false, errorCode, errorMessage));
 				}
 				#endregion
 				// update memory
-				MemorySet.UpdateAndInsertEntity(req);
+				MemorySet.UpdateAndInsertEntity(entityData);
 				var result = new RequestErrorCode(true);
 				result.DataResult = req;
 				return Ok(result);
@@ -245,6 +270,11 @@ namespace Nexus.Controllers
 				#region Process
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
+                var lstSvPackFee = MemoryInfo.GetListServicePackFeeByField(obj.Id.ToString(), ServicePackFee.ServicePackFeeFields.IdServicePack);
+                foreach (var svPackFee in lstSvPackFee)
+                {
+                    lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(svPackFee), EntityAction = EntityAction.Delete });
+                }
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(obj), EntityAction = EntityAction.Update });
 				bool isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
