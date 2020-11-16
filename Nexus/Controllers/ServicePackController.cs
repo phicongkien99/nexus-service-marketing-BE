@@ -132,9 +132,10 @@ namespace Nexus.Controllers
                     {
                         servicePackFee.IdServicePack = newKey;
 						lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(servicePackFee), EntityAction = EntityAction.Insert });
-                    }
+                        MemorySet.UpdateAndInsertEntity(servicePackFee);
+					}
                 }
-				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(entityData), EntityAction = EntityAction.Insert });
+				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req.GetEntity()), EntityAction = EntityAction.Insert });
 				bool isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
 				{
@@ -142,7 +143,7 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				// update memory
-				MemorySet.UpdateAndInsertEntity(entityData);
+				MemorySet.UpdateAndInsertEntity(req.GetEntity());
 				var result = new RequestErrorCode(true);
 				result.DataResult = req;
 				return Ok(result);
@@ -200,7 +201,8 @@ namespace Nexus.Controllers
                 foreach (var svPackFee in lstSvPackFee)
                 {
                     lstCommandDelete.Add(new EntityCommand { BaseEntity = new Entity.Entity(svPackFee), EntityAction = EntityAction.Delete });
-                }
+                    MemorySet.RemoveMemory(svPackFee);
+				}
                 bool isOkDone = updateEntitySql.UpdateDefault(lstCommandDelete);
                 if (isOkDone)
                 {
@@ -212,7 +214,7 @@ namespace Nexus.Controllers
                         }
                     }
                 }
-				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(entityData), EntityAction = EntityAction.Update });
+				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req.GetEntity()), EntityAction = EntityAction.Update });
                 isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
 				{
@@ -220,7 +222,7 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				// update memory
-				MemorySet.UpdateAndInsertEntity(entityData);
+				MemorySet.UpdateAndInsertEntity(req.GetEntity());
 				var result = new RequestErrorCode(true);
 				result.DataResult = req;
 				return Ok(result);
@@ -275,7 +277,8 @@ namespace Nexus.Controllers
                 foreach (var svPackFee in lstSvPackFee)
                 {
                     lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(svPackFee), EntityAction = EntityAction.Delete });
-                }
+                    MemorySet.RemoveMemory(svPackFee);
+				}
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(obj), EntityAction = EntityAction.Update });
 				bool isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)

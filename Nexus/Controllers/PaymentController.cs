@@ -148,6 +148,7 @@ namespace Nexus.Controllers
                     {
                         paymentFee.IdPayment = newKey;
 						lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(paymentFee), EntityAction = EntityAction.Insert });
+                        MemorySet.UpdateAndInsertEntity(paymentFee);
 					}
                 }
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req.GetEntity()), EntityAction = EntityAction.Insert });
@@ -158,7 +159,7 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				// update memory
-				MemorySet.UpdateAndInsertEntity(entityData);
+				MemorySet.UpdateAndInsertEntity(req.GetEntity());
 				var result = new RequestErrorCode(true);
 				result.DataResult = req;
 				return Ok(result);
@@ -219,7 +220,8 @@ namespace Nexus.Controllers
                 foreach (var paymentFee in lstPaymentFee)
                 {
                     lstCommandDelete.Add(new EntityCommand { BaseEntity = new Entity.Entity(paymentFee), EntityAction = EntityAction.Delete });
-                }
+                    MemorySet.RemoveMemory(paymentFee);
+				}
                 bool isOkDone = updateEntitySql.UpdateDefault(lstCommandDelete);
                 if (isOkDone)
                 {
@@ -231,7 +233,7 @@ namespace Nexus.Controllers
                         }
                     }
 				}
-				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(entityData), EntityAction = EntityAction.Update });
+				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req.GetEntity()), EntityAction = EntityAction.Update });
                 isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
 				{
@@ -239,7 +241,7 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				// update memory
-				MemorySet.UpdateAndInsertEntity(entityData);
+				MemorySet.UpdateAndInsertEntity(req.GetEntity());
 				var result = new RequestErrorCode(true);
 				result.DataResult = req;
 				return Ok(result);
@@ -296,6 +298,7 @@ namespace Nexus.Controllers
                 foreach (var paymentFee in lstPaymentFee)
                 {
 					lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(paymentFee), EntityAction = EntityAction.Delete });
+                    MemorySet.RemoveMemory(paymentFee);
 				}
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(obj), EntityAction = EntityAction.Update });
 				bool isOkDone = updateEntitySql.UpdateDefault(lstCommand);
