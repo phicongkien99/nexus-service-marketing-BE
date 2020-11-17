@@ -147,6 +147,7 @@ namespace Nexus.Controllers
                     foreach (var paymentFee in req.ListDataTemp)
                     {
                         paymentFee.IdPayment = newKey;
+                        paymentFee.IsDeleted = 0;
 						lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(paymentFee), EntityAction = EntityAction.Insert });
                         MemorySet.UpdateAndInsertEntity(paymentFee);
 					}

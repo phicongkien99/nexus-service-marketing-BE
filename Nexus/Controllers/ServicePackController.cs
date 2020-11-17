@@ -131,6 +131,7 @@ namespace Nexus.Controllers
                     foreach (var servicePackFee in req.ListDataTemp)
                     {
                         servicePackFee.IdServicePack = newKey;
+                        servicePackFee.IsDeleted = 0;
 						lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(servicePackFee), EntityAction = EntityAction.Insert });
                         MemorySet.UpdateAndInsertEntity(servicePackFee);
 					}
