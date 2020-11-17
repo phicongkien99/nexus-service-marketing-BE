@@ -268,13 +268,41 @@ namespace Nexus.Controllers
 		}
 
 		#region Validation
-		private bool Validate(Connection obj, out string errorCode, out string errorMess)
+		public static bool Validate(Connection obj, out string errorCode, out string errorMess)
 		{
 			errorCode = null;
 			errorMess = null;
 			try
 			{
-
+				if (obj == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					return false;
+				}
+				if (obj.IdContract == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdContract not allow null value";
+					return false;
+				}
+				if (obj.IdDevice == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdDevice not allow null value";
+					return false;
+				}
+				if (obj.IdServicePack == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdServicePack not allow null value";
+					return false;
+				}
+				if (obj.StartDate == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "StartDate not allow null value";
+					return false;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -284,13 +312,41 @@ namespace Nexus.Controllers
 			return true;
 		}
 
-		private bool ValidateUpdate(Connection obj, out string errorCode, out string errorMess)
+		public static bool ValidateUpdate(Connection obj, out string errorCode, out string errorMess)
 		{
 			errorCode = null;
 			errorMess = null;
 			try
 			{
-
+				if (obj == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					return false;
+				}
+				if (obj.IdContract == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdContract not allow null value";
+					return false;
+				}
+				if (obj.IdDevice == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdDevice not allow null value";
+					return false;
+				}
+				if (obj.IdServicePack == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdServicePack not allow null value";
+					return false;
+				}
+				if (obj.StartDate == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "StartDate not allow null value";
+					return false;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -300,7 +356,6 @@ namespace Nexus.Controllers
 			return true;
 		}
 		#endregion
-
 
 	}
 }

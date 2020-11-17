@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeGeneration\BusinessLayerGenerator.cs" />
+    <Compile Include="CodeGeneration\CreateFileValidate.cs" />
     <Compile Include="CodeGeneration\CreateFileEntity.cs" />
     <Compile Include="CodeGeneration\CreateFileController.cs" />
     <Compile Include="CodeGeneration\StoreProceduceGenerator.cs" />

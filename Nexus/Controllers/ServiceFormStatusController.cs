@@ -268,38 +268,59 @@ namespace Nexus.Controllers
 		}
 
 		#region Validation
-		private bool Validate(ServiceFormStatus obj, out string errorCode, out string errorMess)
-		{
-			errorCode = null;
-			errorMess = null;
-			try
-			{
+        public static bool Validate(ServiceFormStatus obj, out string errorCode, out string errorMess)
+        {
+            errorCode = null;
+            errorMess = null;
+            try
+            {
+                if (obj == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
+                if (obj.Name == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "Name not allow null value";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(ex.ToString());
+                throw;
+            }
+            return true;
+        }
 
-			}
-			catch (Exception ex)
-			{
-				Logger.Write(ex.ToString());
-				throw;
-			}
-			return true;
-		}
+        public static bool ValidateUpdate(ServiceFormStatus obj, out string errorCode, out string errorMess)
+        {
+            errorCode = null;
+            errorMess = null;
+            try
+            {
+                if (obj == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
+                if (obj.Name == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "Name not allow null value";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(ex.ToString());
+                throw;
+            }
+            return true;
+        }
+        #endregion
 
-		private bool ValidateUpdate(ServiceFormStatus obj, out string errorCode, out string errorMess)
-		{
-			errorCode = null;
-			errorMess = null;
-			try
-			{
-
-			}
-			catch (Exception ex)
-			{
-				Logger.Write(ex.ToString());
-				throw;
-			}
-			return true;
-		}
-		#endregion
 
 
 	}

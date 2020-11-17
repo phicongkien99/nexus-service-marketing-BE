@@ -204,6 +204,30 @@
     <Compile Include="Utils\Operator.cs" />
     <Compile Include="Utils\PasswordGenerator.cs" />
     <Compile Include="Utils\Token.cs" />
+    <Compile Include="ValidateApi\AreaValidate.cs" />
+    <Compile Include="ValidateApi\ConnectionStatusValidate.cs" />
+    <Compile Include="ValidateApi\ConnectionTypeValidate.cs" />
+    <Compile Include="ValidateApi\ConnectionValidate.cs" />
+    <Compile Include="ValidateApi\ContractStatusValidate.cs" />
+    <Compile Include="ValidateApi\ContractValidate.cs" />
+    <Compile Include="ValidateApi\CustomerFeedbackValidate.cs" />
+    <Compile Include="ValidateApi\CustomerValidate.cs" />
+    <Compile Include="ValidateApi\DetailImportReceiptValidate.cs" />
+    <Compile Include="ValidateApi\DeviceTypeValidate.cs" />
+    <Compile Include="ValidateApi\DeviceValidate.cs" />
+    <Compile Include="ValidateApi\EmployeeValidate.cs" />
+    <Compile Include="ValidateApi\FeeValidate.cs" />
+    <Compile Include="ValidateApi\ImageValidate.cs" />
+    <Compile Include="ValidateApi\ImportReceiptValidate.cs" />
+    <Compile Include="ValidateApi\ManufacturerValidate.cs" />
+    <Compile Include="ValidateApi\PaymentFeeValidate.cs" />
+    <Compile Include="ValidateApi\PaymentValidate.cs" />
+    <Compile Include="ValidateApi\ProviderValidate.cs" />
+    <Compile Include="ValidateApi\ServiceFormStatusValidate.cs" />
+    <Compile Include="ValidateApi\ServiceFormValidate.cs" />
+    <Compile Include="ValidateApi\ServicePackFeeValidate.cs" />
+    <Compile Include="ValidateApi\ServicePackValidate.cs" />
+    <Compile Include="ValidateApi\StoreValidate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\TemplateConfirmOrder.html">

@@ -273,39 +273,72 @@ namespace Nexus.Controllers
 			return BadRequest("Unknow");
 		}
 
-		#region Validation
-		private bool Validate(CustomerFeedback obj, out string errorCode, out string errorMess)
-		{
-			errorCode = null;
-			errorMess = null;
-			try
-			{
+        #region Validation
+        public static bool Validate(CustomerFeedback obj, out string errorCode, out string errorMess)
+        {
+            errorCode = null;
+            errorMess = null;
+            try
+            {
+                if (obj == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
+                if (obj.Content == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "Content not allow null value";
+                    return false;
+                }
+                if (obj.IdCustomer == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "IdCustomer not allow null value";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(ex.ToString());
+                throw;
+            }
+            return true;
+        }
 
-			}
-			catch (Exception ex)
-			{
-				Logger.Write(ex.ToString());
-				throw;
-			}
-			return true;
-		}
+        public static bool ValidateUpdate(CustomerFeedback obj, out string errorCode, out string errorMess)
+        {
+            errorCode = null;
+            errorMess = null;
+            try
+            {
+                if (obj == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
+                if (obj.Content == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "Content not allow null value";
+                    return false;
+                }
+                if (obj.IdCustomer == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "IdCustomer not allow null value";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(ex.ToString());
+                throw;
+            }
+            return true;
+        }
+        #endregion
 
-		private bool ValidateUpdate(CustomerFeedback obj, out string errorCode, out string errorMess)
-		{
-			errorCode = null;
-			errorMess = null;
-			try
-			{
-
-			}
-			catch (Exception ex)
-			{
-				Logger.Write(ex.ToString());
-				throw;
-			}
-			return true;
-		}
-		#endregion
 
 
 	}

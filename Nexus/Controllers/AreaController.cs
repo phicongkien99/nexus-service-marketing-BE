@@ -267,39 +267,71 @@ namespace Nexus.Controllers
 			return BadRequest("Unknow");
 		}
 
-		#region Validation
-		private bool Validate(Area obj, out string errorCode, out string errorMess)
-		{
-			errorCode = null;
-			errorMess = null;
-			try
-			{
+        #region Validation
+        public static bool Validate(Area obj, out string errorCode, out string errorMess)
+        {
+            errorCode = null;
+            errorMess = null;
+            try
+            {
+                if (obj == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
+                if (obj.Name == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "Name not allow null value";
+                    return false;
+                }
+                if (obj.ShortName == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "ShortName not allow null value";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(ex.ToString());
+                throw;
+            }
+            return true;
+        }
 
-			}
-			catch (Exception ex)
-			{
-				Logger.Write(ex.ToString());
-				throw;
-			}
-			return true;
-		}
-
-		private bool ValidateUpdate(Area obj, out string errorCode, out string errorMess)
-		{
-			errorCode = null;
-			errorMess = null;
-			try
-			{
-
-			}
-			catch (Exception ex)
-			{
-				Logger.Write(ex.ToString());
-				throw;
-			}
-			return true;
-		}
-		#endregion
+        public static bool ValidateUpdate(Area obj, out string errorCode, out string errorMess)
+        {
+            errorCode = null;
+            errorMess = null;
+            try
+            {
+                if (obj == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
+                if (obj.Name == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "Name not allow null value";
+                    return false;
+                }
+                if (obj.ShortName == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "ShortName not allow null value";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(ex.ToString());
+                throw;
+            }
+            return true;
+        }
+        #endregion
 
 
 	}

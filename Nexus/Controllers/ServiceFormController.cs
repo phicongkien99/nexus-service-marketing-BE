@@ -253,43 +253,85 @@ namespace Nexus.Controllers
 			return BadRequest("Unknow");
 		}
 
-		#region Validation
-		private bool Validate(ServiceForm obj, out string errorCode, out string errorMess)
-		{
-			errorCode = null;
-			errorMess = null;
-			try
-			{
-				if (obj == null)
+        #region Validation
+        public static bool Validate(ServiceForm obj, out string errorCode, out string errorMess)
+        {
+            errorCode = null;
+            errorMess = null;
+            try
+            {
+                if (obj == null)
                 {
                     errorCode = ErrorCodeEnum.DataInputWrong.ToString();
                     return false;
                 }
-			}
-			catch (Exception ex)
-			{
-				Logger.Write(ex.ToString());
-				throw;
-			}
-			return true;
-		}
+                if (obj.Address == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "Address not allow null value";
+                    return false;
+                }
+                if (obj.IdArea == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "IdArea not allow null value";
+                    return false;
+                }
+                if (obj.IdServicePack == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "IdServicePack not allow null value";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(ex.ToString());
+                throw;
+            }
+            return true;
+        }
 
-		private bool ValidateUpdate(ServiceForm obj, out string errorCode, out string errorMess)
-		{
-			errorCode = null;
-			errorMess = null;
-			try
-			{
+        public static bool ValidateUpdate(ServiceForm obj, out string errorCode, out string errorMess)
+        {
+            errorCode = null;
+            errorMess = null;
+            try
+            {
+                if (obj == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    return false;
+                }
+                if (obj.Address == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "Address not allow null value";
+                    return false;
+                }
+                if (obj.IdArea == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "IdArea not allow null value";
+                    return false;
+                }
+                if (obj.IdServicePack == null)
+                {
+                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+                    errorMess = "IdServicePack not allow null value";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(ex.ToString());
+                throw;
+            }
+            return true;
+        }
+        #endregion
 
-			}
-			catch (Exception ex)
-			{
-				Logger.Write(ex.ToString());
-				throw;
-			}
-			return true;
-		}
-		#endregion
+
 
 
 	}

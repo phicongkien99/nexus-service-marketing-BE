@@ -103,7 +103,7 @@ namespace Nexus.Controllers
 					return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen"));
 
 				#region Validate
-				if (!Validate(req, out errorCode, out errorMessage))
+				if (!Validate(req.GetEntity(), out errorCode, out errorMessage))
 				{
 					return Ok(new RequestErrorCode(false, errorCode, errorMessage));
 				}
@@ -122,7 +122,7 @@ namespace Nexus.Controllers
                 contractId += idContractWithStartId.ToString();
                 req.ContractId = contractId;
 				#region Tạo key
-				var oldKey = Memory.Memory.GetMaxKey(req.GetName());
+				var oldKey = Memory.Memory.GetMaxKey(req.GetEntity().GetName());
 				int newKey = oldKey + 1;
 				// set key
 				req.Id = newKey;
@@ -134,7 +134,7 @@ namespace Nexus.Controllers
 				req.IsDeleted = 0;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
-				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Insert });
+				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req.GetEntity()), EntityAction = EntityAction.Insert });
 				bool isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
 				{
@@ -142,7 +142,7 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				// update memory
-				MemorySet.UpdateAndInsertEntity(req);
+				MemorySet.UpdateAndInsertEntity(req.GetEntity());
 				var result = new RequestErrorCode(true);
 				result.DataResult = req;
 				return Ok(result);
@@ -279,23 +279,47 @@ namespace Nexus.Controllers
 		}
 
 		#region Validation
-		private bool Validate(ContractReq obj, out string errorCode, out string errorMess)
+		public static bool Validate(Contract obj, out string errorCode, out string errorMess)
 		{
 			errorCode = null;
 			errorMess = null;
 			try
 			{
-
-                if (obj == null)
-                {
-                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
-                    return false;
-                }
-                if (obj.ServiceFormId == null)
-                {
-                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
-                    return false;
-                }
+				if (obj == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					return false;
+				}
+				if (obj.Address == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Address not allow null value";
+					return false;
+				}
+				if (obj.ContractId == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "ContractId not allow null value";
+					return false;
+				}
+				if (obj.CreatedAt == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "CreatedAt not allow null value";
+					return false;
+				}
+				if (obj.IdArea == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdArea not allow null value";
+					return false;
+				}
+				if (obj.IdCustomer == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdCustomer not allow null value";
+					return false;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -305,13 +329,47 @@ namespace Nexus.Controllers
 			return true;
 		}
 
-		private bool ValidateUpdate(Contract obj, out string errorCode, out string errorMess)
+		public static bool ValidateUpdate(Contract obj, out string errorCode, out string errorMess)
 		{
 			errorCode = null;
 			errorMess = null;
 			try
 			{
-
+				if (obj == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					return false;
+				}
+				if (obj.Address == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Address not allow null value";
+					return false;
+				}
+				if (obj.ContractId == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "ContractId not allow null value";
+					return false;
+				}
+				if (obj.CreatedAt == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "CreatedAt not allow null value";
+					return false;
+				}
+				if (obj.IdArea == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdArea not allow null value";
+					return false;
+				}
+				if (obj.IdCustomer == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdCustomer not allow null value";
+					return false;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -321,6 +379,7 @@ namespace Nexus.Controllers
 			return true;
 		}
 		#endregion
+
 
 
 	}

@@ -144,6 +144,7 @@ namespace CommonicationMemory.CodeGeneration
 
                 CreateFileEntity.GenerateEntites(table, BusinessLayerRootPath);
                 CreateFileController.GenerateControllerApi(table, BusinessLayerRootPath);
+                CreateFileValidate.GenerateValidateApi(table, BusinessLayerRootPath);
                 GenerateFileDal(table);
 
                 #endregion

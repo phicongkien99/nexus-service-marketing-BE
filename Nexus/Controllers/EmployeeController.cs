@@ -275,17 +275,59 @@ namespace Nexus.Controllers
 		}
 
 		#region Validation
-		private bool Validate(Employee obj, out string errorCode, out string errorMess)
+		public static bool Validate(Employee obj, out string errorCode, out string errorMess)
 		{
 			errorCode = null;
 			errorMess = null;
 			try
 			{
-                if (obj == null)
-                {
-                    errorCode = ErrorCodeEnum.DataInputWrong.ToString();
-                    return false;
-                }
+				if (obj == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					return false;
+				}
+				if (obj.Address == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Address not allow null value";
+					return false;
+				}
+				if (obj.Email == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Email not allow null value";
+					return false;
+				}
+				if (obj.IdStore == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdStore not allow null value";
+					return false;
+				}
+				if (obj.Name == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Name not allow null value";
+					return false;
+				}
+				if (obj.Password == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Password not allow null value";
+					return false;
+				}
+				if (obj.Phone == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Phone not allow null value";
+					return false;
+				}
+				if (obj.Role == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Role not allow null value";
+					return false;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -295,13 +337,59 @@ namespace Nexus.Controllers
 			return true;
 		}
 
-		private bool ValidateUpdate(Employee obj, out string errorCode, out string errorMess)
+		public static bool ValidateUpdate(Employee obj, out string errorCode, out string errorMess)
 		{
 			errorCode = null;
 			errorMess = null;
 			try
 			{
-
+				if (obj == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					return false;
+				}
+				if (obj.Address == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Address not allow null value";
+					return false;
+				}
+				if (obj.Email == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Email not allow null value";
+					return false;
+				}
+				if (obj.IdStore == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "IdStore not allow null value";
+					return false;
+				}
+				if (obj.Name == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Name not allow null value";
+					return false;
+				}
+				if (obj.Password == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Password not allow null value";
+					return false;
+				}
+				if (obj.Phone == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Phone not allow null value";
+					return false;
+				}
+				if (obj.Role == null)
+				{
+					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
+					errorMess = "Role not allow null value";
+					return false;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -311,6 +399,7 @@ namespace Nexus.Controllers
 			return true;
 		}
 		#endregion
+
 
 
 	}
