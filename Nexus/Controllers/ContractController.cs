@@ -296,12 +296,6 @@ namespace Nexus.Controllers
 					errorMess = "Address not allow null value";
 					return false;
 				}
-				if (obj.ContractId == null)
-				{
-					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
-					errorMess = "ContractId not allow null value";
-					return false;
-				}
 				if (obj.CreatedAt == null)
 				{
 					errorCode = ErrorCodeEnum.DataInputWrong.ToString();
