@@ -231,7 +231,8 @@ namespace Nexus.Controllers
                         foreach (var paymentFee in req.ListDataTemp)
                         {
                             lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(paymentFee), EntityAction = EntityAction.Insert });
-                        }
+                            MemorySet.UpdateAndInsertEntity(paymentFee);
+						}
                     }
 				}
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req.GetEntity()), EntityAction = EntityAction.Update });
