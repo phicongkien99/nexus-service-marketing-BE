@@ -11,6 +11,8 @@ using Nexus.Entity;
 using Nexus.Entity.Entities;
 using Nexus.Memory;
 using Nexus.Models;
+using Nexus.Models.Request;
+using Nexus.Models.Response;
 using Nexus.Utils;
 namespace Nexus.Controllers
 {
@@ -81,7 +83,7 @@ namespace Nexus.Controllers
 		}
 
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
-		public async Task<IHttpActionResult> Post([FromBody]ImportReceipt req)
+		public async Task<IHttpActionResult> Post([FromBody]ImportReceiptReq req)
 		{
 			try
 			{
@@ -102,16 +104,16 @@ namespace Nexus.Controllers
 				#endregion
 				if (!Operator.IsAdmin(employee))
 					return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen"));
-
+				var entityData = req.GetEntity();
 				#region Validate
-				if (!Validate(req, out errorCode, out errorMessage))
+				if (!Validate(req.GetEntity(), out errorCode, out errorMessage))
 				{
 					return Ok(new RequestErrorCode(false, errorCode, errorMessage));
 				}
 				#endregion
 
 				#region Tạo key
-				var oldKey = Memory.Memory.GetMaxKey(req.GetName());
+				var oldKey = Memory.Memory.GetMaxKey(entityData.GetName());
 				int newKey = oldKey + 1;
 				// set key
 				req.Id = newKey;
@@ -123,7 +125,17 @@ namespace Nexus.Controllers
 				req.IsDeleted = 0;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
 				var lstCommand = new List<EntityCommand>();
-				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Insert });
+				if (req.ListDataTemp != null)
+				{
+					foreach (var detailImport in req.ListDataTemp)
+					{
+						detailImport.IdImportReceipt = newKey;
+						detailImport.IsDeleted = 0;
+						lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(detailImport), EntityAction = EntityAction.Insert });
+						MemorySet.UpdateAndInsertEntity(detailImport);
+					}
+				}
+				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req.GetEntity()), EntityAction = EntityAction.Insert });
 				bool isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
 				{
@@ -131,7 +143,7 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				// update memory
-				MemorySet.UpdateAndInsertEntity(req);
+				MemorySet.UpdateAndInsertEntity(req.GetEntity());
 				var result = new RequestErrorCode(true);
 				result.DataResult = req;
 				return Ok(result);
@@ -144,7 +156,7 @@ namespace Nexus.Controllers
 		}
 
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
-		public async Task<IHttpActionResult> Put(int id,[FromBody]ImportReceipt req)
+		public async Task<IHttpActionResult> Put(int id,[FromBody]ImportReceiptReq req)
 		{
 			try
 			{
@@ -165,9 +177,10 @@ namespace Nexus.Controllers
 				#endregion
 				if (!Operator.IsAdmin(employee))
 					return Ok(new RequestErrorCode(false, ErrorCodeEnum.Error_NotHavePermision.ToString(), "Khong co quyen"));
-
+				
+				var entityData = req.GetEntity();
 				#region Validate
-				if (!ValidateUpdate(req, out errorCode, out errorMessage))
+				if (!ValidateUpdate(req.GetEntity(), out errorCode, out errorMessage))
 				{
 					return Ok(new RequestErrorCode(false, errorCode, errorMessage));
 				}
@@ -185,16 +198,35 @@ namespace Nexus.Controllers
 				req.UpdatedAt = DateTime.Now;
 				req.UpdatedBy = employee.Id;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
+				var lstCommandDelete = new List<EntityCommand>();
 				var lstCommand = new List<EntityCommand>();
-				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req), EntityAction = EntityAction.Update });
-				bool isOkDone = updateEntitySql.UpdateDefault(lstCommand);
+				var lstDetailImport= MemoryInfo.GetListDetailImportReceiptByField(obj.Id.ToString(), DetailImportReceipt.DetailImportReceiptFields.IdImportReceipt);
+				foreach (var detailImport in lstDetailImport)
+				{
+					lstCommandDelete.Add(new EntityCommand { BaseEntity = new Entity.Entity(detailImport), EntityAction = EntityAction.Delete });
+					MemorySet.RemoveMemory(detailImport);
+				}
+				bool isOkDone = updateEntitySql.UpdateDefault(lstCommandDelete);
+				if (isOkDone)
+				{
+					if (req.ListDataTemp != null)
+					{
+						foreach (var detailImport in req.ListDataTemp)
+						{
+							lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(detailImport), EntityAction = EntityAction.Insert });
+							MemorySet.UpdateAndInsertEntity(detailImport);
+						}
+					}
+				}
+				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req.GetEntity()), EntityAction = EntityAction.Update });
+				isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
 				{
 					return Ok(new RequestErrorCode(false, errorCode, errorMessage));
 				}
 				#endregion
 				// update memory
-				MemorySet.UpdateAndInsertEntity(req);
+				MemorySet.UpdateAndInsertEntity(req.GetEntity());
 				var result = new RequestErrorCode(true);
 				result.DataResult = req;
 				return Ok(result);

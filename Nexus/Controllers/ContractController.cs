@@ -63,7 +63,7 @@ namespace Nexus.Controllers
                 if (data != null)
                 {
                     var lstPayment =
-                        MemoryInfo.GetListPaymentByField(data.ContractId, Payment.PaymentFields.IdContract);
+                        MemoryInfo.GetListPaymentByField(id.ToString(), Payment.PaymentFields.IdContract);
                     var customer = MemoryInfo.GetCustomer(data.IdCustomer);
                     ContractRes result = new ContractRes(data, customer, lstPayment);
                     res.DataResult = result;
