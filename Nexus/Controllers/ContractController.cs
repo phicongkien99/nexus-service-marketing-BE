@@ -78,6 +78,41 @@ namespace Nexus.Controllers
 			}
 			return BadRequest("Unknow");
 		}
+        
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+		public async Task<IHttpActionResult> Get(string contractId)
+		{
+			try
+            {
+                var lstSearch = MemoryInfo.GetListContractByField(contractId, Contract.ContractFields.ContractId);
+                var data = lstSearch[0];
+				if (data != null && data.IsDeleted == 1)
+					data = null;
+				var res = new RequestErrorCode(true, null, null);
+                if (data != null && data.IsDeleted == 1)
+                {
+                    res.DataResult = null;
+                    return Ok(res);
+                }
+
+                if (data != null)
+                {
+                    var lstPayment =
+                        MemoryInfo.GetListPaymentByField(data.ContractId, Payment.PaymentFields.IdContract);
+                    var customer = MemoryInfo.GetCustomer(data.IdCustomer);
+                    ContractRes result = new ContractRes(data, customer, lstPayment);
+                    res.DataResult = result;
+                    return Ok(res);
+                }
+                res.DataResult = data;
+                return Ok(res);
+			}
+			catch (Exception ex)
+			{
+				Logger.Write(ex.ToString());
+			}
+			return BadRequest("Unknow");
+		}
 
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
 		public async Task<IHttpActionResult> Post([FromBody] ContractReq req)

@@ -53,6 +53,25 @@ namespace Nexus.Controllers
 			}
 			return BadRequest("Unknow");
 		}
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+		public async Task<IHttpActionResult> Get(string serviceFormId)
+		{
+			try
+			{
+				var lstSearch = MemoryInfo.GetListServiceFormByField(serviceFormId,ServiceForm.ServiceFormFields.ServiceFormId);
+                var data = lstSearch[0];
+				if (data != null && data.IsDeleted == 1)
+					data = null;
+				var res = new RequestErrorCode(true, null, null);
+				res.DataResult = data;
+				return Ok(res);
+			}
+			catch (Exception ex)
+			{
+				Logger.Write(ex.ToString());
+			}
+			return BadRequest("Unknow");
+		}
 
 		[EnableCors(origins: "*", headers: "*", methods: "*")]
 		public async Task<IHttpActionResult> Post([FromBody]ServiceForm req)
