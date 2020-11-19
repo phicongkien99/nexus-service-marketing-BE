@@ -39,8 +39,19 @@ namespace Nexus.Controllers
 				var lstData = MemoryInfo.GetAllImportReceipt();
 				if (lstData != null)
 					lstData = lstData.Where(x => x.IsDeleted != null && x.IsDeleted != 1).ToList();
+				List<ImportReceiptRes> lstResult = new List<ImportReceiptRes>();
+				foreach (var importReceipt in lstData)
+				{
+					if (importReceipt.IsDeleted != 1)
+					{
+						var lstDetailImport = MemoryInfo.GetListDetailImportReceiptByField(importReceipt.Id.ToString(),
+							DetailImportReceipt.DetailImportReceiptFields.IdImportReceipt);
+						ImportReceiptRes itemRes = new ImportReceiptRes(importReceipt, lstDetailImport);
+						lstResult.Add(itemRes);
+					}
+				}
 				var res = new RequestErrorCode(true, null, null);
-				res.ListDataResult.AddRange(lstData);
+				res.ListDataResult.AddRange(lstResult);
 				return Ok(res);
 			}
 			catch (Exception ex)
@@ -69,10 +80,16 @@ namespace Nexus.Controllers
 				}
 				#endregion
 				var data = MemoryInfo.GetImportReceipt(id);
-				if (data != null && data.IsDeleted == 1)
-					data = null;
 				var res = new RequestErrorCode(true, null, null);
-				res.DataResult = data;
+				if (data != null && data.IsDeleted == 1 || data == null)
+				{
+					res.DataResult = null;
+					return Ok(res);
+				}
+				var lstDetailImportReceipt = MemoryInfo.GetListDetailImportReceiptByField(data.Id.ToString(),
+					DetailImportReceipt.DetailImportReceiptFields.IdImportReceipt);
+				ImportReceiptRes itemRes = new ImportReceiptRes(data, lstDetailImportReceipt);
+				res.DataResult = itemRes;
 				return Ok(res);
 			}
 			catch (Exception ex)

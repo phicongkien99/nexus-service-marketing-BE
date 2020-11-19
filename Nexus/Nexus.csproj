@@ -183,6 +183,7 @@
     <Compile Include="Memory\MemoryInfo.IsExist.cs" />
     <Compile Include="Memory\MemorySet.Entity.cs" />
     <Compile Include="Memory\MemorySet.SetAndRemove.cs" />
+    <Compile Include="Models\Request\ImportReceiptReq.cs" />
     <Compile Include="Models\Request\ServicePackReq.cs" />
     <Compile Include="Models\Request\PaymentReq.cs" />
     <Compile Include="Models\Request\ContractReq.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Models\Response\DeviceRes.cs" />
     <Compile Include="Models\Response\ContractRes.cs" />
     <Compile Include="Models\Response\CustomerFeedbackRes.cs" />
+    <Compile Include="Models\Response\ImportReceiptRes.cs" />
     <Compile Include="Models\Response\PaymentRes.cs" />
     <Compile Include="Models\Response\StoreRes.cs" />
     <Compile Include="Models\Response\ServicesPackRes.cs" />
