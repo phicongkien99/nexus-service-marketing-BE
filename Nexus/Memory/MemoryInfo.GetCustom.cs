@@ -21,6 +21,14 @@ namespace Nexus.Memory
         {
             return DicContract.Values.ToList().FindAll(x => x.ContractId != null && x.ContractId.StartsWith(startId));
         }
+
+        public static Connection GetConnectionByContractId(string idContract)
+        {
+            var result = DicConnection.Values.FirstOrDefault(x => x.IdContract.Equals(idContract) || x.IdContract.ToString() == idContract) as Connection;
+            if ((result != null && result.IsDeleted == 1) || result == null)
+                return null;
+            return result;
+        }
     }
 }
 

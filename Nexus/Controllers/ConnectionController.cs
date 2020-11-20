@@ -48,7 +48,24 @@ namespace Nexus.Controllers
 			return BadRequest("Unknow");
 		}
 
-		[EnableCors(origins: "*", headers: "*", methods: "*")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public async Task<IHttpActionResult> Get(string idContract)
+        {
+            try
+            {
+                var result = MemoryInfo.GetConnectionByContractId(idContract);
+                var res = new RequestErrorCode(true, null, null);
+                res.DataResult = result;
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(ex.ToString());
+            }
+            return BadRequest("Unknow");
+        }
+
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
 		public async Task<IHttpActionResult> Get(int id)
 		{
 			try

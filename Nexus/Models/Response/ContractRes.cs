@@ -9,7 +9,7 @@ namespace Nexus.Models.Response
         public ContractRes(Contract entity, Customer customer, List<Payment> lstPayments = null)
         {
             Customer = customer;
-            ListpaPayments = lstPayments;
+            ListPayments = lstPayments;
             Address = entity.Address;
             ContractId = entity.ContractId;
             CreatedAt = entity.CreatedAt;
@@ -22,7 +22,7 @@ namespace Nexus.Models.Response
             UpdatedBy = entity.UpdatedBy;
         }
         public Customer Customer { get; set; }
-        public List<Payment> ListpaPayments { get; set; }
+        public List<Payment> ListPayments { get; set; }
         public string Address { get; set; }
         public string ContractId { get; set; }
         public DateTime CreatedAt { get; set; }
