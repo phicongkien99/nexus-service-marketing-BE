@@ -22,19 +22,6 @@ namespace Nexus.Controllers
 		{
 			try
 			{
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
 				var lstData = MemoryInfo.GetAllDevice();
 				if (lstData != null)
 					lstData = lstData.Where(x => x.IsDeleted != null && x.IsDeleted != 1).ToList();
@@ -62,19 +49,6 @@ namespace Nexus.Controllers
 		{
 			try
 			{
-				#region token
-				var header = Request.Headers;
-				if (header.Authorization == null)
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				var token = header.Authorization.Parameter;
-				Employee employee;
-				if (string.IsNullOrWhiteSpace(token) || !TokenManager.ValidateToken(token, out employee))
-				{
-					return StatusCode(HttpStatusCode.Unauthorized);
-				}
-				#endregion
 				var data = MemoryInfo.GetDevice(id);
 				if (data != null && data.IsDeleted == 1)
 					data = null;
