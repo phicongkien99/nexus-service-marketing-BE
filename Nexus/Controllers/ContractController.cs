@@ -27,10 +27,13 @@ namespace Nexus.Controllers
                 List<ContractRes> lstResult = new List<ContractRes>();
 				if (lstData != null)
 					lstData = lstData.Where(x => x.IsDeleted != null && x.IsDeleted != 1).ToList();
-                foreach (var item in lstData)
+				var lstPayment = MemoryInfo.GetAllPayment();
+				foreach (var item in lstData)
                 {
+					List<Payment> payments = new List<Payment>();
+					payments = lstPayment.Where(x => x.IdContract == item.Id).ToList();
                     var customer = MemoryInfo.GetCustomer(item.IdCustomer);
-                    ContractRes temp = new ContractRes(item, customer);
+                    ContractRes temp = new ContractRes(item, customer, payments);
                     lstResult.Add(temp);
 
                 }
@@ -98,7 +101,7 @@ namespace Nexus.Controllers
                 if (data != null)
                 {
                     var lstPayment =
-                        MemoryInfo.GetListPaymentByField(data.ContractId, Payment.PaymentFields.IdContract);
+                        MemoryInfo.GetListPaymentByField(data.Id.ToString(), Payment.PaymentFields.IdContract);
                     var customer = MemoryInfo.GetCustomer(data.IdCustomer);
                     ContractRes result = new ContractRes(data, customer, lstPayment);
                     res.DataResult = result;

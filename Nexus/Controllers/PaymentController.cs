@@ -189,28 +189,9 @@ namespace Nexus.Controllers
 				req.UpdatedAt = DateTime.Now;
 				req.UpdatedBy = employee.Id;
 				UpdateEntitySql updateEntitySql = new UpdateEntitySql();
-				var lstCommandDelete = new List<EntityCommand>();
 				var lstCommand = new List<EntityCommand>();
-                var lstPaymentFee = MemoryInfo.GetListPaymentFeeByField(obj.Id.ToString(), PaymentFee.PaymentFeeFields.IdPayment);
-                foreach (var paymentFee in lstPaymentFee)
-                {
-                    lstCommandDelete.Add(new EntityCommand { BaseEntity = new Entity.Entity(paymentFee), EntityAction = EntityAction.Delete });
-                    MemorySet.RemoveMemory(paymentFee);
-				}
-                bool isOkDone = updateEntitySql.UpdateDefault(lstCommandDelete);
-                if (isOkDone)
-                {
-                    if (req.ListDataTemp != null)
-                    {
-                        foreach (var paymentFee in req.ListDataTemp)
-                        {
-                            lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(paymentFee), EntityAction = EntityAction.Insert });
-                            MemorySet.UpdateAndInsertEntity(paymentFee);
-						}
-                    }
-				}
 				lstCommand.Add(new EntityCommand { BaseEntity = new Entity.Entity(req.GetEntity()), EntityAction = EntityAction.Update });
-                isOkDone = updateEntitySql.UpdateDefault(lstCommand);
+                var isOkDone = updateEntitySql.UpdateDefault(lstCommand);
 				if (!isOkDone)
 				{
 					return Ok(new RequestErrorCode(false, errorCode, errorMessage));
